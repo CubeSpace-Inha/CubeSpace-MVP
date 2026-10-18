@@ -34,6 +34,8 @@ powershell -ExecutionPolicy Bypass -File scripts\verify-git.ps1
 | `core.quotepath false`    | 한글 파일 이름이 `\354\225...`로 안 보인다 |
 | `core.longpaths true`     | Windows에서 긴 경로(node_modules)도 받는다 |
 
+키 같은 비밀 값은 그 값을 쓰는 core에만 둔다(`apps/core/.env`). 화면(client)에 두면 개발자 도구로 보일 수 있다. `apps/core/.env.example`을 복사해 값을 채운다(macOS `cp apps/core/.env.example apps/core/.env`, Windows `copy apps\core\.env.example apps\core\.env`). `.env`는 커밋되지 않으니, 항목을 늘리면 `.env.example`에도 이름만 추가한다.
+
 VS Code를 열면 추천 확장(Prettier · ESLint · EditorConfig · C#)을 설치한다. 저장할 때 자동으로 포맷과 lint 수정이 된다.
 
 ## 공통 설정 파일
@@ -85,5 +87,5 @@ git commit -m "fix: 패드가 끊겨도 큐브 자리가 남지 않게 수정" -
 - `main`에서 `feat/짧은-이름` · `fix/짧은-이름` 브랜치를 만들어 작업한다.
 - PR을 올리기 전에 루트에서 `pnpm check`(포맷 · lint · 타입 · 테스트)를 통과시킨다.
 - C# 코드나 `packages/protocol/fixtures/win`을 고쳤으면 Windows에서 `pnpm check:win`도 통과시킨다.
-- PR을 올리기 전에 `git diff main...` 에서 API 키 · 토큰 · 비밀번호 · 개인 경로가 없는지 본다. 키는 `.env`에 두고(`.gitignore`에 있다) 코드에는 `process.env.이름`으로만 읽는다. 이미 push한 키는 지워도 기록에 남으니 바로 폐기하고 새로 발급한다.
+- PR을 올리기 전에 `git diff main...` 에서 API 키 · 토큰 · 비밀번호 · 개인 경로가 없는지 본다. 키는 `apps/core/.env`에 두고(`.gitignore`에 있다) 코드에는 `process.env.이름`으로만 읽는다. 이미 push한 키는 지워도 기록에 남으니 바로 폐기하고 새로 발급한다.
 - PR 설명에는 무엇을 왜 바꿨는지, 화면이 바뀌었으면 스크린샷을 넣는다.

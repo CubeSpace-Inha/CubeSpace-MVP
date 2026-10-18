@@ -19,6 +19,7 @@ CLAUDE.local.md
 # 키 · 인증서
 .env
 .env.*
+!.env.example
 *.pem
 *.key
 *.pfx
