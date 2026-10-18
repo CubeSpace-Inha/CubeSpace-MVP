@@ -1,0 +1,56 @@
+# PR과 main push마다 pnpm check를 부분별 job으로 나눠 돌린다. 어느 단계가 깨졌는지 job 이름으로 바로 보인다.
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+# 같은 브랜치에 새 push가 오면 이전 실행은 취소한다
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - run: pnpm format:check
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - run: pnpm -r lint
+
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - run: pnpm -r typecheck
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - run: pnpm -r --workspace-concurrency=1 test
+
+  # macOS 팀원은 못 돌리는 C# 빌드와 메시지 형식 견본 확인. node_modules가 필요 없어 install은 건너뛴다
+  win-driver:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - run: pnpm build:win
+      - run: pnpm check:win

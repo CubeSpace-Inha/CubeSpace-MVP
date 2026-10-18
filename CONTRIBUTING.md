@@ -87,5 +87,6 @@ git commit -m "fix: 패드가 끊겨도 큐브 자리가 남지 않게 수정" -
 - `main`에서 `feat/짧은-이름` · `fix/짧은-이름` 브랜치를 만들어 작업한다.
 - PR을 올리기 전에 루트에서 `pnpm check`(포맷 · lint · 타입 · 테스트)를 통과시킨다.
 - C# 코드나 `packages/protocol/fixtures/win`을 고쳤으면 Windows에서 `pnpm check:win`도 통과시킨다.
+- PR과 main push마다 GitHub Actions(`.github/workflows/check.yml`)가 format · lint · typecheck · test · win-driver를 job별로 돌린다. 빨간 job 이름이 깨진 단계다. macOS 팀원도 여기서 `check:win` 결과를 볼 수 있다.
 - PR을 올리기 전에 `git diff main...` 에서 API 키 · 토큰 · 비밀번호 · 개인 경로가 없는지 본다. 키는 `apps/core/.env`에 두고(`.gitignore`에 있다) 코드에는 `process.env.이름`으로만 읽는다. 이미 push한 키는 지워도 기록에 남으니 바로 폐기하고 새로 발급한다.
 - PR 설명에는 무엇을 왜 바꿨는지, 화면이 바뀌었으면 스크린샷을 넣는다.
