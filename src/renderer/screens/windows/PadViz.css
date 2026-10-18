@@ -1,3 +1,0 @@
-.mpad { position: relative; flex: none; width: 136px; height: 128px; border-radius: 14px; background: radial-gradient(rgba(255, 255, 255, .12) 1px, transparent 1.5px) 0 0 / 10px 10px, #23262d; }
-.mpad .q { position: absolute; width: var(--q); height: var(--q); border-radius: 7px; background: #2f343e; display: grid; place-items: center; color: #fff; font-size: 12px; font-weight: 700; box-shadow: 0 2px 0 #0f1116, 0 0 0 1.5px var(--a); }
-.mpad .q .aic { background: none; padding: 0; }

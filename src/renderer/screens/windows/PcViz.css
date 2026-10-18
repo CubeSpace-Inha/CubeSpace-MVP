@@ -1,6 +1,0 @@
-.mpc { position: relative; flex: 1; min-width: 0; aspect-ratio: 16 / 10; border-radius: 10px; background: #1a1d24; box-shadow: 0 0 0 3px #2c313b; }
-.mscr { position: absolute; inset: 4px; }
-.mw { position: absolute; padding: 2px; }
-.mw > div { height: 100%; border-radius: 5px; background: color-mix(in srgb, var(--a) 20%, #2a2e37); border-top: 3px solid var(--a); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; overflow: hidden; color: #e6e9ef; font-size: 10.5px; font-weight: 600; padding: 0 4px; }
-.mw span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.mph { display: grid; place-items: center; text-align: center; font-size: 11.5px; color: #8b93a1; line-height: 1.5; }

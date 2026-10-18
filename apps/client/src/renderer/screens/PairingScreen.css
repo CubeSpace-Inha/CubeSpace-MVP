@@ -1,0 +1,16 @@
+/* 페어링(/): 메뉴 없이 가운데 한 줄 */
+.pairing { height: 100%; overflow-y: auto; display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 48px 16px; }
+.pairing > .card { width: min(520px, 100%); flex: none; }
+.pairing-hello { text-align: center; }
+.pairing-hello b { display: block; font-size: 20px; }
+.pairing-hello small { color: var(--muted); font-size: 13px; }
+.pairing-muted { color: var(--muted); font-size: 12.5px; line-height: 1.55; }
+.pairing-foot { width: min(520px, 100%); display: grid; gap: 8px; justify-items: center; }
+.pairing-skip { color: var(--muted); font-size: 12.5px; font-weight: 600; padding: 6px 10px; }
+.pairing-skip:hover { color: var(--ink); }
+.padsteps { list-style: none; padding: 0; margin: 0 0 14px; display: grid; gap: 10px; }
+.padsteps li { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; background: var(--soft); }
+.padsteps li > svg { flex: none; color: var(--muted); }
+.padsteps b { display: block; font-size: 13.5px; }
+.padsteps small { display: block; color: var(--muted); font-size: 12px; }
+.padhelp { margin: 0; padding: 10px 12px 10px 28px; border-radius: 12px; background: var(--soft); color: var(--muted); font-size: 12px; line-height: 1.7; }

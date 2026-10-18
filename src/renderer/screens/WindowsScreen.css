@@ -1,7 +1,0 @@
-.wcubes { display: flex; flex-direction: column; gap: 14px; }
-.wtop { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; font-size: 12px; font-weight: 600; color: var(--muted); }
-.wtop .monsw { color: var(--ink); }
-.wnote { font-size: 12px; color: var(--faint); }
-/* 오른쪽 열린 창 · 모드는 같은 높이(시안 ws0 · ws1) */
-.vcol > .wsec { flex: 1 1 0; }
-@media (max-width: 1180px) { .vcol > .wsec { flex: none; } }

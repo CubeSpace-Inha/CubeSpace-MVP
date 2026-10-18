@@ -1,7 +1,0 @@
-.cpk { margin-top: 8px; max-height: 230px; overflow: auto; padding: 4px; border-radius: 12px; background: var(--soft); box-shadow: inset 0 2px 5px var(--inset); animation: cpk-in 0.3s var(--ease-out); }
-.cpk small { display: block; font-size: 10.5px; font-weight: 600; color: var(--faint); padding: 6px 6px 2px; }
-.cpk button { display: flex; align-items: center; gap: 8px; width: 100%; padding: 5px 6px; border-radius: 8px; font-size: 12px; font-weight: 600; text-align: left; }
-.cpk button:hover { background: var(--raise); }
-.cpk span { flex: 1; min-width: 0; }
-.cpk em { font-style: normal; font-size: 10.5px; color: var(--faint); font-weight: 500; }
-@keyframes cpk-in { from { opacity: 0; transform: translateY(-4px); } }

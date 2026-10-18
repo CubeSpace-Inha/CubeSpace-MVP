@@ -1,0 +1,1 @@
+{"v":1,"type":"result","id":"r3","ts":1760400000001,"payload":{"ok":true,"value":[{"hwnd":"132456","ok":true},{"hwnd":"132460","ok":false,"error":"관리자 권한 창"}]}}
