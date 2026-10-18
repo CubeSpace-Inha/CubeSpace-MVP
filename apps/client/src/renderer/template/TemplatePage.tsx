@@ -25,18 +25,7 @@ import { WindowCards } from "./WindowCards";
 import "./TemplatePage.css";
 
 const COLORS = ["c1", "c2", "c3", "c4", "ok", "err"];
-const SURFACES = [
-  "bg",
-  "card",
-  "soft",
-  "raise",
-  "ink",
-  "muted",
-  "faint",
-  "line",
-  "edge",
-  "padbg",
-];
+const SURFACES = ["bg", "card", "soft", "raise", "ink", "muted", "faint", "line", "edge", "padbg"];
 const TONES: Tone[] = ["ok", "warn", "warnd", "danger", "neutral", "muted"];
 
 // 개발자용 템플릿 카탈로그(/template). 공통 레이아웃 · 부품을 한 화면에 모은다.
@@ -59,11 +48,7 @@ export function TemplatePage() {
           <RailButton label="홈으로" onClick={() => navigate("/home")}>
             <Icon name="arrowLeft" size={20} stroke={2} />
           </RailButton>
-          <RailButton
-            label="알림 3건"
-            badge={3}
-            onClick={() => setDrawerOpen(true)}
-          >
+          <RailButton label="알림 3건" badge={3} onClick={() => setDrawerOpen(true)}>
             <Icon name="bell" size={20} stroke={2} />
           </RailButton>
         </>
@@ -108,9 +93,7 @@ export function TemplatePage() {
               <Button variant="primary" wide>
                 가득
               </Button>
-              <SectionTitle hint="disabled · 조건이 안 맞아 못 누를 때">
-                비활성
-              </SectionTitle>
+              <SectionTitle hint="disabled · 조건이 안 맞아 못 누를 때">비활성</SectionTitle>
               <div className="tpl-row">
                 <Button variant="primary" disabled>
                   저장
@@ -134,19 +117,9 @@ export function TemplatePage() {
           <Column>
             <Card title="탭 · 로딩" n={4}>
               <SectionTitle hint="2칸">Tabs</SectionTitle>
-              <Tabs
-                options={["창", "AI"]}
-                value={tab}
-                onChange={setTab}
-                label="모드"
-              />
+              <Tabs options={["창", "AI"]} value={tab} onChange={setTab} label="모드" />
               <SectionTitle hint="3칸">Tabs</SectionTitle>
-              <Tabs
-                options={["느슨", "보통", "꼼꼼"]}
-                value={seg}
-                onChange={setSeg}
-                label="강도"
-              />
+              <Tabs options={["느슨", "보통", "꼼꼼"]} value={seg} onChange={setSeg} label="강도" />
               <SectionTitle hint="위 3칸과 같은 값">PillTabs</SectionTitle>
               <PillTabs
                 options={[
@@ -162,9 +135,7 @@ export function TemplatePage() {
               <Spinner />
             </Card>
             <Card title="영역 · 영역 제목" meta="3개" n={5}>
-              <p className="tpl-p">
-                Card의 title · meta · actions가 제목 줄이다.
-              </p>
+              <p className="tpl-p">Card의 title · meta · actions가 제목 줄이다.</p>
             </Card>
             <Card
               title="제목 + 버튼"
@@ -204,11 +175,7 @@ export function TemplatePage() {
       >
         <p>대화상자 본문. Esc로도 닫힌다.</p>
       </Dialog>
-      <Drawer
-        open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
-        title="상태"
-      >
+      <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)} title="상태">
         <section>
           <h3>
             패드 <span>USB · BLE</span>

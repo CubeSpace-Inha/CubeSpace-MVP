@@ -4,11 +4,7 @@ import { pairPhase } from "../model/settings";
 
 // 장치 추가 흐름(시안 pairStart). 등록은 core가 한다: 시작하면 켜진 미등록 큐브를 세고,
 // 확인점에 올린 순서대로 빈 슬롯에 등록한다(스냅샷 pairing). 완료 · 찾은 큐브 없음은 1.7초 뒤 처음으로 돌아간다.
-export function usePairing(
-  s: Snapshot,
-  api: CubeSpaceApi,
-  onRegistered: (slot: Slot) => void,
-) {
+export function usePairing(s: Snapshot, api: CubeSpaceApi, onRegistered: (slot: Slot) => void) {
   const [none, setNone] = useState(false);
   const phase = pairPhase(s, none);
   const done = s.pairing?.done;
@@ -26,10 +22,7 @@ export function usePairing(
 
   useEffect(() => {
     if (phase !== "none" && phase !== "done") return;
-    const t = setTimeout(
-      () => (phase === "none" ? setNone(false) : void api.stopPairing()),
-      1700,
-    );
+    const t = setTimeout(() => (phase === "none" ? setNone(false) : void api.stopPairing()), 1700);
     return () => clearTimeout(t);
   }, [phase, api]);
 

@@ -35,7 +35,10 @@ export function windowRows(s: Snapshot) {
   return s.windows
     .filter(isOpen)
     .map((w) => ({ w, cube: s.cubes.find((c) => c.name === w.owner) ?? null }))
-    .sort((a, b) => Number(!a.cube) - Number(!b.cube) || Number(a.w.status === "minimized") - Number(b.w.status === "minimized"));
+    .sort(
+      (a, b) =>
+        Number(!a.cube) - Number(!b.cube) || Number(a.w.status === "minimized") - Number(b.w.status === "minimized"),
+    );
 }
 
 // 고르기 목록: 담당 없는 열린 창(떠 있음 · 최소화) → 아직 안 연 프로그램(실행)
@@ -46,5 +49,8 @@ export function pickItems(s: Snapshot): PickItem[] {
     .sort((a, b) => Number(a.status === "minimized") - Number(b.status === "minimized"))
     .map((w) => ({ group: "열린 창", app: w.app, window: w, note: w.status === "minimized" ? "최소화" : "떠 있음" }));
   const has = new Set(free.map((x) => x.app));
-  return [...free, ...PROGRAMS.filter((a) => !has.has(a)).map((app) => ({ group: "등록된 프로그램", app, note: "실행" }))];
+  return [
+    ...free,
+    ...PROGRAMS.filter((a) => !has.has(a)).map((app) => ({ group: "등록된 프로그램", app, note: "실행" })),
+  ];
 }

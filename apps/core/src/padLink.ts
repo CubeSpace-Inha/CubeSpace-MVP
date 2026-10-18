@@ -39,7 +39,11 @@ export function createPadLink(store: Store, api: CubeSpaceApi) {
     const slot = ([0, 1, 2, 3, 4, 5] as const).find((i) => !s0.cubes.some((c) => c.slot === i));
     const [cx, cy] = PAD_CHECK.xy;
     const p = [...known.values()].find(
-      (x) => x.link === "up" && x.xy && Math.hypot(x.xy[0] - cx, x.xy[1] - cy) <= PAD_CHECK.r && !s0.cubes.some((c) => c.mac4 === x.id),
+      (x) =>
+        x.link === "up" &&
+        x.xy &&
+        Math.hypot(x.xy[0] - cx, x.xy[1] - cy) <= PAD_CHECK.r &&
+        !s0.cubes.some((c) => c.mac4 === x.id),
     );
     if (slot === undefined || !p) return;
     store.change((s) => {

@@ -25,7 +25,11 @@ function wirePaths(bs: Branch[], detail: HTMLElement, pick: Pick | null, x0: num
   if (opened) {
     const xa = dx + opened.offsetLeft + opened.offsetWidth + 22; // +22 = +N 칩만큼 오른쪽
     const hue = bs[pick === "win" ? 1 : 2]!.hue;
-    svg += [...colB.querySelectorAll<HTMLElement>(".cand")].map((n) => `<path class="dash" style="--c:${hue}" d="${curve(xa, mid(opened), dx + n.offsetLeft - 8, mid(n))}"/>`).join("");
+    svg += [...colB.querySelectorAll<HTMLElement>(".cand")]
+      .map(
+        (n) => `<path class="dash" style="--c:${hue}" d="${curve(xa, mid(opened), dx + n.offsetLeft - 8, mid(n))}"/>`,
+      )
+      .join("");
   }
   return `${svg}<circle class="root" cx="${x0}" cy="${y0}" r="5.5"/>`;
 }
@@ -70,7 +74,12 @@ export function useZoomLayout(s: Snapshot, slot: number | null, pick: Pick | nul
       if (stack) {
         // 쌓기: 노드 아래에 후보, 넘치면 detail 안에서 스크롤. 선은 그리지 않는다.
         const top = T.y + half + 26;
-        Object.assign(detail.style, { left: "16px", right: "16px", top: `${top}px`, maxHeight: `${Math.max(160, H - top - (W <= 720 ? 84 : 16))}px` });
+        Object.assign(detail.style, {
+          left: "16px",
+          right: "16px",
+          top: `${top}px`,
+          maxHeight: `${Math.max(160, H - top - (W <= 720 ? 84 : 16))}px`,
+        });
         wires.innerHTML = "";
         return;
       }

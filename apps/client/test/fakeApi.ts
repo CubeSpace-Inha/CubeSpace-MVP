@@ -37,20 +37,14 @@ export function createFakeApi(initial: Snapshot = OK) {
         const w = s.windows.find((x) => x.id === id);
         if (!w || c.window === id) return;
         const cur = s.windows.find((x) => x.id === c.window);
-        const other = w.owner
-          ? s.cubes.find((x) => x.name === w.owner)
-          : undefined;
+        const other = w.owner ? s.cubes.find((x) => x.name === w.owner) : undefined;
         const curRegion = s.layout.find((p) => p.window === cur?.id);
         const newRegion = s.layout.find((p) => p.window === w.id);
         if (other) {
           // 맞바꿈: 두 큐브의 창과 영역을 바꾼다
           other.window = cur?.id ?? null;
           if (cur) cur.owner = other.name;
-          if (curRegion && newRegion)
-            [curRegion.window, newRegion.window] = [
-              newRegion.window,
-              curRegion.window,
-            ];
+          if (curRegion && newRegion) [curRegion.window, newRegion.window] = [newRegion.window, curRegion.window];
         } else {
           // 담당 없는 창: 지금 창은 담당 없는 창이 되고, 그 자리를 새 창이 받는다
           if (cur) cur.owner = null;
@@ -91,8 +85,7 @@ export function createFakeApi(initial: Snapshot = OK) {
       const s = structuredClone(current);
       const w = s.windows.find((x) => x.id === id);
       if (!w) return Promise.reject(new Error(`창 ${id} 없음`));
-      if (cmd === "min")
-        w.status = w.status === "minimized" ? "linked" : "minimized";
+      if (cmd === "min") w.status = w.status === "minimized" ? "linked" : "minimized";
       if (cmd === "top") w.top = !w.top;
       if (cmd === "close") {
         s.windows = s.windows.filter((x) => x !== w);
@@ -110,8 +103,7 @@ export function createFakeApi(initial: Snapshot = OK) {
       const s = structuredClone(current);
       const c = s.settings.cubes.find((x) => x.slot === slot);
       if (c) Object.assign(c, patch);
-      else
-        s.settings.cubes.push({ slot, button: "toggle", fix: null, ...patch });
+      else s.settings.cubes.push({ slot, button: "toggle", fix: null, ...patch });
       push(s);
       return Promise.resolve();
     },
@@ -132,11 +124,7 @@ export function createFakeApi(initial: Snapshot = OK) {
       else s.modes.push((m = { id: `m${Date.now()}`, name, cubes }));
       if (now) s.activeMode = m.id;
       // 실행 중인 모드를 고쳐 지금 패드와 모양이 달라지면 실행 중이 아니다
-      else if (
-        s.activeMode === m.id &&
-        !fitMode(nowCubes(s), cubes, s.settings.rules.gapMm)
-      )
-        s.activeMode = null;
+      else if (s.activeMode === m.id && !fitMode(nowCubes(s), cubes, s.settings.rules.gapMm)) s.activeMode = null;
       push(s);
       return Promise.resolve();
     },

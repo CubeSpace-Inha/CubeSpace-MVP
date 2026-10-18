@@ -1,14 +1,6 @@
 import type { Cube, Snapshot } from "@cubespace/protocol";
 import type { Pixels } from "../cube/led";
-import {
-  cubeLine,
-  NEUTRAL,
-  profileIcon,
-  REGION,
-  regionOf,
-  winDot,
-  winOf,
-} from "./home";
+import { cubeLine, NEUTRAL, profileIcon, REGION, regionOf, winDot, winOf } from "./home";
 import { KIND_TEXT, winName } from "./status";
 
 // 큐브 확대(노드 그래프)에 그릴 값. 시안 pad-home.html의 winCands · aiCands · candColumn · zoomTo 규칙.
@@ -29,13 +21,8 @@ export type CandGroup = { name: string; items: Cand[] };
 
 // 이 큐브의 창 · AI를 바꿀 수 있는 후보. 다른 큐브가 쓰는 것은 맞바꿈이다.
 export const winCands = (s: Snapshot, c: Cube) =>
-  s.windows.filter(
-    (w) =>
-      w.id !== c.window &&
-      ["linked", "minimized", "relaunchable"].includes(w.status),
-  );
-export const aiCands = (s: Snapshot, c: Cube) =>
-  s.profiles.filter((p) => p.id !== c.ai);
+  s.windows.filter((w) => w.id !== c.window && ["linked", "minimized", "relaunchable"].includes(w.status));
+export const aiCands = (s: Snapshot, c: Cube) => s.profiles.filter((p) => p.id !== c.ai);
 
 const regionName = (i: number) => (i >= 0 ? ` · 영역 ${i + 1}` : "");
 
@@ -91,12 +78,7 @@ export function candGroups(s: Snapshot, c: Cube, pick: Pick): CandGroup[] {
 }
 
 // 바꾼 뒤 띄울 알림 글자
-export function swapToast(
-  s: Snapshot,
-  c: Cube,
-  kind: Pick,
-  id: string,
-): string {
+export function swapToast(s: Snapshot, c: Cube, kind: Pick, id: string): string {
   if (kind === "win") {
     const cur = winOf(s, c);
     const w = s.windows.find((x) => x.id === id);
@@ -119,9 +101,7 @@ export function zoomFrame(W: number, H: number, padW: number) {
   const base = padW * 0.175 || 1;
   const fitHalf = (W - 100 - GAP - GRAPH_W - 24) / 2;
   const stack = fitHalf < 48;
-  const half = stack
-    ? Math.min(64, H * 0.09)
-    : Math.min(base * Math.min(2.2, (H * 0.5) / base) * 0.4, fitHalf);
+  const half = stack ? Math.min(64, H * 0.09) : Math.min(base * Math.min(2.2, (H * 0.5) / base) * 0.4, fitHalf);
   const size = half / 0.4;
   const T = stack
     ? { x: W / 2, y: 84 + half }

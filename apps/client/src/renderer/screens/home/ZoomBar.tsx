@@ -22,7 +22,12 @@ export function ZoomBar({ title, mode, onMode, onBack, backRef }: Props) {
         전체 보기
       </Button>
       <h2>{title}</h2>
-      <Tabs options={["창", "AI"]} value={mode === "ai" ? 1 : 0} onChange={(i) => onMode(i ? "ai" : "window")} label="이 큐브의 모드" />
+      <Tabs
+        options={["창", "AI"]}
+        value={mode === "ai" ? 1 : 0}
+        onChange={(i) => onMode(i ? "ai" : "window")}
+        label="이 큐브의 모드"
+      />
       <span className="kbd">Esc</span>
     </div>
   );

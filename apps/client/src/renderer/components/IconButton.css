@@ -1,5 +1,44 @@
-.icon-btn { position: relative; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 14px; background: var(--raise); box-shadow: var(--r1); color: var(--muted); transition: transform .2s var(--ease-spring), box-shadow .2s, color .2s; }
-.icon-btn:hover { color: var(--ink); transform: translateY(-2px); }
-.icon-btn:active { box-shadow: var(--r1p); transform: translateY(2px); }
-.icon-btn b { position: absolute; top: -7px; right: -7px; min-width: 20px; height: 20px; padding: 0 5px; display: grid; place-items: center; border-radius: 99px; background: var(--err); color: #fff; font-size: 11px; box-shadow: 0 2px 6px rgba(0, 0, 0, .35); }
-@media (max-width: 720px) { .icon-btn { width: 40px; height: 40px; } }
+.icon-btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--raise);
+  box-shadow: var(--r1);
+  color: var(--muted);
+  transition:
+    transform 0.2s var(--ease-spring),
+    box-shadow 0.2s,
+    color 0.2s;
+}
+.icon-btn:hover {
+  color: var(--ink);
+  transform: translateY(-2px);
+}
+.icon-btn:active {
+  box-shadow: var(--r1p);
+  transform: translateY(2px);
+}
+.icon-btn b {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  display: grid;
+  place-items: center;
+  border-radius: 99px;
+  background: var(--err);
+  color: #fff;
+  font-size: 11px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+@media (max-width: 720px) {
+  .icon-btn {
+    width: 40px;
+    height: 40px;
+  }
+}

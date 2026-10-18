@@ -1,2 +1,15 @@
-.spin { display: inline-block; width: 16px; height: 16px; border-radius: 50%; border: 2.5px solid var(--line); border-top-color: var(--sel); animation: rot .7s linear infinite; flex: none; }
-@keyframes rot { to { transform: rotate(360deg); } }
+.spin {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2.5px solid var(--line);
+  border-top-color: var(--sel);
+  animation: rot 0.7s linear infinite;
+  flex: none;
+}
+@keyframes rot {
+  to {
+    transform: rotate(360deg);
+  }
+}

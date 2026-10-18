@@ -20,9 +20,7 @@ function arg(name: string) {
 
 function command(path: string | undefined) {
   if (!path) return {};
-  return /\.c?js$/.test(path)
-    ? { cmd: process.execPath, args: [path] }
-    : { cmd: path, args: [] };
+  return /\.c?js$/.test(path) ? { cmd: process.execPath, args: [path] } : { cmd: path, args: [] };
 }
 
 async function main() {

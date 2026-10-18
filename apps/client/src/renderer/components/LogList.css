@@ -1,6 +1,43 @@
-.log { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-.log li { display: flex; align-items: center; gap: 9px; height: 34px; padding: 0 14px; border-radius: 12px; background: var(--soft); font-size: 12.5px; box-shadow: inset 0 2px 4px var(--inset); animation: logIn .45s var(--ease-spring); white-space: nowrap; overflow: hidden; }
-.log li i { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); flex: none; }
-.log li.err { color: var(--err); }
-.log li time { color: var(--faint); font-size: 11px; margin-left: auto; flex: none; }
-@keyframes logIn { from { opacity: 0; transform: translateY(-6px); } }
+.log {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.log li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: var(--soft);
+  font-size: 12.5px;
+  box-shadow: inset 0 2px 4px var(--inset);
+  animation: logIn 0.45s var(--ease-spring);
+  white-space: nowrap;
+  overflow: hidden;
+}
+.log li i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--faint);
+  flex: none;
+}
+.log li.err {
+  color: var(--err);
+}
+.log li time {
+  color: var(--faint);
+  font-size: 11px;
+  margin-left: auto;
+  flex: none;
+}
+@keyframes logIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}

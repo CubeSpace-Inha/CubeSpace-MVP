@@ -11,11 +11,7 @@ export function createTray(icon: string, getWindow: () => BrowserWindow, onQuit:
   const tray = new Tray(icon);
   tray.setToolTip("CUBE SPACE");
   tray.setContextMenu(
-    Menu.buildFromTemplate([
-      { label: "열기", click: show },
-      { type: "separator" },
-      { label: "종료", click: onQuit },
-    ]),
+    Menu.buildFromTemplate([{ label: "열기", click: show }, { type: "separator" }, { label: "종료", click: onQuit }]),
   );
   tray.on("click", show);
   return { tray, show };

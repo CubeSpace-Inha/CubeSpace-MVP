@@ -1,33 +1,146 @@
-* { box-sizing: border-box; margin: 0; }
-[hidden] { display: none !important; }
-html, body, #root { height: 100%; }
-body { background: var(--bg); color: var(--ink); font: 14px/1.5 Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow: hidden; }
-button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
-:focus-visible { outline: 2px solid var(--c1); outline-offset: 3px; }
-.num { font-variant-numeric: tabular-nums; }
-.mono { font-family: ui-monospace, Menlo, monospace; }
-.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.theming, .theming * { transition: background-color .35s, color .35s, box-shadow .35s, border-color .35s !important; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+[hidden] {
+  display: none !important;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font:
+    14px/1.5 Pretendard,
+    "Apple SD Gothic Neo",
+    "Malgun Gothic",
+    "Noto Sans KR",
+    system-ui,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+:focus-visible {
+  outline: 2px solid var(--c1);
+  outline-offset: 3px;
+}
+.num {
+  font-variant-numeric: tabular-nums;
+}
+.mono {
+  font-family: ui-monospace, Menlo, monospace;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.theming,
+.theming * {
+  transition:
+    background-color 0.35s,
+    color 0.35s,
+    box-shadow 0.35s,
+    border-color 0.35s !important;
+}
 
 /* 톤: 상태는 색과 글자를 함께 쓴다 */
-.tone-ok { background: var(--t-ok-bg); color: var(--t-ok); }
-.tone-warn { background: var(--t-warn-bg); color: var(--t-warn); }
-.tone-warnd { background: var(--t-warnd-bg); color: var(--t-warnd); }
-.tone-danger { background: var(--t-danger-bg); color: var(--t-danger); }
-.tone-neutral { background: var(--t-neutral-bg); color: var(--t-neutral); }
-.tone-muted { background: var(--t-muted-bg); color: var(--t-muted); }
+.tone-ok {
+  background: var(--t-ok-bg);
+  color: var(--t-ok);
+}
+.tone-warn {
+  background: var(--t-warn-bg);
+  color: var(--t-warn);
+}
+.tone-warnd {
+  background: var(--t-warnd-bg);
+  color: var(--t-warnd);
+}
+.tone-danger {
+  background: var(--t-danger-bg);
+  color: var(--t-danger);
+}
+.tone-neutral {
+  background: var(--t-neutral-bg);
+  color: var(--t-neutral);
+}
+.tone-muted {
+  background: var(--t-muted-bg);
+  color: var(--t-muted);
+}
 
 /* 떠 있는 카드. 등장할 때 아래에서 떠오른다(--n번째만큼 늦게). */
-.float { background: var(--card); border-radius: 22px; box-shadow: var(--rc); animation: rise .8s var(--ease-out) backwards; animation-delay: calc(var(--n, 0) * 90ms); }
-@keyframes rise { from { opacity: 0; translate: 0 34px; scale: .97; } }
+.float {
+  background: var(--card);
+  border-radius: 22px;
+  box-shadow: var(--rc);
+  animation: rise 0.8s var(--ease-out) backwards;
+  animation-delay: calc(var(--n, 0) * 90ms);
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 34px;
+    scale: 0.97;
+  }
+}
 
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .001ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; } }
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0s !important;
+  }
+}
 
 /* 연결 선 규칙(색과 모양을 함께): ok 실선 · hold 주황 끊긴 선 · off 회색 점선 · err 빨강 · empty 빈 슬롯 */
-.k-ok { --k: var(--ok); --ks: solid; }
-.k-hold { --k: #f59e0b; --ks: dashed; }
-.k-off { --k: #969eac; --ks: dotted; }
-.k-err { --k: var(--err); --ks: solid; }
-.k-empty { --k: var(--faint); --ks: dashed; }
-.kicker { font-size: 13px; font-weight: 600; color: var(--muted); }
-.note { margin-top: 10px; font-size: 12px; color: var(--muted); line-height: 1.55; }
+.k-ok {
+  --k: var(--ok);
+  --ks: solid;
+}
+.k-hold {
+  --k: #f59e0b;
+  --ks: dashed;
+}
+.k-off {
+  --k: #969eac;
+  --ks: dotted;
+}
+.k-err {
+  --k: var(--err);
+  --ks: solid;
+}
+.k-empty {
+  --k: var(--faint);
+  --ks: dashed;
+}
+.kicker {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.note {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.55;
+}

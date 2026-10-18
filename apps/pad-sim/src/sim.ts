@@ -14,15 +14,10 @@ export const SIM_CUBES: PadCube[] = [
   { id: "A2:F5", xy: null, link: "up", battPct: 73 },
 ];
 
-export async function startSim(
-  padPath: string,
-  simPath: string,
-  log: (m: string) => void = () => {},
-) {
+export async function startSim(padPath: string, simPath: string, log: (m: string) => void = () => {}) {
   const cubes = new Map(SIM_CUBES.map((c) => [c.id, { ...c }]));
   const cores = new Set<Conn>();
-  const toCore = (type: string, payload: unknown) =>
-    cores.forEach((c) => c.send(type, payload));
+  const toCore = (type: string, payload: unknown) => cores.forEach((c) => c.send(type, payload));
   const sync = () => toCore("sync", { cubes: [...cubes.values()] });
 
   function get(id: string) {
@@ -72,8 +67,7 @@ export async function startSim(
       try {
         let value: unknown = null;
         if (e.type === "simCube") ops.cube(e.payload.id, e.payload.xy);
-        else if (e.type === "simButton")
-          ops.button(e.payload.id, e.payload.press);
+        else if (e.type === "simButton") ops.button(e.payload.id, e.payload.press);
         else if (e.type === "simLink") ops.link(e.payload.id, e.payload.link);
         else if (e.type === "simState") value = ops.state();
         else if (e.type === "simPad") ops.dropPad();
@@ -119,10 +113,7 @@ export function runLine(ops: Ops, line: string): string {
     case "list":
       return ops
         .state()
-        .map(
-          (c) =>
-            `${c.id} ${c.link} ${c.xy ? c.xy.join(",") : "패드 밖"} ${c.battPct}%`,
-        )
+        .map((c) => `${c.id} ${c.link} ${c.xy ? c.xy.join(",") : "패드 밖"} ${c.battPct}%`)
         .join("\n");
     default:
       return "명령: move <id> <x> <y> · lift <id> · press <id> [long] · link <id> up|down · drop · list";

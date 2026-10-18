@@ -19,9 +19,7 @@ export function App({ api }: { api: CubeSpaceApi }) {
         <Route path="/settings" element={<SettingsScreen />} />
       </Route>
       {/* 개발자용 템플릿 카탈로그. 배포 빌드에서는 빠진다. */}
-      {import.meta.env.DEV && (
-        <Route path="/template" element={<TemplatePage />} />
-      )}
+      {import.meta.env.DEV && <Route path="/template" element={<TemplatePage />} />}
       <Route path="*" element={<Navigate to="/home" replace />} />
     </Routes>
   );

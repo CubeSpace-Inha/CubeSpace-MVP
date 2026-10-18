@@ -32,7 +32,9 @@ const Head = ({ title, tag }: { title: string; tag?: string }) => (
   </span>
 );
 
-const Dot = ({ color }: { color: string }) => <i className="tdot" style={{ background: color, boxShadow: `0 0 8px ${color}` }} />;
+const Dot = ({ color }: { color: string }) => (
+  <i className="tdot" style={{ background: color, boxShadow: `0 0 8px ${color}` }} />
+);
 
 const Body = ({ lead, title, sub }: { lead: ReactNode; title: string; sub: string }) => (
   <span className="node__body">
@@ -44,7 +46,8 @@ const Body = ({ lead, title, sub }: { lead: ReactNode; title: string; sub: strin
   </span>
 );
 
-const iconOrDot = (icon: Pixels | undefined, dot = "rgb(154 161 173)") => (icon ? <LedIcon pixels={icon} size={40} /> : <Dot color={dot} />);
+const iconOrDot = (icon: Pixels | undefined, dot = "rgb(154 161 173)") =>
+  icon ? <LedIcon pixels={icon} size={40} /> : <Dot color={dot} />;
 
 // 확대 = 노드 그래프. 왼쪽 열: 패드(보기만) · 창 · AI. 창 · AI 노드를 누르면 오른쪽 열에 후보가 펼쳐진다. 시안 nodeColumn · candColumn.
 // 위치 · 선은 useZoomLayout이 잡는다.
@@ -113,14 +116,22 @@ export function ZoomDetail({ snapshot: s, cube: c, pick, quiet, onPick, onSwap, 
           "win",
           1,
           `창${ri >= 0 ? ` · 영역 ${ri + 1}` : ""}`,
-          <Body lead={<Dot color={winDot(s, w)} />} title={w ? winName(w) : "없음"} sub={w ? WIN_TEXT[w.status].text : "미배정"} />,
+          <Body
+            lead={<Dot color={winDot(s, w)} />}
+            title={w ? winName(w) : "없음"}
+            sub={w ? WIN_TEXT[w.status].text : "미배정"}
+          />,
           winCands(s, c).length,
         )}
         {box(
           "ai",
           2,
           `AI · ${p ? KIND_TEXT[p.kind] : "없음"}`,
-          <Body lead={iconOrDot(bs[2]!.icon)} title={p ? p.name : "없음"} sub={p ? "다음 실행부터 적용" : "연결된 AI 없음"} />,
+          <Body
+            lead={iconOrDot(bs[2]!.icon)}
+            title={p ? p.name : "없음"}
+            sub={p ? "다음 실행부터 적용" : "연결된 AI 없음"}
+          />,
           aiCands(s, c).length,
         )}
       </div>

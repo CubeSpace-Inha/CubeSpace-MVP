@@ -8,7 +8,11 @@ import { TextInput } from "../../components/TextInput";
 export type Brief = { source: string; scope: string; done: string; exclude: string; confirmed: boolean };
 export const emptyBrief = (source: string): Brief => ({ source, scope: "", done: "", exclude: "", confirmed: false });
 
-const EX = { scope: "로그인 화면과 입력 검증", done: "잘못된 이메일을 입력하면 이유를 안내하고 다시 시도할 수 있다", exclude: "서버 API와 디자인 시스템 변경" };
+const EX = {
+  scope: "로그인 화면과 입력 검증",
+  done: "잘못된 이메일을 입력하면 이유를 안내하고 다시 시도할 수 있다",
+  exclude: "서버 API와 디자인 시스템 변경",
+};
 
 type Props = { brief: Brief; onChange: (b: Brief) => void; show: (t: string) => void };
 
@@ -38,22 +42,48 @@ export function BriefTool({ brief: b, onChange, show }: Props) {
       <label className="fl" htmlFor="brief-scope">
         어디까지 바꿀까요?
       </label>
-      <TextArea id="brief-scope" rows={2} maxLength={1000} placeholder={`예: ${EX.scope}`} value={b.scope} onChange={(e) => set({ scope: e.target.value })} />
+      <TextArea
+        id="brief-scope"
+        rows={2}
+        maxLength={1000}
+        placeholder={`예: ${EX.scope}`}
+        value={b.scope}
+        onChange={(e) => set({ scope: e.target.value })}
+      />
       <label className="fl" htmlFor="brief-done">
         어떻게 되면 완료인가요?
       </label>
-      <TextArea id="brief-done" rows={2} maxLength={1000} placeholder={`예: ${EX.done}`} value={b.done} onChange={(e) => set({ done: e.target.value })} />
+      <TextArea
+        id="brief-done"
+        rows={2}
+        maxLength={1000}
+        placeholder={`예: ${EX.done}`}
+        value={b.done}
+        onChange={(e) => set({ done: e.target.value })}
+      />
       <label className="fl" htmlFor="brief-exclude">
         제외할 것 <small>선택 사항</small>
       </label>
-      <TextInput id="brief-exclude" maxLength={1000} placeholder={`예: ${EX.exclude}`} value={b.exclude} onChange={(e) => set({ exclude: e.target.value })} />
+      <TextInput
+        id="brief-exclude"
+        maxLength={1000}
+        placeholder={`예: ${EX.exclude}`}
+        value={b.exclude}
+        onChange={(e) => set({ exclude: e.target.value })}
+      />
       <div className="acts">
         <Button onClick={() => set(EX)}>입력 예시 채우기</Button>
         <Button variant="primary" disabled={!b.source} onClick={apply}>
           작업에 반영
         </Button>
       </div>
-      <p className="muted fb">{warn ? "완료 기준을 한 줄 이상 적어 주세요." : b.confirmed ? "시작할 때 이 내용도 함께 전달됩니다." : "예시는 직접 검토하고 수정해 주세요."}</p>
+      <p className="muted fb">
+        {warn
+          ? "완료 기준을 한 줄 이상 적어 주세요."
+          : b.confirmed
+            ? "시작할 때 이 내용도 함께 전달됩니다."
+            : "예시는 직접 검토하고 수정해 주세요."}
+      </p>
     </>
   );
 }

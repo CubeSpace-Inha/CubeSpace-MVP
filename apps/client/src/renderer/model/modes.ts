@@ -8,8 +8,7 @@ import { onPad, PAD_H, PAD_W, winOf } from "./home";
 
 export type VizCube = { xy: [number, number]; app: string | null }; // app null = 아직 안 묶인 큐브(?)
 
-export const vizColor = (app: string | null) =>
-  app ? (APP_ICONS[app]?.palette[0] ?? "#9aa1ad") : "#9aa1ad";
+export const vizColor = (app: string | null) => (app ? (APP_ICONS[app]?.palette[0] ?? "#9aa1ad") : "#9aa1ad");
 
 // 패드 그림: 36mm 칸에 맞춰 모양만 가운데에 그린다. size = 그림 한 변(px)
 export function padCells(list: VizCube[], size = 116) {
@@ -33,20 +32,10 @@ const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
 
 // 지금 패드: 패드 위 큐브와 묶인 창의 앱
 export const nowCubes = (s: Snapshot): VizCube[] =>
-  s.cubes
-    .filter(onPad)
-    .map((c) => ({ xy: c.xy!, app: winOf(s, c)?.app ?? null }));
+  s.cubes.filter(onPad).map((c) => ({ xy: c.xy!, app: winOf(s, c)?.app ?? null }));
 
-export const sameShape = (
-  s: Snapshot,
-  list: { xy: [number, number] }[],
-  skip?: string,
-): Mode | undefined =>
-  list.length >= 2
-    ? s.modes.find(
-        (m) => m.id !== skip && fitMode(list, m.cubes, s.settings.rules.gapMm),
-      )
-    : undefined;
+export const sameShape = (s: Snapshot, list: { xy: [number, number] }[], skip?: string): Mode | undefined =>
+  list.length >= 2 ? s.modes.find((m) => m.id !== skip && fitMode(list, m.cubes, s.settings.rules.gapMm)) : undefined;
 
 // 지금 패드 카드: 실행 중인 모드 · 저장할 수 있는지 · 모양이 같은 모드(덮어쓰기)
 export function nowCard(s: Snapshot) {
@@ -71,10 +60,7 @@ export const GX = 6;
 export const GY = 4;
 export type GridCell = { gx: number; gy: number; app: string };
 export const cellXy = (g: GridCell): ModeCube => ({
-  xy: [
-    PAD_W / 2 + (g.gx - (GX - 1) / 2) * 36,
-    PAD_H / 2 + (g.gy - (GY - 1) / 2) * 36,
-  ],
+  xy: [PAD_W / 2 + (g.gx - (GX - 1) / 2) * 36, PAD_H / 2 + (g.gy - (GY - 1) / 2) * 36],
   app: g.app,
 });
 export const toCells = (m: Mode): GridCell[] =>

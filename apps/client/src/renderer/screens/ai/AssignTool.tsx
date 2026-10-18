@@ -94,7 +94,12 @@ export function AssignTool({ s, sel, act, running, onSelect, onCheck }: Props) {
                     <Button size="sm" aria-label={`${name} 위로`} disabled={i === 0} onClick={() => act.move(id, -1)}>
                       ↑
                     </Button>
-                    <Button size="sm" aria-label={`${name} 아래로`} disabled={i === l.length - 1} onClick={() => act.move(id, 1)}>
+                    <Button
+                      size="sm"
+                      aria-label={`${name} 아래로`}
+                      disabled={i === l.length - 1}
+                      onClick={() => act.move(id, 1)}
+                    >
                       ↓
                     </Button>
                     <Button size="sm" className="gh dg" aria-label={`${name} 빼기`} onClick={() => act.remove(id)}>
@@ -102,7 +107,13 @@ export function AssignTool({ s, sel, act, running, onSelect, onCheck }: Props) {
                     </Button>
                   </div>
                 ) : (
-                  <Button size="sm" className="gh" aria-label={`${name} ${isC ? "선택됨" : "선택"}`} disabled={isC} onClick={() => act.pick(id)}>
+                  <Button
+                    size="sm"
+                    className="gh"
+                    aria-label={`${name} ${isC ? "선택됨" : "선택"}`}
+                    disabled={isC}
+                    onClick={() => act.pick(id)}
+                  >
                     {isC ? "선택됨" : "선택"}
                   </Button>
                 )}

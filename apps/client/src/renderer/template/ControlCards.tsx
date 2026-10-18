@@ -17,7 +17,6 @@ import { APP_ICONS, appPixels } from "../cube/appIcons";
 import { Board } from "../layout/Board";
 import { Column } from "../layout/Column";
 
-
 const LOG: LogItem[] = [
   { id: "1", text: "큐브 B를 창 2에 맡김", time: "14:02", color: "var(--c2)" },
   { id: "2", text: "프리셋 '코딩' 적용", time: "13:58", color: "var(--c1)" },
@@ -66,7 +65,12 @@ export function ControlCards() {
         <Card title="프로그램 칩" meta="건너뛸 프로그램" n={3}>
           <div className="chips">
             {skips.map((p) => (
-              <Chip key={p} icon={<LedIcon size={20} pixels={appPixels(p)} />} label={p} onRemove={() => setSkips(skips.filter((s) => s !== p))} />
+              <Chip
+                key={p}
+                icon={<LedIcon size={20} pixels={appPixels(p)} />}
+                label={p}
+                onRemove={() => setSkips(skips.filter((s) => s !== p))}
+              />
             ))}
             <ChipAdd
               label="프로그램"

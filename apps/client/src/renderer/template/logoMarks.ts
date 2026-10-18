@@ -4,29 +4,15 @@ const C = ["#7c5cff", "#12b5d6", "#f0457a", "#ff8a1f"];
 type Pt = [number, number];
 
 // 아이소 큐브 윗면 위의 한 점: 윗면 꼭짓점 t, 오른쪽 · 왼쪽 변 벡터로 (u, v)
-const iso = (
-  u: number,
-  v: number,
-  t: Pt = [32, 6],
-  r: Pt = [24, 13],
-  l: Pt = [-24, 13],
-): Pt => [t[0] + u * r[0] + v * l[0], t[1] + u * r[1] + v * l[1]];
-const poly = (pts: Pt[], fill: string) =>
-  `<polygon points="${pts.map((p) => p.join(",")).join(" ")}" fill="${fill}"/>`;
+const iso = (u: number, v: number, t: Pt = [32, 6], r: Pt = [24, 13], l: Pt = [-24, 13]): Pt => [
+  t[0] + u * r[0] + v * l[0],
+  t[1] + u * r[1] + v * l[1],
+];
+const poly = (pts: Pt[], fill: string) => `<polygon points="${pts.map((p) => p.join(",")).join(" ")}" fill="${fill}"/>`;
 const cell = (u0: number, v0: number, s: number, fill: string) =>
-  poly(
-    [iso(u0, v0), iso(u0 + s, v0), iso(u0 + s, v0 + s), iso(u0, v0 + s)],
-    fill,
-  );
+  poly([iso(u0, v0), iso(u0 + s, v0), iso(u0 + s, v0 + s), iso(u0, v0 + s)], fill);
 // 가운데(cx, cy)가 윗면 중심인 큐브. w = 반폭.
-const cube = (
-  cx: number,
-  cy: number,
-  w: number,
-  top: string,
-  left: string,
-  right: string,
-) => {
+const cube = (cx: number, cy: number, w: number, top: string, left: string, right: string) => {
   const h = (w * 13) / 24,
     d = (w * 26) / 24;
   return (
@@ -66,14 +52,7 @@ const topFace = (cx: number, cy: number, w: number): [Pt, Pt, Pt] => [
 ];
 
 // 점 판: rows의 글자 = 색 번호, "." = 꺼진 점. wave면 물결로 켜진다.
-const dots = (
-  rows: string[],
-  col: Record<string, string>,
-  pitch = 6.3,
-  r = 2.1,
-  wave = false,
-  bg = "#23262d",
-) => {
+const dots = (rows: string[], col: Record<string, string>, pitch = 6.3, r = 2.1, wave = false, bg = "#23262d") => {
   const w = rows[0].length * pitch,
     h = rows.length * pitch,
     x0 = 32 - w / 2 + pitch / 2,
@@ -92,16 +71,7 @@ const dots = (
   return s + "</svg>";
 };
 
-const CS = [
-  "........",
-  "111.222.",
-  "1...2...",
-  "1...222.",
-  "1.....2.",
-  "111.222.",
-  "........",
-  "3344....",
-];
+const CS = ["........", "111.222.", "1...2...", "1...222.", "1.....2.", "111.222.", "........", "3344...."];
 const CS_COL: Record<string, string> = { 1: C[1], 2: C[2], 3: C[3], 4: C[0] };
 
 // 3 × 5 LED 글꼴로 쓴 CUBE / SPACE
@@ -116,22 +86,11 @@ const ledWords = () => {
     A: ["010", "101", "111", "101", "101"],
   };
   const line = (w: string, col: string) =>
-    [0, 1, 2, 3, 4].map((y) =>
-      [...w].map((ch) => F[ch][y].replaceAll("0", ".").replaceAll("1", col)).join("."),
-    );
+    [0, 1, 2, 3, 4].map((y) => [...w].map((ch) => F[ch][y].replaceAll("0", ".").replaceAll("1", col)).join("."));
   const pad = (rs: string[], n: number) =>
-    rs.map(
-      (x) =>
-        ".".repeat((n - x.length) >> 1) +
-        x +
-        ".".repeat(n - x.length - ((n - x.length) >> 1)),
-    );
+    rs.map((x) => ".".repeat((n - x.length) >> 1) + x + ".".repeat(n - x.length - ((n - x.length) >> 1)));
   return dots(
-    [
-      ...pad(line("CUBE", "1"), 19),
-      ".".repeat(19),
-      ...pad(line("SPACE", "2"), 19),
-    ],
+    [...pad(line("CUBE", "1"), 19), ".".repeat(19), ...pad(line("SPACE", "2"), 19)],
     { 1: C[1], 2: C[0] },
     2.75,
     1.05,
@@ -206,43 +165,19 @@ const MARKS: Record<string, string> = {
     "#6c50e8",
   )}</svg>`,
   F: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2.8 20.5 7.5v9L12 21.2 3.5 16.5v-9z"/><path d="M3.5 7.5 12 12.2l8.5-4.7M12 12.2v9"/><circle cx="12" cy="7.4" r="1.3" fill="${C[1]}" stroke="none"/></svg>`,
-  G: dots(
-    [
-      "...11...",
-      ".111111.",
-      "21111113",
-      "22211333",
-      "22223333",
-      "22223333",
-      ".222333.",
-      "...23...",
-    ],
-    { 1: C[0], 2: C[1], 3: C[2] },
-  ),
-  H: dots(
-    [
-      "..11111.",
-      ".1......",
-      "1....22.",
-      "1....22.",
-      "1.......",
-      "1.......",
-      ".1......",
-      "..11111.",
-    ],
-    { 1: C[1], 2: C[0] },
-  ),
+  G: dots(["...11...", ".111111.", "21111113", "22211333", "22223333", "22223333", ".222333.", "...23..."], {
+    1: C[0],
+    2: C[1],
+    3: C[2],
+  }),
+  H: dots(["..11111.", ".1......", "1....22.", "1....22.", "1.......", "1.......", ".1......", "..11111."], {
+    1: C[1],
+    2: C[0],
+  }),
   I: ledWords(),
   J: dots(CS, CS_COL, 6.3, 2.1, true),
   K: cubeCs(),
-  L: dots(
-    [...CS.slice(0, 7), "...4...."],
-    { 1: "currentColor", 2: "currentColor", 4: C[0] },
-    6.3,
-    2.1,
-    false,
-    "none",
-  ),
+  L: dots([...CS.slice(0, 7), "...4...."], { 1: "currentColor", 2: "currentColor", 4: C[0] }, 6.3, 2.1, false, "none"),
   M: `<svg viewBox="0 0 64 64"><path fill-rule="evenodd" fill="${C[0]}" d="M2 16A14 14 0 0 1 16 2h32a14 14 0 0 1 14 14v32a14 14 0 0 1-14 14H16A14 14 0 0 1 2 48zM32 14l15.6 9v18L32 50l-15.6-9V23z"/><path d="M16.4 23 32 32l15.6-9M32 32v18" fill="none" stroke="${C[0]}" stroke-width="3" stroke-linejoin="round"/></svg>`,
   N: `<svg viewBox="0 0 64 64">${poly(
     [
@@ -287,10 +222,7 @@ const MARKS: Record<string, string> = {
       [25.5, 49, C[3]],
     ] as const
   )
-    .map(
-      ([x, y, c]) =>
-        `<rect x="${x}" y="${y}" width="13" height="13" rx="3" fill="${c}"/>`,
-    )
+    .map(([x, y, c]) => `<rect x="${x}" y="${y}" width="13" height="13" rx="3" fill="${c}"/>`)
     .join("")}</svg>`,
   P: `<svg viewBox="0 0 64 64" fill="currentColor"><rect x="13" y="6" width="37" height="7" rx="2"/><rect x="43" y="6" width="7" height="26" rx="2"/><rect x="13" y="18" width="30" height="6" rx="2"/><rect x="7" y="38" width="50" height="7" rx="2" fill="${C[0]}"/><rect x="19" y="45" width="7" height="13" rx="2" fill="${C[0]}"/><rect x="38" y="45" width="7" height="13" rx="2" fill="${C[0]}"/></svg>`,
   Q: `<svg viewBox="0 0 64 64"><defs><path id="qarc" d="M32 32m-22.5 0a22.5 22.5 0 1 1 45 0a22.5 22.5 0 1 1-45 0"/></defs><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="32" r="16.5" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".5"/><text font-weight="800" font-size="6" letter-spacing=".9" fill="currentColor"><textPath href="#qarc">CUBE SPACE • WINDOW PAD •</textPath></text>${cube(32, 27, 9, C[0], "#5a3fd0", "#6c50e8")}</svg>`,
@@ -300,16 +232,7 @@ const MARKS: Record<string, string> = {
 };
 
 // 이름 표기 방식
-export type Lock =
-  | "between"
-  | "stack"
-  | "lw"
-  | "cubed"
-  | "ko"
-  | "mono"
-  | "just"
-  | "grot"
-  | "self";
+export type Lock = "between" | "stack" | "lw" | "cubed" | "ko" | "mono" | "just" | "grot" | "self";
 export const LOCK_NAME: Record<Lock, string> = {
   between: "사이에 마크",
   stack: "두 줄",

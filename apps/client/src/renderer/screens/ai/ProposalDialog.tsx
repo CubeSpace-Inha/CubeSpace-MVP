@@ -19,15 +19,7 @@ type Props = {
 };
 
 // 추천 배정 미리보기: 구성마다 담을 큐브를 고르고 바뀔 내용을 본다(시안 proposalDialog)
-export function ProposalDialog({
-  s,
-  p,
-  effort,
-  running,
-  onChange,
-  onClose,
-  onApply,
-}: Props) {
+export function ProposalDialog({ s, p, effort, running, onChange, onClose, onApply }: Props) {
   const bad = !p || proposalBad(p.targets);
   return (
     <Dialog
@@ -46,8 +38,8 @@ export function ProposalDialog({
       {p && (
         <>
           <p>
-            각 구성을 담을 큐브를 고르세요. 현재 선택은 아래처럼 바뀌고, 전환
-            후보는 유지됩니다. 고른 큐브는 AI 모드로 바뀝니다.
+            각 구성을 담을 큐브를 고르세요. 현재 선택은 아래처럼 바뀌고, 전환 후보는 유지됩니다. 고른 큐브는 AI 모드로
+            바뀝니다.
           </p>
           {p.ids.map((id, i) => {
             const pr = s.profiles.find((x) => x.id === id);
@@ -60,13 +52,7 @@ export function ProposalDialog({
                 <Select
                   aria-label={`${pr?.name ?? "구성"} 담을 큐브`}
                   value={p.targets[i]}
-                  onChange={(e) =>
-                    onChange(
-                      p.targets.map((t, k) =>
-                        k === i ? Number(e.target.value) : t,
-                      ),
-                    )
-                  }
+                  onChange={(e) => onChange(p.targets.map((t, k) => (k === i ? Number(e.target.value) : t)))}
                 >
                   <option value={-1}>큐브 선택</option>
                   {s.cubes.map((c) => (
@@ -85,19 +71,16 @@ export function ProposalDialog({
                 <p key={c.slot}>
                   <b>큐브 {c.name}</b>
                   <span>
-                    {profName(s, c.ai)} →{" "}
-                    {profName(s, k < 0 ? null : p.ids[k]!)}
+                    {profName(s, c.ai)} → {profName(s, k < 0 ? null : p.ids[k]!)}
                   </span>
                 </p>
               );
             })}
           </div>
-          {bad && (
-            <p className="vmsg">구성마다 서로 다른 큐브를 선택해 주세요.</p>
-          )}
+          {bad && <p className="vmsg">구성마다 서로 다른 큐브를 선택해 주세요.</p>}
           <p>
-            사용 강도: {EFFORTS.find(([v]) => v === effort)![1]}. 큐브의 물리적
-            위치는 유지돼요. 패드 밖 큐브는 직접 올려야 참여합니다.
+            사용 강도: {EFFORTS.find(([v]) => v === effort)![1]}. 큐브의 물리적 위치는 유지돼요. 패드 밖 큐브는 직접
+            올려야 참여합니다.
             {running && " 진행 중인 작업은 바뀌지 않습니다."}
           </p>
         </>

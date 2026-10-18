@@ -1,15 +1,7 @@
 import type { AppWindow, Cube, Profile, Snapshot } from "@cubespace/protocol";
 import { APP_ICONS, glyphPixels } from "../cube/appIcons";
 import type { LinkKind } from "../cube/ChainPill";
-import {
-  ICON_ROWS,
-  OFF,
-  outlineLeds,
-  REG_ICONS,
-  toPixels,
-  type PadLed,
-  type Pixels,
-} from "../cube/led";
+import { ICON_ROWS, OFF, outlineLeds, REG_ICONS, toPixels, type PadLed, type Pixels } from "../cube/led";
 import type { SpareCube } from "../cube/SpareTray";
 import { battText, KIND_TEXT, linkText, WIN_TEXT, winName } from "./status";
 
@@ -18,12 +10,7 @@ import { battText, KIND_TEXT, linkText, WIN_TEXT, winName } from "./status";
 import { PAD_H, PAD_W } from "@cubespace/protocol";
 export { PAD_H, PAD_W };
 // 창 영역 색: 청록 · 분홍 · 주황 · 보라 순. AI 모드 큐브는 보라.
-export const REGION = [
-  "rgb(18 181 214)",
-  "rgb(240 69 122)",
-  "rgb(255 138 31)",
-  "rgb(124 92 255)",
-];
+export const REGION = ["rgb(18 181 214)", "rgb(240 69 122)", "rgb(255 138 31)", "rgb(124 92 255)"];
 export const AI = "rgb(124 92 255)";
 export const NEUTRAL = "rgb(150 158 172)";
 const MUTED = "rgb(154 161 173)";
@@ -79,20 +66,11 @@ export type HomeView = {
 };
 
 export const onPad = (c: Cube) => c.link === "up" && c.xy !== null;
-export const winOf = (s: Snapshot, c: Cube) =>
-  s.windows.find((w) => w.id === c.window) ?? null;
-export const profOf = (s: Snapshot, c: Cube) =>
-  s.profiles.find((p) => p.id === c.ai) ?? null;
-export const regionOf = (s: Snapshot, w: AppWindow | null) =>
-  w ? s.layout.findIndex((p) => p.window === w.id) : -1;
+export const winOf = (s: Snapshot, c: Cube) => s.windows.find((w) => w.id === c.window) ?? null;
+export const profOf = (s: Snapshot, c: Cube) => s.profiles.find((p) => p.id === c.ai) ?? null;
+export const regionOf = (s: Snapshot, w: AppWindow | null) => (w ? s.layout.findIndex((p) => p.window === w.id) : -1);
 export const cubeK = (s: Snapshot, c: Cube): LinkKind =>
-  s.pad.session !== "up"
-    ? "off"
-    : c.link === "up"
-      ? "ok"
-      : c.downReason === "link"
-        ? "hold"
-        : "off";
+  s.pad.session !== "up" ? "off" : c.link === "up" ? "ok" : c.downReason === "link" ? "hold" : "off";
 
 // 창 점 색: 창 모드 큐브가 맡아 패드 테두리가 켜진 창만 영역 색, 아니면 회색(시안 swatch · lit)
 export function winDot(s: Snapshot, w: AppWindow | null): string {
@@ -108,14 +86,9 @@ export function cubeLine(s: Snapshot, c: Cube): string | undefined {
 }
 
 // 큐브가 있는 곳: 패드 위 · 패드 밖 · 꺼진 이유
-export const place = (c: Cube) =>
-  onPad(c) ? "패드 위" : c.link === "up" ? "패드 밖" : (linkText(c).why ?? "");
+export const place = (c: Cube) => (onPad(c) ? "패드 위" : c.link === "up" ? "패드 밖" : (linkText(c).why ?? ""));
 export const coords = (c: Cube) =>
-  c.xy
-    ? `${c.xy[0].toFixed(1)}, ${c.xy[1].toFixed(1)} mm`
-    : c.link === "up"
-      ? "패드 밖"
-      : "—";
+  c.xy ? `${c.xy[0].toFixed(1)}, ${c.xy[1].toFixed(1)} mm` : c.link === "up" ? "패드 밖" : "—";
 
 export const appIcon = (app: string): Pixels =>
   APP_ICONS[app] ? glyphPixels(APP_ICONS[app]) : toPixels(ICON_ROWS.frame);
@@ -152,11 +125,7 @@ export function branches(s: Snapshot, c: Cube): Branch[] {
   return [
     b({
       head: "패드 · 무선",
-      text: !padUp
-        ? "판정 동결"
-        : c.link === "up"
-          ? `연결 · ${place(c)}`
-          : `${l.text} · ${l.why}`,
+      text: !padUp ? "판정 동결" : c.link === "up" ? `연결 · ${place(c)}` : `${l.text} · ${l.why}`,
       note: "",
       kind: ck,
       on: false,
@@ -186,9 +155,7 @@ export function branches(s: Snapshot, c: Cube): Branch[] {
 export function homeView(s: Snapshot): HomeView {
   const padUp = s.pad.session === "up";
   // 패드는 창 모드 큐브가 맡은 창의 영역만 테두리를 켠다
-  const lit = s.layout.filter((p) =>
-    s.cubes.some((c) => c.window === p.window && c.mode === "window"),
-  );
+  const lit = s.layout.filter((p) => s.cubes.some((c) => c.window === p.window && c.mode === "window"));
 
   const label = (c: Cube) =>
     `슬롯 ${c.slot} 큐브 ${c.name}. 배터리 ${battText(c)}. ${branches(s, c)
@@ -209,10 +176,7 @@ export function homeView(s: Snapshot): HomeView {
   }));
 
   // 안 쓰는 큐브(연결됐지만 패드 밖) 뒤에 도크에서 충전 중인 큐브. 그 밖의 꺼진 큐브는 연결 표시에만.
-  const spares = [
-    ...s.cubes.filter((c) => c.link === "up" && !onPad(c)),
-    ...s.cubes.filter(charging),
-  ];
+  const spares = [...s.cubes.filter((c) => c.link === "up" && !onPad(c)), ...s.cubes.filter(charging)];
   const spare = Array.from({ length: 6 }, (_, i) => {
     const c = spares[i];
     if (!c) return null;
@@ -224,9 +188,7 @@ export function homeView(s: Snapshot): HomeView {
       pct: c.battPct ?? 0,
       line: cubeLine(s, c),
       charging: ch,
-      label: ch
-        ? `큐브 ${c.name} · 도크 · 충전 중 · 마지막 잔량 ${battText(c)}`
-        : label(c),
+      label: ch ? `큐브 ${c.name} · 도크 · 충전 중 · 마지막 잔량 ${battText(c)}` : label(c),
     };
   });
 
@@ -234,23 +196,13 @@ export function homeView(s: Snapshot): HomeView {
     const c = s.cubes.find((x) => x.slot === slot);
     if (!c) return null;
     const l = linkText(c);
-    const why = !padUp
-      ? "확인할 수 없음"
-      : c.link === "up"
-        ? "연결"
-        : `${l.text} · ${l.why}`;
+    const why = !padUp ? "확인할 수 없음" : c.link === "up" ? "연결" : `${l.text} · ${l.why}`;
     return { name: c.name, kind: cubeK(s, c), why };
   });
 
   return {
     frozen: !padUp,
-    leds: lit.flatMap((p) =>
-      outlineLeds(
-        p.rect,
-        REGION[s.layout.indexOf(p)]!,
-        EDGE[lit.length] ?? 0.4,
-      ),
-    ),
+    leds: lit.flatMap((p) => outlineLeds(p.rect, REGION[s.layout.indexOf(p)]!, EDGE[lit.length] ?? 0.4)),
     placed,
     spare,
     chain,

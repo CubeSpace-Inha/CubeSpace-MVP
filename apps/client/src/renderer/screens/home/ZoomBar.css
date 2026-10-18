@@ -1,13 +1,67 @@
-.zoom-bar { position: absolute; top: calc(18px + env(safe-area-inset-top, 0px)); left: 50%; z-index: 6; display: flex; align-items: center; gap: 12px; padding: 8px 14px 8px 8px; border-radius: 18px; background: var(--card); box-shadow: var(--rc);
-  translate: -50% -8px; opacity: 0; pointer-events: none; transition: opacity .3s .15s, translate .45s .15s var(--ease-spring); }
-.zoomed .zoom-bar { opacity: 1; pointer-events: auto; translate: -50% 0; }
-.zoom-bar h2 { font-size: 15px; font-weight: 700; }
-.zoom-bar .tabs { grid-template-columns: repeat(2, 56px); }
-.zoom-bar .tabs button { height: 30px; font-size: 13px; }
-.kbd { font: 600 11px ui-monospace, Menlo, monospace; padding: 3px 7px; border-radius: 7px; background: var(--soft); color: var(--muted); box-shadow: inset 0 2px 4px var(--inset); }
+.zoom-bar {
+  position: absolute;
+  top: calc(18px + env(safe-area-inset-top, 0px));
+  left: 50%;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px 8px 8px;
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: var(--rc);
+  translate: -50% -8px;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.3s 0.15s,
+    translate 0.45s 0.15s var(--ease-spring);
+}
+.zoomed .zoom-bar {
+  opacity: 1;
+  pointer-events: auto;
+  translate: -50% 0;
+}
+.zoom-bar h2 {
+  font-size: 15px;
+  font-weight: 700;
+}
+.zoom-bar .tabs {
+  grid-template-columns: repeat(2, 56px);
+}
+.zoom-bar .tabs button {
+  height: 30px;
+  font-size: 13px;
+}
+.kbd {
+  font:
+    600 11px ui-monospace,
+    Menlo,
+    monospace;
+  padding: 3px 7px;
+  border-radius: 7px;
+  background: var(--soft);
+  color: var(--muted);
+  box-shadow: inset 0 2px 4px var(--inset);
+}
 @media (max-width: 720px) {
-  .zoom-bar { top: calc(16px + env(safe-area-inset-top, 0px)); max-width: calc(100% - 32px); gap: 8px; padding: 6px 8px 6px 6px; }
-  .zoom-bar h2 { min-width: 0; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .zoom-bar .kbd { display: none; }
-  .zoom-bar .btn { padding: 0 10px; }
+  .zoom-bar {
+    top: calc(16px + env(safe-area-inset-top, 0px));
+    max-width: calc(100% - 32px);
+    gap: 8px;
+    padding: 6px 8px 6px 6px;
+  }
+  .zoom-bar h2 {
+    min-width: 0;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .zoom-bar .kbd {
+    display: none;
+  }
+  .zoom-bar .btn {
+    padding: 0 10px;
+  }
 }

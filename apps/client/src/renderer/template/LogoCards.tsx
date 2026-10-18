@@ -22,46 +22,42 @@ export function LogoCards() {
       {open && (
         <div className="logo-grid">
           {LOGO_GROUPS[page].logos.map((o) => (
-          <article
-            key={o.k}
-            className={o.tag ? "logo-opt rec" : "logo-opt"}
-            aria-label={`시안 ${o.k} ${o.name}`}
-          >
-            <div className="logo-head">
-              <b>
-                {o.k}. {o.name}
-              </b>
-              {o.tag && <span>{o.tag}</span>}
-            </div>
-            <div className="logo-plates">
-              <Mark svg={o.svg} className="logo-plate d" />
-              <Mark svg={o.svg} className="logo-plate l" />
-            </div>
-            <div className="logo-sizes">
-              {SIZES.map((s) => (
-                <Fragment key={s}>
-                  <span>{s}</span>
-                  <Mark svg={o.svg} className="logo-sz" size={s} />
-                </Fragment>
-              ))}
-            </div>
-            <div className="logo-lock">
-              {o.lock === "between" ? (
-                <>
-                  <span className="wm inline">CUBE</span>
-                  <Mark svg={o.svg} className="logo-lm" />
-                  <span className="wm inline">SPACE</span>
-                </>
-              ) : (
-                <>
-                  <Mark svg={o.svg} className="logo-lm" />
-                  <Wordmark lock={o.lock} />
-                </>
-              )}
-              <small>{LOCK_NAME[o.lock]}</small>
-            </div>
-            <p className="tpl-p">{o.note}</p>
-          </article>
+            <article key={o.k} className={o.tag ? "logo-opt rec" : "logo-opt"} aria-label={`시안 ${o.k} ${o.name}`}>
+              <div className="logo-head">
+                <b>
+                  {o.k}. {o.name}
+                </b>
+                {o.tag && <span>{o.tag}</span>}
+              </div>
+              <div className="logo-plates">
+                <Mark svg={o.svg} className="logo-plate d" />
+                <Mark svg={o.svg} className="logo-plate l" />
+              </div>
+              <div className="logo-sizes">
+                {SIZES.map((s) => (
+                  <Fragment key={s}>
+                    <span>{s}</span>
+                    <Mark svg={o.svg} className="logo-sz" size={s} />
+                  </Fragment>
+                ))}
+              </div>
+              <div className="logo-lock">
+                {o.lock === "between" ? (
+                  <>
+                    <span className="wm inline">CUBE</span>
+                    <Mark svg={o.svg} className="logo-lm" />
+                    <span className="wm inline">SPACE</span>
+                  </>
+                ) : (
+                  <>
+                    <Mark svg={o.svg} className="logo-lm" />
+                    <Wordmark lock={o.lock} />
+                  </>
+                )}
+                <small>{LOCK_NAME[o.lock]}</small>
+              </div>
+              <p className="tpl-p">{o.note}</p>
+            </article>
           ))}
         </div>
       )}
@@ -69,15 +65,7 @@ export function LogoCards() {
   );
 }
 
-function Mark({
-  svg,
-  className,
-  size,
-}: {
-  svg: string;
-  className: string;
-  size?: number;
-}) {
+function Mark({ svg, className, size }: { svg: string; className: string; size?: number }) {
   // 고정 문자열만 넣는다(사용자 입력 없음).
   return (
     <i

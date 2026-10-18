@@ -1,1 +1,13 @@
-.code-chip { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 99px; font: 600 11px ui-monospace, Menlo, monospace; white-space: nowrap; flex-shrink: 0; }
+.code-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 9px;
+  border-radius: 99px;
+  font:
+    600 11px ui-monospace,
+    Menlo,
+    monospace;
+  white-space: nowrap;
+  flex-shrink: 0;
+}

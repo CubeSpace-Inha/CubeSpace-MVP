@@ -22,7 +22,15 @@ export function Cube({ label, pixels, x, y, line, selected, caption, slot, class
   const style = { left: `${x * 100}%`, top: `${y * 100}%`, "--cube-line": line } as CSSProperties;
   const cls = ["cube", selected && "selected", className].filter(Boolean).join(" ");
   return (
-    <button type="button" className={cls} style={style} aria-label={label} aria-pressed={selected} data-slot={slot} onClick={onClick}>
+    <button
+      type="button"
+      className={cls}
+      style={style}
+      aria-label={label}
+      aria-pressed={selected}
+      data-slot={slot}
+      onClick={onClick}
+    >
       <CubeTop pixels={pixels} />
       {caption && <span className="cube-caption">{caption}</span>}
       {children}

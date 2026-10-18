@@ -3,7 +3,13 @@ import type { Cube, Snapshot } from "@cubespace/protocol";
 import { moveChoice, nextChoice, padOn, profName, removeChoice } from "../../model/aiAdv";
 
 // 고른 큐브의 AI 전환 목록 조작(시안 addChoice · touchCube · pick · removeChoice · moveChoice). 결과는 토스트로 알린다.
-export function choiceActions(s: Snapshot, api: CubeSpaceApi, c: Cube | undefined, running: boolean, show: (t: string) => void) {
+export function choiceActions(
+  s: Snapshot,
+  api: CubeSpaceApi,
+  c: Cube | undefined,
+  running: boolean,
+  show: (t: string) => void,
+) {
   if (!c) return null;
   const name = (id: string | null) => profName(s, id);
   return {

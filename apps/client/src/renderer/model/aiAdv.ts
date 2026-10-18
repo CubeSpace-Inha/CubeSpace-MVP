@@ -1,9 +1,4 @@
-import type {
-  Cube,
-  Profile,
-  ProfileKind,
-  Snapshot,
-} from "@cubespace/protocol";
+import type { Cube, Profile, ProfileKind, Snapshot } from "@cubespace/protocol";
 import { candProfiles, linked, type Effort } from "./ai";
 import { onPad, profOf } from "./home";
 import { KIND_TEXT } from "./status";
@@ -19,10 +14,7 @@ export const KIND_GLYPH: Record<ProfileKind, string> = {
   mcp: "⌁",
 };
 
-export const EFFORT_INFO: Record<
-  Effort,
-  { rounds: number; description: string; detail: string }
-> = {
+export const EFFORT_INFO: Record<Effort, { rounds: number; description: string; detail: string }> = {
   light: {
     rounds: 0,
     description: "작은 수정이나 빠른 확인에 적합해요.",
@@ -41,12 +33,9 @@ export const EFFORT_INFO: Record<
 };
 
 export const padOn = (s: Snapshot) => s.pad.session === "up";
-export const plc = (c: Cube) =>
-  !linked(c) ? "미연결" : onPad(c) ? "패드 위" : "패드 밖";
-export const profName = (s: Snapshot, id: string | null) =>
-  s.profiles.find((p) => p.id === id)?.name ?? "선택 없음";
-export const kindLine = (p: Profile | undefined) =>
-  p ? KIND_TEXT[p.kind] + (p.kind === "prompt" ? " · md" : "") : "";
+export const plc = (c: Cube) => (!linked(c) ? "미연결" : onPad(c) ? "패드 위" : "패드 밖");
+export const profName = (s: Snapshot, id: string | null) => s.profiles.find((p) => p.id === id)?.name ?? "선택 없음";
+export const kindLine = (p: Profile | undefined) => (p ? KIND_TEXT[p.kind] + (p.kind === "prompt" ? " · md" : "") : "");
 
 // 터치하면 바뀔 다음 항목: 지금 항목 다음부터 한 바퀴. 없는 구성은 건너뛴다.
 export function nextChoice(s: Snapshot, c: Cube): string | null {
@@ -85,19 +74,13 @@ export function touchHint(s: Snapshot, c: Cube, running: boolean) {
           ? "다른 큐브에서 사용 중인 창은 건너뜁니다."
           : `다음 터치: ${profName(s, nx)}`,
     note:
-      (n > 1
-        ? "마지막 다음에는 첫 항목으로 돌아옵니다."
-        : "후보를 추가해도 현재 선택은 유지됩니다.") +
+      (n > 1 ? "마지막 다음에는 첫 항목으로 돌아옵니다." : "후보를 추가해도 현재 선택은 유지됩니다.") +
       (running ? " 진행 중인 작업은 그대로 유지돼요." : ""),
   };
 }
 
 // 목록에서 빼기: 지금 항목을 뺐으면 그 뒤(한 바퀴)의 첫 구성이 지금 항목이 된다
-export function removeChoice(
-  s: Snapshot,
-  c: Cube,
-  id: string,
-): { list: string[]; cur: string | null } {
+export function removeChoice(s: Snapshot, c: Cube, id: string): { list: string[]; cur: string | null } {
   const at = c.aiChoices.indexOf(id);
   const list = c.aiChoices.filter((x) => x !== id);
   if (c.ai !== id) return { list, cur: c.ai };
@@ -126,18 +109,10 @@ export function conflictChecks(s: Snapshot): [string, boolean, string][] {
     ["프로젝트 하나", pr.length === 1, `${pr.length}개 선택됨`],
     [
       "에이전트 역할",
-      ag.length >= 1 &&
-        ag.length <= 2 &&
-        (ag.length < 2 || ag[0]!.role !== ag[1]!.role),
-      ag.length === 2
-        ? "계획·검토와 구현을 나눠서 진행"
-        : `${ag.length}개 선택됨`,
+      ag.length >= 1 && ag.length <= 2 && (ag.length < 2 || ag[0]!.role !== ag[1]!.role),
+      ag.length === 2 ? "계획·검토와 구현을 나눠서 진행" : `${ag.length}개 선택됨`,
     ],
-    [
-      "중복 구성",
-      new Set(l.map((p) => p.id)).size === l.length,
-      "현재 선택한 구성만 검사",
-    ],
+    ["중복 구성", new Set(l.map((p) => p.id)).size === l.length, "현재 선택한 구성만 검사"],
     ["패드 연결", padOn(s), padOn(s) ? "연결됨" : "연결 필요"],
   ];
 }
@@ -145,13 +120,11 @@ export function conflictChecks(s: Snapshot): [string, boolean, string][] {
 // 추천 배정: 프로젝트 + 구현 에이전트(+ 큐브 3개 이상이고 가볍게가 아니면 계획 에이전트). 지금 후보를 먼저 쓴다.
 export function recommendIds(s: Snapshot, effort: Effort): string[] {
   const cur = candProfiles(s);
-  const pick = (f: (p: Profile) => boolean) =>
-    cur.find(f) ?? s.profiles.find(f);
+  const pick = (f: (p: Profile) => boolean) => cur.find(f) ?? s.profiles.find(f);
   const pr = pick((p) => p.kind === "project");
   const im = pick((p) => p.kind === "agent" && p.role === "implement");
   const pl = pick((p) => p.kind === "agent" && p.role === "plan");
-  const plan =
-    s.cubes.filter(linked).length >= 3 && effort !== "light" ? [pl] : [];
+  const plan = s.cubes.filter(linked).length >= 3 && effort !== "light" ? [pl] : [];
   return [pr, im, ...plan].filter((p): p is Profile => !!p).map((p) => p.id);
 }
 
@@ -159,8 +132,7 @@ export function recommendIds(s: Snapshot, effort: Effort): string[] {
 export function proposeTargets(s: Snapshot, ids: string[]): number[] {
   const used = new Set<number>();
   return ids.map((id) => {
-    const free = (f: (c: Cube) => boolean) =>
-      s.cubes.find((c) => !used.has(c.slot) && f(c));
+    const free = (f: (c: Cube) => boolean) => s.cubes.find((c) => !used.has(c.slot) && f(c));
     const c = free((k) => k.ai === id) ?? free(onPad) ?? free(linked);
     if (c) used.add(c.slot);
     return c ? c.slot : -1;

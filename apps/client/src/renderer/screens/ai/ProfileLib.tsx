@@ -17,9 +17,7 @@ type Props = {
 // 큐브에 담을 구성: 큐브를 고르고 전환 후보를 추가한다(시안 renderAILib). 프리셋 · 구성 만들기/편집은 뺐다.
 export function ProfileLib({ s, sel, onSelect, onAdd }: Props) {
   const [pf, setPf] = useState<"all" | ProfileKind>("all");
-  const kinds = (Object.keys(KIND_TEXT) as ProfileKind[]).filter((k) =>
-    s.profiles.some((p) => p.kind === k),
-  );
+  const kinds = (Object.keys(KIND_TEXT) as ProfileKind[]).filter((k) => s.profiles.some((p) => p.kind === k));
   const list = s.profiles.filter((p) => pf === "all" || p.kind === pf);
   return (
     <Card title="큐브에 담을 구성" n={3} className="ailib">
@@ -41,12 +39,7 @@ export function ProfileLib({ s, sel, onSelect, onAdd }: Props) {
           </button>
         ))}
       </div>
-      <PillTabs
-        label="구성 목록"
-        options={[["available", "전환 가능 목록"]]}
-        value="available"
-        onChange={() => {}}
-      />
+      <PillTabs label="구성 목록" options={[["available", "전환 가능 목록"]]} value="available" onChange={() => {}} />
       <div className="cbody">
         <div className="pfilters" role="group" aria-label="종류">
           {(["all", ...kinds] as const).map((k) => (
@@ -73,11 +66,7 @@ export function ProfileLib({ s, sel, onSelect, onAdd }: Props) {
                     {p.kind === "prompt" && " · md"}
                   </small>
                   <b>{p.name}</b>
-                  <span>
-                    {p.kind === "project"
-                      ? p.detail.split(/[\\/]/).pop()
-                      : p.detail}
-                  </span>
+                  <span>{p.kind === "project" ? p.detail.split(/[\\/]/).pop() : p.detail}</span>
                 </div>
                 <div className="lact">
                   <Button

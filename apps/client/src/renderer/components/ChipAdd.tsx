@@ -1,7 +1,12 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import "./ChipAdd.css";
 
-type Props = { label: string; options: string[]; icon?: (option: string) => ReactNode; onAdd: (option: string) => void };
+type Props = {
+  label: string;
+  options: string[];
+  icon?: (option: string) => ReactNode;
+  onAdd: (option: string) => void;
+};
 
 // 칩 줄 끝의 "+ 더하기": 누르면 아래에 고를 목록이 뜨고, 고르면 닫힌다. 바깥을 누르거나 Esc로도 닫힌다.
 export function ChipAdd({ label, options, icon, onAdd }: Props) {
@@ -22,7 +27,12 @@ export function ChipAdd({ label, options, icon, onAdd }: Props) {
 
   return (
     <div className="chip-add" ref={ref}>
-      <button type="button" className={open ? "chip-add-btn on" : "chip-add-btn"} aria-expanded={open} onClick={() => setOpen(!open)}>
+      <button
+        type="button"
+        className={open ? "chip-add-btn on" : "chip-add-btn"}
+        aria-expanded={open}
+        onClick={() => setOpen(!open)}
+      >
         + {label}
       </button>
       {open && (

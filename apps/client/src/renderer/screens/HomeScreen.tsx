@@ -29,7 +29,11 @@ export function HomeScreen() {
   const zc = s.cubes.find((c) => String(c.slot) === params.get("cube")) ?? null;
   const zoom = zc?.slot ?? null;
   // 펼친 노드 · 움직임 없이 다시 그리기. 확대한 큐브가 바뀌면 처음으로 돌아간다.
-  const [ui, setUi] = useState<{ slot: number | null; pick: Pick | null; quiet: boolean }>({ slot: null, pick: null, quiet: false });
+  const [ui, setUi] = useState<{ slot: number | null; pick: Pick | null; quiet: boolean }>({
+    slot: null,
+    pick: null,
+    quiet: false,
+  });
   const pick = ui.slot === zoom ? ui.pick : null;
   const quiet = ui.slot === zoom && ui.quiet;
   const toast = useToast();
@@ -42,7 +46,8 @@ export function HomeScreen() {
     homeRef.current?.querySelector<HTMLElement>(`[data-slot="${zoom}"]`)?.focus({ preventScroll: true });
   };
   const setPick = (next: Pick | null) => setUi({ slot: zoom, pick: next, quiet: true });
-  const focusNode = (kind: Pick) => detailRef.current?.querySelector<HTMLElement>(`[data-pick="${kind}"]`)?.focus({ preventScroll: true });
+  const focusNode = (kind: Pick) =>
+    detailRef.current?.querySelector<HTMLElement>(`[data-pick="${kind}"]`)?.focus({ preventScroll: true });
 
   const swap = (kind: Pick, id: string) => {
     if (!zc || (kind === "win" ? zc.window === id : zc.ai === id)) return; // 지금 것과 같으면 할 일 없음
@@ -92,11 +97,19 @@ export function HomeScreen() {
 
   const ghost = zc && !onPad(zc);
   return (
-    <div ref={homeRef} className={["home", zoom !== null && "zoomed", ghost && "pad-dim"].filter(Boolean).join(" ")} onClick={onClick}>
+    <div
+      ref={homeRef}
+      className={["home", zoom !== null && "zoomed", ghost && "pad-dim"].filter(Boolean).join(" ")}
+      onClick={onClick}
+    >
       <h1 className="sr-only">장치 상태</h1>
       <div className="homeblock" aria-hidden="true" />
       <div className="stage3d">
-        <div className={`padlink k-${v.frozen ? "hold" : "ok"}`} role="img" aria-label={v.frozen ? "패드 연결 끊김" : "패드 연결됨"} />
+        <div
+          className={`padlink k-${v.frozen ? "hold" : "ok"}`}
+          role="img"
+          aria-label={v.frozen ? "패드 연결 끊김" : "패드 연결됨"}
+        />
         <Pad leds={v.leds} frozen={v.frozen} dim={hot !== null}>
           <Logo size={48} className="padlogo" />
           {v.placed.map(({ cube: c, x, y, pixels, line, label, fanLeft, branches }) => (

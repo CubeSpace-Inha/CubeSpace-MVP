@@ -1,4 +1,13 @@
-import { fitMode, type BattLevel, type Cube, type CubeSpaceApi, type PadCube, type Slot, type Snapshot, type WindowCommand } from "@cubespace/protocol";
+import {
+  fitMode,
+  type BattLevel,
+  type Cube,
+  type CubeSpaceApi,
+  type PadCube,
+  type Slot,
+  type Snapshot,
+  type WindowCommand,
+} from "@cubespace/protocol";
 import type { Store } from "./store";
 
 // 화면 API의 core 쪽 구현. 규칙은 client 가짜 API(renderer/dev/fakeApi.ts)와 같다.
@@ -20,7 +29,12 @@ const onPad = (c: Cube) => c.link === "up" && c.xy !== null;
 export function createApi(store: Store, side: Side): CubeSpaceApi {
   function change(slot: Slot, fn: (s: Snapshot, c: Cube) => void) {
     if (!store.get().cubes.some((x) => x.slot === slot)) return Promise.reject(new Error(`슬롯 ${slot}에 큐브 없음`));
-    store.change((s) => fn(s, s.cubes.find((x) => x.slot === slot)!));
+    store.change((s) =>
+      fn(
+        s,
+        s.cubes.find((x) => x.slot === slot)!,
+      ),
+    );
     return Promise.resolve();
   }
   const done = (fn: () => void) => {

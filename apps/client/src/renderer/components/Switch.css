@@ -1,6 +1,48 @@
-.sw { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 16px 0 4px; font-size: 13px; }
-.sw span small { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
-.tg { width: 48px; height: 28px; border-radius: 99px; background: var(--soft); box-shadow: inset 0 3px 6px var(--inset); position: relative; transition: background .3s; flex: none; }
-.tg::after { content: ""; position: absolute; left: 3px; top: 3px; width: 22px; height: 22px; border-radius: 50%; background: var(--raise); box-shadow: 0 2px 0 var(--edge), 0 4px 8px rgba(0, 0, 0, .3); transition: transform .4s var(--ease-spring); }
-.tg.on { background: var(--sel); box-shadow: inset 0 3px 6px rgba(0, 0, 0, .25), 0 0 16px color-mix(in srgb, var(--sel) 50%, transparent); }
-.tg.on::after { transform: translateX(20px); background: #fff; }
+.sw {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 16px 0 4px;
+  font-size: 13px;
+}
+.sw span small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 2px;
+}
+.tg {
+  width: 48px;
+  height: 28px;
+  border-radius: 99px;
+  background: var(--soft);
+  box-shadow: inset 0 3px 6px var(--inset);
+  position: relative;
+  transition: background 0.3s;
+  flex: none;
+}
+.tg::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--raise);
+  box-shadow:
+    0 2px 0 var(--edge),
+    0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s var(--ease-spring);
+}
+.tg.on {
+  background: var(--sel);
+  box-shadow:
+    inset 0 3px 6px rgba(0, 0, 0, 0.25),
+    0 0 16px color-mix(in srgb, var(--sel) 50%, transparent);
+}
+.tg.on::after {
+  transform: translateX(20px);
+  background: #fff;
+}

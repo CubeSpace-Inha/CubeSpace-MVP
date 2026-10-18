@@ -1,8 +1,31 @@
-.board { display: grid; grid-template-columns: var(--cols); grid-template-rows: minmax(0, 1fr); gap: 22px; height: 100%; min-height: 520px; min-width: 0; }
-.vcol { display: flex; flex-direction: column; gap: 22px; min-height: 0; min-width: 0; }
-.vcol > .card { overflow: hidden; }
+.board {
+  display: grid;
+  grid-template-columns: var(--cols);
+  grid-template-rows: minmax(0, 1fr);
+  gap: 22px;
+  height: 100%;
+  min-height: 520px;
+  min-width: 0;
+}
+.vcol {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-height: 0;
+  min-width: 0;
+}
+.vcol > .card {
+  overflow: hidden;
+}
 /* 좁은 노트북: 한 칸, 카드는 내용 높이대로, 보드 전체가 스크롤된다 */
 @media (max-width: 1180px) {
-  .board { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; height: auto; min-height: 0; }
-  .vcol > .card { overflow: visible; }
+  .board {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    height: auto;
+    min-height: 0;
+  }
+  .vcol > .card {
+    overflow: visible;
+  }
 }

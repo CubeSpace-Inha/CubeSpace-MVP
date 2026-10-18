@@ -32,9 +32,13 @@ export function RunCard({ run, onStop, onReset }: { run: AiRun; onStop: () => vo
       </div>
       <div className="runacts">
         {run.status === "running" ? (
-          <Button variant="danger" onClick={onStop}>중지</Button>
+          <Button variant="danger" onClick={onStop}>
+            중지
+          </Button>
         ) : (
-          <Button variant="primary" onClick={onReset}>새 작업</Button>
+          <Button variant="primary" onClick={onReset}>
+            새 작업
+          </Button>
         )}
       </div>
     </Card>

@@ -39,7 +39,9 @@ test("페어링: 시작하면 k/N 안내, 등록될 때마다 글자, 다 채우
 
   await registerAt(fake, 5);
   expect(screen.getByText("큐브 2개 등록 완료")).toBeTruthy();
-  await waitFor(() => expect(screen.getByRole("button", { name: /슬롯 6개가 모두 찼어요/ })).toBeTruthy(), { timeout: 2500 });
+  await waitFor(() => expect(screen.getByRole("button", { name: /슬롯 6개가 모두 찼어요/ })).toBeTruthy(), {
+    timeout: 2500,
+  });
   expect((await fake.api.getSnapshot()).pairing).toBeNull();
 }, 15000); // 화면 그리기 + 완료 표시 1.7초
 

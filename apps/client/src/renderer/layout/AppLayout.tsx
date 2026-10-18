@@ -42,11 +42,7 @@ export function AppLayout({ api }: { api: CubeSpaceApi }) {
               onSlot={(slot) => navigate(`/home?cube=${slot}`)}
               onHot={setHot}
             />
-            <RailButton
-              label="알림"
-              badge={snapshot.notices.length}
-              onClick={() => setDrawer(true)}
-            >
+            <RailButton label="알림" badge={snapshot.notices.length} onClick={() => setDrawer(true)}>
               <Icon name="bell" size={22} />
             </RailButton>
           </>
@@ -60,13 +56,7 @@ export function AppLayout({ api }: { api: CubeSpaceApi }) {
       ) : (
         <Spinner />
       )}
-      {snapshot && (
-        <NoticeDrawer
-          snapshot={snapshot}
-          open={drawer}
-          onClose={() => setDrawer(false)}
-        />
-      )}
+      {snapshot && <NoticeDrawer snapshot={snapshot} open={drawer} onClose={() => setDrawer(false)} />}
       {/* 디버그용: 템플릿 카탈로그로 가는 버튼. 배포 빌드에서는 빠진다. */}
       {import.meta.env.DEV && (
         <Button

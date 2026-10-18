@@ -1,2 +1,12 @@
-.sec-t { font-size: 12px; font-weight: 600; color: var(--muted); margin: 2px 0 10px; }
-.sec-t small { font-size: inherit; font-weight: 500; color: var(--faint); margin-left: 6px; }
+.sec-t {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 2px 0 10px;
+}
+.sec-t small {
+  font-size: inherit;
+  font-weight: 500;
+  color: var(--faint);
+  margin-left: 6px;
+}

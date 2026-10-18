@@ -12,7 +12,18 @@ import { useToast } from "../hooks/useToast";
 import type { LayoutContext } from "../layout/AppLayout";
 import { Board } from "../layout/Board";
 import { Column } from "../layout/Column";
-import { aiStatus, cubeCol, EFFORTS, GOAL_EX, linked, pipeline, profileGroups, recommend, runProfiles, type Effort } from "../model/ai";
+import {
+  aiStatus,
+  cubeCol,
+  EFFORTS,
+  GOAL_EX,
+  linked,
+  pipeline,
+  profileGroups,
+  recommend,
+  runProfiles,
+  type Effort,
+} from "../model/ai";
 import { onPad, profileIcon } from "../model/home";
 import { AdvPanel } from "./ai/AdvPanel";
 import { AssignDialog } from "./ai/AssignDialog";
@@ -73,10 +84,21 @@ export function AiScreen() {
       <Column>
         <Card title="AI에게 맡길 일" meta={ai.running && <Badge tone="ok">진행 중</Badge>} className="ai-chat">
           <div className="composer">
-            <TextArea aria-label="맡길 일" rows={5} maxLength={2000} value={goal} onChange={(e) => setGoal(e.target.value)} placeholder={`무엇을 맡길까요? 예: ${GOAL_EX.feature}`} />
+            <TextArea
+              aria-label="맡길 일"
+              rows={5}
+              maxLength={2000}
+              value={goal}
+              onChange={(e) => setGoal(e.target.value)}
+              placeholder={`무엇을 맡길까요? 예: ${GOAL_EX.feature}`}
+            />
             <div className="chs">
-              <button type="button" onClick={() => setGoal(GOAL_EX.feature)}>기능 만들기</button>
-              <button type="button" onClick={() => setGoal(GOAL_EX.bug)}>버그 고치기</button>
+              <button type="button" onClick={() => setGoal(GOAL_EX.feature)}>
+                기능 만들기
+              </button>
+              <button type="button" onClick={() => setGoal(GOAL_EX.bug)}>
+                버그 고치기
+              </button>
             </div>
           </div>
           <section className="asec" aria-label="구성">
@@ -124,7 +146,12 @@ export function AiScreen() {
             </div>
           </section>
           <div className="aibar">
-            <Tabs label="얼마나 꼼꼼하게" options={EFFORTS.map(([, n]) => n)} value={EFFORTS.findIndex(([v]) => v === effort)} onChange={(i) => setEffort(EFFORTS[i]![0])} />
+            <Tabs
+              label="얼마나 꼼꼼하게"
+              options={EFFORTS.map(([, n]) => n)}
+              value={EFFORTS.findIndex(([v]) => v === effort)}
+              onChange={(i) => setEffort(EFFORTS[i]![0])}
+            />
             <div className="aibar-r">
               <Button onClick={fill}>✦ 추천으로 채우기</Button>
               <Button variant="primary" disabled={!goal.trim() || ai.running} onClick={start}>
@@ -141,7 +168,18 @@ export function AiScreen() {
           {adv ? "고급 설정 접기 ▴" : "고급 설정 ▾"}
         </button>
       </Column>
-      {adv && <AdvPanel s={s} api={api} running={ai.running} effort={effort} onEffort={setEffort} brief={b} onBrief={setBrief} show={show} />}
+      {adv && (
+        <AdvPanel
+          s={s}
+          api={api}
+          running={ai.running}
+          effort={effort}
+          onEffort={setEffort}
+          brief={b}
+          onBrief={setBrief}
+          show={show}
+        />
+      )}
       <AssignDialog s={s} profile={target} onClose={() => setTarget(null)} onSet={assign} />
       <Toast text={toast.text} visible={toast.visible} />
     </Board>

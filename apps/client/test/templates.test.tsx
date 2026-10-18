@@ -139,7 +139,15 @@ test("appIcons: 모든 도안이 64칸, 색 번호가 팔레트 안", () => {
   expect(appPixels("없는 앱")).toEqual(glyphPixels(ST_ICONS["창 켜짐"]));
 });
 
-const CUBE = (id: string, state: CubeInfo["state"], win?: string): CubeInfo => ({ id, name: id, pixels: appPixels("메모장"), color: "red", state, pct: 50, win });
+const CUBE = (id: string, state: CubeInfo["state"], win?: string): CubeInfo => ({
+  id,
+  name: id,
+  pixels: appPixels("메모장"),
+  color: "red",
+  state,
+  pct: 50,
+  win,
+});
 
 test("CubeList: 패드 위 칸 + 빈 칸, 패드 밖 칩, 누르면 onSelect", () => {
   const onSelect = vi.fn();
@@ -151,7 +159,15 @@ test("CubeList: 패드 위 칸 + 빈 칸, 패드 밖 칩, 누르면 onSelect", (
 
 test("CubeDetail: 지금 상태 줄에 불, 큐브 버튼을 바꾸면 onButton", () => {
   const onButton = vi.fn();
-  const { container } = render(<CubeDetail cube={CUBE("A", "off", "Edge")} programs={["Edge"]} onFix={() => {}} button="toggle" onButton={onButton} />);
+  const { container } = render(
+    <CubeDetail
+      cube={CUBE("A", "off", "Edge")}
+      programs={["Edge"]}
+      onFix={() => {}}
+      button="toggle"
+      onButton={onButton}
+    />,
+  );
   expect(container.querySelector(".ptab .on b")?.textContent).toBe("배치된 큐브");
   fireEvent.click(screen.getByRole("button", { name: "다시 고르기" }));
   expect(onButton).toHaveBeenCalledWith("pick");
@@ -162,14 +178,27 @@ test("인자에 따라 바뀜: 패드 밖 큐브 없음 · 패드 밖 큐브 · 
   expect(screen.getAllByText("빈 칸")).toHaveLength(2);
   expect(screen.queryByText("패드 밖")).toBeNull();
   cleanup();
-  const { container } = render(<CubeDetail cube={{ ...CUBE("E", "empty"), pct: 8 }} fix="Edge" programs={["Edge"]} onFix={() => {}} button="toggle" onButton={() => {}} />);
+  const { container } = render(
+    <CubeDetail
+      cube={{ ...CUBE("E", "empty"), pct: 8 }}
+      fix="Edge"
+      programs={["Edge"]}
+      onFix={() => {}}
+      button="toggle"
+      onButton={() => {}}
+    />,
+  );
   expect(container.querySelector(".ptab .on")?.textContent).toContain("Edge 바로 열기");
   expect(container.textContent).toContain("배터리 8%");
   cleanup();
-  const { container: out } = render(<CubeDetail cube={CUBE("F", "out", "Edge")} programs={[]} onFix={() => {}} button="pick" onButton={() => {}} />);
+  const { container: out } = render(
+    <CubeDetail cube={CUBE("F", "out", "Edge")} programs={[]} onFix={() => {}} button="pick" onButton={() => {}} />,
+  );
   expect(out.querySelector(".ccw")).toBeNull();
   cleanup();
-  const { container: tray } = render(<SpareTray cells={[{ name: "C", pixels: appPixels("메모장"), pct: 8, label: "C" }, null, null]} />);
+  const { container: tray } = render(
+    <SpareTray cells={[{ name: "C", pixels: appPixels("메모장"), pct: 8, label: "C" }, null, null]} />,
+  );
   expect(tray.querySelectorAll(".spare-cell")).toHaveLength(3);
   expect(tray.querySelector(".cell-batt.low10")).not.toBeNull();
   cleanup();

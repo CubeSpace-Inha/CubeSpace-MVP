@@ -51,7 +51,8 @@ export function supervise(o: Child) {
       c.on("exit", (code) => {
         log(`${o.name}: 끝남(${code})`);
         if (child !== c) return;
-        if (conn) conn.close(); // 끊김 처리(onClose)에서 다시 띄운다
+        if (conn)
+          conn.close(); // 끊김 처리(onClose)에서 다시 띄운다
         else child = null;
       });
     }

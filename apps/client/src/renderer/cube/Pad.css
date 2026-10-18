@@ -1,19 +1,80 @@
-.padbox { position: relative; width: 100%; aspect-ratio: 3 / 2; container-type: inline-size; }
+.padbox {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  container-type: inline-size;
+}
 /* 판 면과 앞쪽 두께(--th) */
-.padsurf { position: absolute; inset: 0; border-radius: 20px; --th: 5cqw; --w1: #c3c6d2; --w2: #9096a6; transform-style: preserve-3d;
+.padsurf {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  --th: 5cqw;
+  --w1: #c3c6d2;
+  --w2: #9096a6;
+  transform-style: preserve-3d;
   background: linear-gradient(160deg, color-mix(in srgb, var(--soft) 86%, #fff), var(--soft) 70%);
-  box-shadow: inset 0 1.5px 0 var(--hi), inset 0 0 0 1.5px color-mix(in srgb, var(--edge) 35%, transparent), 0 calc(var(--th) * .5) 44px -10px var(--shadow); }
-.padsurf::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: var(--th); transform-origin: top; transform: rotateX(-90deg);
-  border-radius: 0 0 20px 20px / 0 0 8px 8px; background: linear-gradient(var(--w1), var(--w2)); box-shadow: inset 0 1.5px 0 var(--hi); }
-:root[data-theme="dark"] .padsurf { --w1: #3a424f; --w2: #12151b; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .padsurf { --w1: #3a424f; --w2: #12151b; } }
-.pad { position: absolute; inset: 0; }
+  box-shadow:
+    inset 0 1.5px 0 var(--hi),
+    inset 0 0 0 1.5px color-mix(in srgb, var(--edge) 35%, transparent),
+    0 calc(var(--th) * 0.5) 44px -10px var(--shadow);
+}
+.padsurf::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: var(--th);
+  transform-origin: top;
+  transform: rotateX(-90deg);
+  border-radius: 0 0 20px 20px / 0 0 8px 8px;
+  background: linear-gradient(var(--w1), var(--w2));
+  box-shadow: inset 0 1.5px 0 var(--hi);
+}
+:root[data-theme="dark"] .padsurf {
+  --w1: #3a424f;
+  --w2: #12151b;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .padsurf {
+    --w1: #3a424f;
+    --w2: #12151b;
+  }
+}
+.pad {
+  position: absolute;
+  inset: 0;
+}
 /* LED 24 × 16, 칸 가운데가 LED다 */
-.pad-leds { position: absolute; inset: 0; pointer-events: none; border-radius: 14px;
-  background-image: radial-gradient(circle at center, color-mix(in srgb, var(--ink) 18%, transparent) 0 1.2px, transparent 1.9px);
-  background-size: calc(100% / 24) calc(100% / 16); }
+.pad-leds {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 14px;
+  background-image: radial-gradient(
+    circle at center,
+    color-mix(in srgb, var(--ink) 18%, transparent) 0 1.2px,
+    transparent 1.9px
+  );
+  background-size: calc(100% / 24) calc(100% / 16);
+}
 /* 켜진 LED: 밝기는 진하기와 번짐으로 */
-.pad-lit { position: absolute; inset: 0; pointer-events: none; }
-.led { position: absolute; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: var(--c); opacity: calc(.3 + var(--b) * .7);
-  box-shadow: 0 0 calc(4px + var(--b) * 8px) calc(var(--b) * 2px) color-mix(in srgb, var(--c) 70%, transparent); }
-.pad.frozen .cube-top { filter: grayscale(.85) brightness(.7); }
+.pad-lit {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.led {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: var(--c);
+  opacity: calc(0.3 + var(--b) * 0.7);
+  box-shadow: 0 0 calc(4px + var(--b) * 8px) calc(var(--b) * 2px) color-mix(in srgb, var(--c) 70%, transparent);
+}
+.pad.frozen .cube-top {
+  filter: grayscale(0.85) brightness(0.7);
+}

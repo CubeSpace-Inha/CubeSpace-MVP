@@ -1,7 +1,17 @@
 import { useEffect, useRef, type RefObject } from "react";
 import type { Pick } from "../../model/zoom";
 
-type Drag = { cand: HTMLElement; kind: Pick; id: string; x: number; y: number; dx: number; dy: number; ghost: HTMLElement | null; over: Element | null };
+type Drag = {
+  cand: HTMLElement;
+  kind: Pick;
+  id: string;
+  x: number;
+  y: number;
+  dx: number;
+  dy: number;
+  ghost: HTMLElement | null;
+  over: Element | null;
+};
 
 // 끌어 놓기(시안): 후보(data-cand)를 잡아 같은 종류의 노드(data-drop) 위에서 놓으면 onDrop.
 // 끈 직후 따라오는 click은 무시해야 해서 justDragged를 돌려준다(핸들러에서 읽는다).
@@ -18,7 +28,17 @@ export function useDragSwap(root: RefObject<HTMLElement | null>, onDrop: (kind: 
     const down = (e: PointerEvent) => {
       const cand = (e.target as Element).closest<HTMLElement>("[data-cand]");
       if (!cand || e.button !== 0) return;
-      drag = { cand, kind: cand.dataset.cand as Pick, id: cand.dataset.id!, x: e.clientX, y: e.clientY, dx: 0, dy: 0, ghost: null, over: null };
+      drag = {
+        cand,
+        kind: cand.dataset.cand as Pick,
+        id: cand.dataset.id!,
+        x: e.clientX,
+        y: e.clientY,
+        dx: 0,
+        dy: 0,
+        ghost: null,
+        over: null,
+      };
     };
     const move = (e: PointerEvent) => {
       if (!drag) return;

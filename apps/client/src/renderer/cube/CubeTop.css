@@ -1,9 +1,58 @@
 /* 큐브 두께: 옆면을 1cqw씩 21겹 쌓은 그림자(위가 밝고 아래가 어둡다). 선 색 --cube-line = 맡은 창의 색, 없으면 회색. */
-.cube-top { --cl: var(--cube-line, rgb(150 158 172)); position: absolute; inset: 10cqw; border-radius: 6cqw; background: linear-gradient(145deg, #383d49, #1e222a);
-  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--cl) 75%, #000), inset 0 0 3cqw color-mix(in srgb, var(--cl) 30%, transparent),
-    0 0 4cqw color-mix(in srgb, var(--cl) 40%, transparent), inset 0 .7cqw 0 rgba(255, 255, 255, .14), 0 1cqw 0 #3b424e, 0 2cqw 0 #393f4b, 0 3cqw 0 #363d48, 0 4cqw 0 #343a45, 0 5cqw 0 #313742, 0 6cqw 0 #2f353f, 0 7cqw 0 #2d323c, 0 8cqw 0 #2a2f39, 0 9cqw 0 #282d36, 0 10cqw 0 #252a33, 0 11cqw 0 #232830, 0 12cqw 0 #21252c, 0 13cqw 0 #1e2229, 0 14cqw 0 #1c2026, 0 15cqw 0 #191d23, 0 16cqw 0 #171a20, 0 17cqw 0 #15181d, 0 18cqw 0 #12151a, 0 19cqw 0 #101217, 0 20cqw 0 #0d1014, 0 21cqw 0 #0b0d11, 0 21cqw 0 1.5px rgba(255, 255, 255, .1), 0 26cqw 18cqw -7cqw var(--shadow);
-  transition: transform .3s var(--ease-spring); }
-.cube-top::after { content: ""; position: absolute; inset: -4cqw; border-radius: 9cqw; border: 2px solid var(--cl); box-shadow: 0 0 18px var(--cl); opacity: 0; transition: opacity .3s; pointer-events: none; }
-.cube-win { position: absolute; inset: 5.71cqw; }
-.cube-win i { margin: 14%; }
-.cube-win i.on { box-shadow: 0 0 1.8cqw var(--p); }
+.cube-top {
+  --cl: var(--cube-line, rgb(150 158 172));
+  position: absolute;
+  inset: 10cqw;
+  border-radius: 6cqw;
+  background: linear-gradient(145deg, #383d49, #1e222a);
+  box-shadow:
+    inset 0 0 0 1.5px color-mix(in srgb, var(--cl) 75%, #000),
+    inset 0 0 3cqw color-mix(in srgb, var(--cl) 30%, transparent),
+    0 0 4cqw color-mix(in srgb, var(--cl) 40%, transparent),
+    inset 0 0.7cqw 0 rgba(255, 255, 255, 0.14),
+    0 1cqw 0 #3b424e,
+    0 2cqw 0 #393f4b,
+    0 3cqw 0 #363d48,
+    0 4cqw 0 #343a45,
+    0 5cqw 0 #313742,
+    0 6cqw 0 #2f353f,
+    0 7cqw 0 #2d323c,
+    0 8cqw 0 #2a2f39,
+    0 9cqw 0 #282d36,
+    0 10cqw 0 #252a33,
+    0 11cqw 0 #232830,
+    0 12cqw 0 #21252c,
+    0 13cqw 0 #1e2229,
+    0 14cqw 0 #1c2026,
+    0 15cqw 0 #191d23,
+    0 16cqw 0 #171a20,
+    0 17cqw 0 #15181d,
+    0 18cqw 0 #12151a,
+    0 19cqw 0 #101217,
+    0 20cqw 0 #0d1014,
+    0 21cqw 0 #0b0d11,
+    0 21cqw 0 1.5px rgba(255, 255, 255, 0.1),
+    0 26cqw 18cqw -7cqw var(--shadow);
+  transition: transform 0.3s var(--ease-spring);
+}
+.cube-top::after {
+  content: "";
+  position: absolute;
+  inset: -4cqw;
+  border-radius: 9cqw;
+  border: 2px solid var(--cl);
+  box-shadow: 0 0 18px var(--cl);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.cube-win {
+  position: absolute;
+  inset: 5.71cqw;
+}
+.cube-win i {
+  margin: 14%;
+}
+.cube-win i.on {
+  box-shadow: 0 0 1.8cqw var(--p);
+}

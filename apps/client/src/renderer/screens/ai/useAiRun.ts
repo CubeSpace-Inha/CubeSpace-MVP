@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 
 // 임시: AI 실행 API가 아직 없어 화면에서 단계를 1.5초마다 넘긴다(시안 startRun · tickRun). 실제 연결 때 바꾼다.
-export type AiRun = { steps: [string, string][]; names: string[]; step: number; status: "running" | "done" | "stopped" };
+export type AiRun = {
+  steps: [string, string][];
+  names: string[];
+  step: number;
+  status: "running" | "done" | "stopped";
+};
 
 export function useAiRun(onDone: () => void) {
   const [run, setRun] = useState<AiRun | null>(null);

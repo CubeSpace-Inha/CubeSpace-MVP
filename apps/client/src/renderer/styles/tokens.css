@@ -1,47 +1,120 @@
 /* 색 · 그림자 토큰. 시안 pad-home.html과 같은 값. 다크는 시스템 설정을 따르고, data-theme이 있으면 그 값을 쓴다. */
 :root {
-  --c1: #7c5cff; --c2: #12b5d6; --c3: #f0457a; --c4: #ff8a1f; --ok: #16a34a; --err: #e5484d; --sel: var(--c1);
-  --ease-spring: cubic-bezier(.34, 1.5, .5, 1); --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --c1: #7c5cff;
+  --c2: #12b5d6;
+  --c3: #f0457a;
+  --c4: #ff8a1f;
+  --ok: #16a34a;
+  --err: #e5484d;
+  --sel: var(--c1);
+  --ease-spring: cubic-bezier(0.34, 1.5, 0.5, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 :root {
   color-scheme: light;
-  --bgdot: rgba(20, 22, 30, .07);
-  --bg: #e8e9ee; --card: #fff; --soft: #f1f2f6; --raise: #fff;
-  --ink: #15171c; --on-ink: #fff; --muted: #6b7280; --faint: #9aa1ad; --line: #e3e5ec;
-  --edge: #c8cbd7; --hi: #fff; --shadow: rgba(38, 42, 64, .32); --inset: rgba(30, 34, 52, .14);
+  --bgdot: rgba(20, 22, 30, 0.07);
+  --bg: #e8e9ee;
+  --card: #fff;
+  --soft: #f1f2f6;
+  --raise: #fff;
+  --ink: #15171c;
+  --on-ink: #fff;
+  --muted: #6b7280;
+  --faint: #9aa1ad;
+  --line: #e3e5ec;
+  --edge: #c8cbd7;
+  --hi: #fff;
+  --shadow: rgba(38, 42, 64, 0.32);
+  --inset: rgba(30, 34, 52, 0.14);
   --padbg: #1c1f25;
   --desk: radial-gradient(120% 90% at 20% 0%, #dfe4ff 0%, #eef0fa 45%, #f4eef6 100%);
   --r1: inset 0 1px 0 var(--hi), 0 3px 0 var(--edge), 0 9px 14px -5px var(--shadow);
   --r1p: inset 0 1px 0 var(--hi), 0 1px 0 var(--edge), 0 3px 5px -2px var(--shadow);
   --rc: inset 0 1px 0 var(--hi), 0 7px 0 var(--edge), 0 26px 38px -14px var(--shadow);
-  --t-ok-bg: #e6f6ec; --t-ok: #166534; --t-warn-bg: #fff3d6; --t-warn: #b45309; --t-warnd-bg: #fdf0d0; --t-warnd: #92400e;
-  --t-danger-bg: #fdeaea; --t-danger: #c8262c; --t-neutral-bg: #f1f2f6; --t-neutral: #4b5260; --t-muted-bg: #f1f2f6; --t-muted: #5f6673;
+  --t-ok-bg: #e6f6ec;
+  --t-ok: #166534;
+  --t-warn-bg: #fff3d6;
+  --t-warn: #b45309;
+  --t-warnd-bg: #fdf0d0;
+  --t-warnd: #92400e;
+  --t-danger-bg: #fdeaea;
+  --t-danger: #c8262c;
+  --t-neutral-bg: #f1f2f6;
+  --t-neutral: #4b5260;
+  --t-muted-bg: #f1f2f6;
+  --t-muted: #5f6673;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bgdot: rgba(255, 255, 255, .07); --bg: #12151a; --card: #222730; --soft: #191d24; --raise: #2c333e;
-    --ink: #eef0f5; --on-ink: #12151a; --muted: #a0a7b4; --faint: #6e7683; --line: #303743;
-    --edge: #0b0d11; --hi: rgba(255, 255, 255, .09); --shadow: rgba(0, 0, 0, .7); --inset: rgba(0, 0, 0, .55);
+    --bgdot: rgba(255, 255, 255, 0.07);
+    --bg: #12151a;
+    --card: #222730;
+    --soft: #191d24;
+    --raise: #2c333e;
+    --ink: #eef0f5;
+    --on-ink: #12151a;
+    --muted: #a0a7b4;
+    --faint: #6e7683;
+    --line: #303743;
+    --edge: #0b0d11;
+    --hi: rgba(255, 255, 255, 0.09);
+    --shadow: rgba(0, 0, 0, 0.7);
+    --inset: rgba(0, 0, 0, 0.55);
     --padbg: #0c0f14;
     --desk: radial-gradient(120% 90% at 20% 0%, #343b5c 0%, #252a3f 50%, #2d2437 100%);
     --r1: inset 0 1px 0 var(--hi), 0 3px 0 var(--edge), 0 9px 14px -4px var(--shadow);
     --r1p: inset 0 1px 0 var(--hi), 0 1px 0 var(--edge), 0 3px 5px -2px var(--shadow);
-    --rc: inset 0 1px 0 var(--hi), inset 0 0 0 1px rgba(255, 255, 255, .04), 0 7px 0 var(--edge), 0 28px 40px -12px var(--shadow);
-    --t-ok-bg: #12301f; --t-ok: #4ade80; --t-warn-bg: #33270d; --t-warn: #f5b83d; --t-warnd-bg: #2c230f; --t-warnd: #e0a92e;
-    --t-danger-bg: #3a1a1c; --t-danger: #ff8a80; --t-neutral-bg: #2c333e; --t-neutral: #c7ccd6; --t-muted-bg: #2c333e; --t-muted: #a0a7b4;
+    --rc:
+      inset 0 1px 0 var(--hi), inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 7px 0 var(--edge),
+      0 28px 40px -12px var(--shadow);
+    --t-ok-bg: #12301f;
+    --t-ok: #4ade80;
+    --t-warn-bg: #33270d;
+    --t-warn: #f5b83d;
+    --t-warnd-bg: #2c230f;
+    --t-warnd: #e0a92e;
+    --t-danger-bg: #3a1a1c;
+    --t-danger: #ff8a80;
+    --t-neutral-bg: #2c333e;
+    --t-neutral: #c7ccd6;
+    --t-muted-bg: #2c333e;
+    --t-muted: #a0a7b4;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bgdot: rgba(255, 255, 255, .07); --bg: #12151a; --card: #222730; --soft: #191d24; --raise: #2c333e;
-  --ink: #eef0f5; --on-ink: #12151a; --muted: #a0a7b4; --faint: #6e7683; --line: #303743;
-  --edge: #0b0d11; --hi: rgba(255, 255, 255, .09); --shadow: rgba(0, 0, 0, .7); --inset: rgba(0, 0, 0, .55);
+  --bgdot: rgba(255, 255, 255, 0.07);
+  --bg: #12151a;
+  --card: #222730;
+  --soft: #191d24;
+  --raise: #2c333e;
+  --ink: #eef0f5;
+  --on-ink: #12151a;
+  --muted: #a0a7b4;
+  --faint: #6e7683;
+  --line: #303743;
+  --edge: #0b0d11;
+  --hi: rgba(255, 255, 255, 0.09);
+  --shadow: rgba(0, 0, 0, 0.7);
+  --inset: rgba(0, 0, 0, 0.55);
   --padbg: #0c0f14;
   --desk: radial-gradient(120% 90% at 20% 0%, #343b5c 0%, #252a3f 50%, #2d2437 100%);
   --r1: inset 0 1px 0 var(--hi), 0 3px 0 var(--edge), 0 9px 14px -4px var(--shadow);
   --r1p: inset 0 1px 0 var(--hi), 0 1px 0 var(--edge), 0 3px 5px -2px var(--shadow);
-  --rc: inset 0 1px 0 var(--hi), inset 0 0 0 1px rgba(255, 255, 255, .04), 0 7px 0 var(--edge), 0 28px 40px -12px var(--shadow);
-  --t-ok-bg: #12301f; --t-ok: #4ade80; --t-warn-bg: #33270d; --t-warn: #f5b83d; --t-warnd-bg: #2c230f; --t-warnd: #e0a92e;
-  --t-danger-bg: #3a1a1c; --t-danger: #ff8a80; --t-neutral-bg: #2c333e; --t-neutral: #c7ccd6; --t-muted-bg: #2c333e; --t-muted: #a0a7b4;
+  --rc:
+    inset 0 1px 0 var(--hi), inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 7px 0 var(--edge),
+    0 28px 40px -12px var(--shadow);
+  --t-ok-bg: #12301f;
+  --t-ok: #4ade80;
+  --t-warn-bg: #33270d;
+  --t-warn: #f5b83d;
+  --t-warnd-bg: #2c230f;
+  --t-warnd: #e0a92e;
+  --t-danger-bg: #3a1a1c;
+  --t-danger: #ff8a80;
+  --t-neutral-bg: #2c333e;
+  --t-neutral: #c7ccd6;
+  --t-muted-bg: #2c333e;
+  --t-muted: #a0a7b4;
   color-scheme: dark;
 }

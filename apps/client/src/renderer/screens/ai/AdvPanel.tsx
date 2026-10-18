@@ -38,19 +38,8 @@ type Props = {
 };
 
 // AI 화면 고급 설정(시안 #aAdv): 도구 카드(탭 5개) + 큐브에 담을 구성 + 추천 배정 미리보기
-export function AdvPanel({
-  s,
-  api,
-  running,
-  effort,
-  onEffort,
-  brief,
-  onBrief,
-  show,
-}: Props) {
-  const [vsel, setVsel] = useState(
-    () => (s.cubes.find(onPad) ?? s.cubes[0])?.slot,
-  );
+export function AdvPanel({ s, api, running, effort, onEffort, brief, onBrief, show }: Props) {
+  const [vsel, setVsel] = useState(() => (s.cubes.find(onPad) ?? s.cubes[0])?.slot);
   const [tool, setTool] = useState<Tool>("assignment");
   const [proposal, setProposal] = useState<Proposal | null>(null);
   const sel = s.cubes.find((c) => c.slot === vsel) ?? s.cubes[0];
@@ -68,8 +57,7 @@ export function AdvPanel({
       const c = s.cubes.find((k) => k.slot === proposal.targets[i])!;
       void api.assignAi(c.slot, id);
       void api.setMode(c.slot, "ai");
-      if (!c.aiChoices.includes(id))
-        void api.setAiChoices(c.slot, [...c.aiChoices, id]);
+      if (!c.aiChoices.includes(id)) void api.setAiChoices(c.slot, [...c.aiChoices, id]);
     });
     setProposal(null);
     setTool("assignment");
@@ -79,12 +67,7 @@ export function AdvPanel({
   return (
     <Column>
       <Card n={2} className="aitools">
-        <PillTabs
-          label="고급 설정"
-          options={TOOLS}
-          value={tool}
-          onChange={setTool}
-        />
+        <PillTabs label="고급 설정" options={TOOLS} value={tool} onChange={setTool} />
         <div className="cbody">
           {tool === "assignment" && sel && act && (
             <AssignTool
@@ -96,29 +79,19 @@ export function AdvPanel({
               onCheck={() => setTool("conflicts")}
             />
           )}
-          {tool === "brief" && (
-            <BriefTool brief={brief} onChange={onBrief} show={show} />
-          )}
-          {tool === "conflicts" && (
-            <ConflictsTool s={s} onFix={() => setTool("assignment")} />
-          )}
-          {tool === "effort" && (
-            <EffortTool effort={effort} onChange={onEffort} />
-          )}
+          {tool === "brief" && <BriefTool brief={brief} onChange={onBrief} show={show} />}
+          {tool === "conflicts" && <ConflictsTool s={s} onFix={() => setTool("assignment")} />}
+          {tool === "effort" && <EffortTool effort={effort} onChange={onEffort} />}
           {tool === "recommend" && <RecommendTool onPreview={preview} />}
         </div>
       </Card>
-      {sel && act && (
-        <ProfileLib s={s} sel={sel} onSelect={select} onAdd={act.add} />
-      )}
+      {sel && act && <ProfileLib s={s} sel={sel} onSelect={select} onAdd={act.add} />}
       <ProposalDialog
         s={s}
         p={proposal}
         effort={effort}
         running={running}
-        onChange={(targets) =>
-          setProposal(proposal && { ...proposal, targets })
-        }
+        onChange={(targets) => setProposal(proposal && { ...proposal, targets })}
         onClose={() => setProposal(null)}
         onApply={apply}
       />

@@ -1,5 +1,28 @@
-.stp { display: flex; align-items: center; gap: 6px; flex: none; }
-.stp b { min-width: 40px; text-align: center; font-size: 12px; }
-.stp button { width: 26px; height: 26px; border-radius: 8px; background: var(--raise); box-shadow: var(--r1); font-weight: 700; }
-.stp button:active { transform: translateY(1px); box-shadow: var(--r1p); }
-.stp button:disabled { opacity: .35; cursor: not-allowed; transform: none; }
+.stp {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+}
+.stp b {
+  min-width: 40px;
+  text-align: center;
+  font-size: 12px;
+}
+.stp button {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--raise);
+  box-shadow: var(--r1);
+  font-weight: 700;
+}
+.stp button:active {
+  transform: translateY(1px);
+  box-shadow: var(--r1p);
+}
+.stp button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}

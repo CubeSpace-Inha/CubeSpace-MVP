@@ -1,4 +1,22 @@
 /* Pretendard(OFL-1.1) 400 · 600 · 700. 시안에 들어 있던 한글 부분 글꼴을 파일로 뺐다. */
-@font-face { font-family: Pretendard; font-style: normal; font-weight: 400; font-display: swap; src: url("../assets/fonts/Pretendard-400.subset.woff2") format("woff2"); }
-@font-face { font-family: Pretendard; font-style: normal; font-weight: 600; font-display: swap; src: url("../assets/fonts/Pretendard-600.subset.woff2") format("woff2"); }
-@font-face { font-family: Pretendard; font-style: normal; font-weight: 700; font-display: swap; src: url("../assets/fonts/Pretendard-700.subset.woff2") format("woff2"); }
+@font-face {
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/Pretendard-400.subset.woff2") format("woff2");
+}
+@font-face {
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../assets/fonts/Pretendard-600.subset.woff2") format("woff2");
+}
+@font-face {
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/Pretendard-700.subset.woff2") format("woff2");
+}

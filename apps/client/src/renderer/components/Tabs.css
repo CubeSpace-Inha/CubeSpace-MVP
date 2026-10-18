@@ -1,9 +1,55 @@
-.tabs { position: relative; display: grid; grid-template-columns: repeat(var(--n), minmax(88px, 1fr)); padding: 4px; border-radius: 14px; background: var(--soft); box-shadow: inset 0 2px 5px var(--inset); }
-.tabs::before { content: ""; position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc((100% - 8px) / var(--n)); border-radius: 11px; background: var(--raise); box-shadow: var(--r1); transition: transform .45s var(--ease-spring); transform: translateX(calc(var(--i, 0) * 100%)); }
-.tabs button { position: relative; height: 36px; font-weight: 600; color: var(--muted); transition: color .2s; }
-.tabs button[aria-pressed="true"] { color: var(--ink); }
+.tabs {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(88px, 1fr));
+  padding: 4px;
+  border-radius: 14px;
+  background: var(--soft);
+  box-shadow: inset 0 2px 5px var(--inset);
+}
+.tabs::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc((100% - 8px) / var(--n));
+  border-radius: 11px;
+  background: var(--raise);
+  box-shadow: var(--r1);
+  transition: transform 0.45s var(--ease-spring);
+  transform: translateX(calc(var(--i, 0) * 100%));
+}
+.tabs button {
+  position: relative;
+  height: 36px;
+  font-weight: 600;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.tabs button[aria-pressed="true"] {
+  color: var(--ink);
+}
 /* 작은 것: 글자 폭만큼, 고른 칸은 진하게 */
-.tabs.sm { grid-template-columns: repeat(var(--n), auto); padding: 3px; border-radius: 10px; background: var(--raise); box-shadow: inset 0 0 0 1px var(--line); flex: none; }
-.tabs.sm::before { display: none; }
-.tabs.sm button { height: 26px; padding: 0 10px; border-radius: 8px; font-size: 11.5px; white-space: nowrap; }
-.tabs.sm button[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); }
+.tabs.sm {
+  grid-template-columns: repeat(var(--n), auto);
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--raise);
+  box-shadow: inset 0 0 0 1px var(--line);
+  flex: none;
+}
+.tabs.sm::before {
+  display: none;
+}
+.tabs.sm button {
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  white-space: nowrap;
+}
+.tabs.sm button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--on-ink);
+}

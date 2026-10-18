@@ -11,21 +11,11 @@ type Props = {
 export function MonitorSwitch({ label, onPrev, onNext, disabled }: Props) {
   return (
     <div className="monsw">
-      <button
-        type="button"
-        aria-label="이전 모니터"
-        disabled={disabled}
-        onClick={onPrev}
-      >
+      <button type="button" aria-label="이전 모니터" disabled={disabled} onClick={onPrev}>
         ◀
       </button>
       <span>{label}</span>
-      <button
-        type="button"
-        aria-label="다음 모니터"
-        disabled={disabled}
-        onClick={onNext}
-      >
+      <button type="button" aria-label="다음 모니터" disabled={disabled} onClick={onNext}>
         ▶
       </button>
     </div>

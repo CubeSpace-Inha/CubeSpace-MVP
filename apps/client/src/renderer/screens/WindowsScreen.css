@@ -1,6 +1,25 @@
-.wtop { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; font-size: 12px; font-weight: 600; color: var(--muted); }
-.wtop .monsw { color: var(--ink); }
-.wnote { font-size: 12px; color: var(--faint); }
+.wtop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.wtop .monsw {
+  color: var(--ink);
+}
+.wnote {
+  font-size: 12px;
+  color: var(--faint);
+}
 /* 열린 창이 열 높이를 채운다 */
-.vcol > .wsec { flex: 1 1 0; }
-@media (max-width: 1180px) { .vcol > .wsec { flex: none; } }
+.vcol > .wsec {
+  flex: 1 1 0;
+}
+@media (max-width: 1180px) {
+  .vcol > .wsec {
+    flex: none;
+  }
+}

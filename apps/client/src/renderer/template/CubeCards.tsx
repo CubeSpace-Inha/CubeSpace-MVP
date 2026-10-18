@@ -13,7 +13,10 @@ import { ICON_ROWS, OFF, outlineLeds, toPixels } from "../cube/led";
 import { Board } from "../layout/Board";
 import { Column } from "../layout/Column";
 
-const P = Object.fromEntries(Object.entries(ICON_ROWS).map(([k, rows]) => [k, toPixels(rows)])) as Record<keyof typeof ICON_ROWS, ReturnType<typeof toPixels>>;
+const P = Object.fromEntries(Object.entries(ICON_ROWS).map(([k, rows]) => [k, toPixels(rows)])) as Record<
+  keyof typeof ICON_ROWS,
+  ReturnType<typeof toPixels>
+>;
 const C1 = "rgb(18 181 214)";
 const C2 = "rgb(240 69 122)";
 
@@ -48,12 +51,44 @@ export function CubeCards() {
           n={1}
         >
           <Pad leds={LEDS} frozen={frozen}>
-            <Cube label="큐브 A · 창 1" pixels={P.vscode} line={C1} x={0.25} y={0.45} selected={sel === 0} onClick={() => setSel(0)} caption={<><b>A</b><Battery pct={72} /></>} />
-            <Cube label="큐브 B · 창 2" pixels={P.edge} line={C2} x={0.75} y={0.45} selected={sel === 1} onClick={() => setSel(1)} caption={<><b>B</b><Battery pct={18} /></>} />
+            <Cube
+              label="큐브 A · 창 1"
+              pixels={P.vscode}
+              line={C1}
+              x={0.25}
+              y={0.45}
+              selected={sel === 0}
+              onClick={() => setSel(0)}
+              caption={
+                <>
+                  <b>A</b>
+                  <Battery pct={72} />
+                </>
+              }
+            />
+            <Cube
+              label="큐브 B · 창 2"
+              pixels={P.edge}
+              line={C2}
+              x={0.75}
+              y={0.45}
+              selected={sel === 1}
+              onClick={() => setSel(1)}
+              caption={
+                <>
+                  <b>B</b>
+                  <Battery pct={18} />
+                </>
+              }
+            />
           </Pad>
           <p className="tpl-p">큐브를 누르면 고름(테두리) · 올리면 나머지가 흐려짐. 패드 LED는 창 영역 테두리.</p>
         </Card>
-        <Card title="LED" meta={`8 × 8 · 아이콘 ${Object.keys(APP_ICONS).length} + ${Object.keys(ST_ICONS).length}개`} n={2}>
+        <Card
+          title="LED"
+          meta={`8 × 8 · 아이콘 ${Object.keys(APP_ICONS).length} + ${Object.keys(ST_ICONS).length}개`}
+          n={2}
+        >
           <SectionTitle hint="LedMatrix">도안</SectionTitle>
           <div className="tpl-leds">
             {Object.entries(P).map(([k, px]) => (
@@ -103,8 +138,23 @@ export function CubeCards() {
         </Card>
         <Card title="연결" meta="ChainPill · vertical" n={4}>
           <div className="tpl-row">
-            <ChainPill vertical padUp slots={[{ name: "A", kind: "ok" }, { name: "B", kind: "ok" }, { name: "C", kind: "hold" }, { name: "D", kind: "err" }, null, null]} />
-            <ChainPill vertical padUp={false} slots={[{ name: "A", kind: "ok" }, { name: "B", kind: "ok" }, null, null, null, null]} />
+            <ChainPill
+              vertical
+              padUp
+              slots={[
+                { name: "A", kind: "ok" },
+                { name: "B", kind: "ok" },
+                { name: "C", kind: "hold" },
+                { name: "D", kind: "err" },
+                null,
+                null,
+              ]}
+            />
+            <ChainPill
+              vertical
+              padUp={false}
+              slots={[{ name: "A", kind: "ok" }, { name: "B", kind: "ok" }, null, null, null, null]}
+            />
           </div>
           <p className="tpl-p">ok 초록 실선 · hold 주황 끊긴 선 · off 회색 점선 · err 빨강 · 빈 슬롯</p>
         </Card>

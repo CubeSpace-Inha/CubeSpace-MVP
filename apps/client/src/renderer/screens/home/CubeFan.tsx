@@ -32,7 +32,11 @@ export function CubeFan({ branches, left }: { branches: Branch[]; left: boolean 
       </svg>
       <span className="fan-labels">
         {branches.map((b, i) => (
-          <span key={i} className={`fan-label k-${b.kind}${b.on ? " on" : ""}`} style={{ "--i": i, "--c": b.color } as CSSProperties}>
+          <span
+            key={i}
+            className={`fan-label k-${b.kind}${b.on ? " on" : ""}`}
+            style={{ "--i": i, "--c": b.color } as CSSProperties}
+          >
             {b.icon ? <LedIcon pixels={b.icon} size={30} /> : <i className={`cdot k-${b.kind}`} />}
             <span>
               <small>

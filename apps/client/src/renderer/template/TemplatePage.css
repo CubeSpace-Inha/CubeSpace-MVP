@@ -1,21 +1,116 @@
 /* 카탈로그 전용: 카드가 내용 높이대로 늘고 보드 전체가 스크롤된다 */
-.tpl { display: flex; flex-direction: column; gap: 22px; }
-.tpl .board { height: auto; min-height: 0; }
-.tpl .vcol > .card { overflow: visible; }
-.tpl .card .sec-t:not(:first-of-type) { margin-top: 14px; }
-.tpl-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 10px; }
-.tpl-p { color: var(--muted); font-size: 12.5px; }
-.tpl-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; }
-.tpl-swatch { display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--muted); }
-.tpl-swatch i { height: 34px; border-radius: 10px; box-shadow: inset 0 0 0 1px var(--line); }
-.tpl-icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 10px; }
-.tpl-icons figure, .tpl-leds figure { display: flex; flex-direction: column; align-items: center; gap: 4px; margin: 0; font-size: 11px; color: var(--muted); }
-.tpl-leds { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 12px; }
-.tpl-ledm { width: 56px; height: 56px; padding: 6px; gap: 2px; border-radius: 10px; background: #23262d; }
-.tpl-ledm i { border-radius: 2px; }
-.tpl-link { padding: 0; font-size: 12px; font-weight: 600; color: var(--c1); }
-.tpl-h { margin: 8px 0 -8px; font-size: 13px; font-weight: 800; letter-spacing: .08em; color: var(--muted); }
-.tpl-h:first-of-type { margin-top: 0; }
-.tpl-apps { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 12px 8px; }
-.tpl-apps figure { display: flex; flex-direction: column; align-items: center; gap: 5px; margin: 0; font-size: 11px; color: var(--muted); text-align: center; word-break: keep-all; }
-.tpl-wtop { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; font-size: 12px; font-weight: 600; color: var(--muted); }
+.tpl {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.tpl .board {
+  height: auto;
+  min-height: 0;
+}
+.tpl .vcol > .card {
+  overflow: visible;
+}
+.tpl .card .sec-t:not(:first-of-type) {
+  margin-top: 14px;
+}
+.tpl-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.tpl-p {
+  color: var(--muted);
+  font-size: 12.5px;
+}
+.tpl-swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  gap: 8px;
+}
+.tpl-swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.tpl-swatch i {
+  height: 34px;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.tpl-icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: 10px;
+}
+.tpl-icons figure,
+.tpl-leds figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  font-size: 11px;
+  color: var(--muted);
+}
+.tpl-leds {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: 12px;
+}
+.tpl-ledm {
+  width: 56px;
+  height: 56px;
+  padding: 6px;
+  gap: 2px;
+  border-radius: 10px;
+  background: #23262d;
+}
+.tpl-ledm i {
+  border-radius: 2px;
+}
+.tpl-link {
+  padding: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c1);
+}
+.tpl-h {
+  margin: 8px 0 -8px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.tpl-h:first-of-type {
+  margin-top: 0;
+}
+.tpl-apps {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 12px 8px;
+}
+.tpl-apps figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  word-break: keep-all;
+}
+.tpl-wtop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}

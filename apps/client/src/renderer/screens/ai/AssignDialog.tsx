@@ -15,10 +15,13 @@ export function AssignDialog({ s, profile: p, onClose, onSet }: Props) {
       <div className="aopts">
         {s.cubes.filter(linked).map((c) => {
           const now = profOf(s, c);
-          const hint = cur === c ? "지금 이 큐브가 써요" : now ? `지금: ${now.name}${cur ? " → 맞바꿈" : ""}` : "배정 없음";
+          const hint =
+            cur === c ? "지금 이 큐브가 써요" : now ? `지금: ${now.name}${cur ? " → 맞바꿈" : ""}` : "배정 없음";
           return (
             <button key={c.slot} type="button" className={cur === c ? "aopt on" : "aopt"} onClick={() => onSet(c)}>
-              <span className="tok" style={{ "--c": cubeCol(c) } as CSSProperties}>{c.name}</span>
+              <span className="tok" style={{ "--c": cubeCol(c) } as CSSProperties}>
+                {c.name}
+              </span>
               <span className="oc">
                 <b>큐브 {c.name}</b>
                 <small>{hint}</small>

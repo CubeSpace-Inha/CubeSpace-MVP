@@ -21,12 +21,7 @@ export function DeviceCard({ s, api, toast }: Props) {
   };
 
   return (
-    <Card
-      title="등록된 큐브"
-      meta={<span className="num">{s.cubes.length} / 6</span>}
-      scroll
-      className="devcard"
-    >
+    <Card title="등록된 큐브" meta={<span className="num">{s.cubes.length} / 6</span>} scroll className="devcard">
       <ul className="lib">
         {s.cubes.map((c) => (
           <li key={c.slot}>
@@ -40,11 +35,7 @@ export function DeviceCard({ s, api, toast }: Props) {
               <b>큐브 {c.name}</b>
               <span>{cubeLineText(c)}</span>
             </div>
-            <Button
-              size="sm"
-              variant={arm === c.slot ? "danger" : "sub"}
-              onClick={() => unregister(c)}
-            >
+            <Button size="sm" variant={arm === c.slot ? "danger" : "sub"} onClick={() => unregister(c)}>
               {arm === c.slot ? "정말 해제" : "등록 해제"}
             </Button>
           </li>

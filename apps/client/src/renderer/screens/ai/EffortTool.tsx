@@ -15,7 +15,13 @@ export function EffortTool({ effort, onChange }: { effort: Effort; onChange: (e:
         {EFFORTS.map(([id, label]) => {
           const e = EFFORT_INFO[id];
           return (
-            <button key={id} type="button" className={id === effort ? "ef on" : "ef"} aria-pressed={id === effort} onClick={() => onChange(id)}>
+            <button
+              key={id}
+              type="button"
+              className={id === effort ? "ef on" : "ef"}
+              aria-pressed={id === effort}
+              onClick={() => onChange(id)}
+            >
               <span className="lv">
                 {[0, 1, 2].map((i) => (
                   <i key={i} className={i <= e.rounds ? "f" : undefined} />

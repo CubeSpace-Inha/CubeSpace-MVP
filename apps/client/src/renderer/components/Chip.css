@@ -1,5 +1,31 @@
-.chips { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 6px; margin: 8px 0 12px; }
-.chip { display: flex; align-items: center; gap: 5px; height: 28px; padding: 0 9px 0 4px; border-radius: 99px; background: var(--raise); box-shadow: var(--r1); font-size: 11.5px; font-weight: 600; color: var(--muted); }
-.chip > i { font-style: normal; opacity: .55; margin-left: 2px; }
-.chip:hover { color: var(--ink); }
-.chip:hover > i { opacity: 1; }
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 6px;
+  margin: 8px 0 12px;
+}
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 28px;
+  padding: 0 9px 0 4px;
+  border-radius: 99px;
+  background: var(--raise);
+  box-shadow: var(--r1);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.chip > i {
+  font-style: normal;
+  opacity: 0.55;
+  margin-left: 2px;
+}
+.chip:hover {
+  color: var(--ink);
+}
+.chip:hover > i {
+  opacity: 1;
+}

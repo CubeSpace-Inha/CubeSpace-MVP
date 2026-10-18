@@ -1,10 +1,63 @@
-.aopts { display: flex; flex-direction: column; gap: 9px; }
-.aopt { display: flex; align-items: center; gap: 13px; padding: 11px 14px; border-radius: 16px; background: var(--raise); box-shadow: var(--r1); text-align: left; transition: transform 0.25s var(--ease-spring), box-shadow 0.2s; }
-.aopt:hover { transform: translateY(-2px); }
-.aopt:active { transform: translateY(2px); box-shadow: var(--r1p); }
-.aopt.on { box-shadow: inset 0 1px 0 var(--hi), 0 0 0 1.5px var(--ok); }
-.aopt .oc { flex: 1; min-width: 0; }
-.aopt b { display: block; font-size: 14px; }
-.aopt small { color: var(--muted); font-size: 12px; }
-.aopt em { font-style: normal; font-size: 11px; font-weight: 800; color: var(--ok); }
-.tok { width: 24px; height: 24px; border-radius: 8px; background: #23262d; color: var(--c); display: inline-grid; place-items: center; font-size: 11px; font-weight: 800; flex: none; box-shadow: 0 2px 0 #0f1116, 0 0 10px color-mix(in srgb, var(--c) 45%, transparent); }
+.aopts {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.aopt {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 11px 14px;
+  border-radius: 16px;
+  background: var(--raise);
+  box-shadow: var(--r1);
+  text-align: left;
+  transition:
+    transform 0.25s var(--ease-spring),
+    box-shadow 0.2s;
+}
+.aopt:hover {
+  transform: translateY(-2px);
+}
+.aopt:active {
+  transform: translateY(2px);
+  box-shadow: var(--r1p);
+}
+.aopt.on {
+  box-shadow:
+    inset 0 1px 0 var(--hi),
+    0 0 0 1.5px var(--ok);
+}
+.aopt .oc {
+  flex: 1;
+  min-width: 0;
+}
+.aopt b {
+  display: block;
+  font-size: 14px;
+}
+.aopt small {
+  color: var(--muted);
+  font-size: 12px;
+}
+.aopt em {
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ok);
+}
+.tok {
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  background: #23262d;
+  color: var(--c);
+  display: inline-grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 800;
+  flex: none;
+  box-shadow:
+    0 2px 0 #0f1116,
+    0 0 10px color-mix(in srgb, var(--c) 45%, transparent);
+}

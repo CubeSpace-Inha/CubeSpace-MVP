@@ -1,6 +1,18 @@
-.app { position: relative; height: 100%; }
+.app {
+  position: relative;
+  height: 100%;
+}
 /* 점 무늬 보드. 왼쪽 메뉴 자리(104px)를 비운다. */
-.views { position: absolute; inset: 0; overflow: auto; overscroll-behavior: contain;
+.views {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
   background: var(--bg) radial-gradient(var(--bgdot) 1.2px, transparent 1.6px) 0 0 / 22px 22px;
-  padding: calc(18px + env(safe-area-inset-top, 0px)) 18px 18px 104px; }
-@media (max-width: 720px) { .views { padding: calc(16px + env(safe-area-inset-top, 0px)) 16px calc(92px + env(safe-area-inset-bottom, 0px)); } }
+  padding: calc(18px + env(safe-area-inset-top, 0px)) 18px 18px 104px;
+}
+@media (max-width: 720px) {
+  .views {
+    padding: calc(16px + env(safe-area-inset-top, 0px)) 16px calc(92px + env(safe-area-inset-bottom, 0px));
+  }
+}

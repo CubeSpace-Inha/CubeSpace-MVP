@@ -1,5 +1,14 @@
 import type { Conn } from "@cubespace/protocol/pipe";
-import type { AppWindow, LayoutItem, MonitorInfo, Slot, Snapshot, WinInfo, WindowCommand, WinToCore } from "@cubespace/protocol";
+import type {
+  AppWindow,
+  LayoutItem,
+  MonitorInfo,
+  Slot,
+  Snapshot,
+  WinInfo,
+  WindowCommand,
+  WinToCore,
+} from "@cubespace/protocol";
 import type { CubeSpaceApi } from "@cubespace/protocol";
 import { appOf, exeOf } from "./apps";
 import type { Store } from "./store";

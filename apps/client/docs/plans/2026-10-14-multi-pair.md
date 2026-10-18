@@ -123,10 +123,7 @@ import { PAD_CHECK, type PadCube } from "@cubespace/protocol";
 const side: Side = {
   padCubes: () => pad.cubes(),
   tryPair: () => pad.tryPair(),
-  command: (hwnd, cmd) => (
-    calls.push(`${cmd} ${hwnd}`),
-    win.command(hwnd, cmd)
-  ),
+  command: (hwnd, cmd) => (calls.push(`${cmd} ${hwnd}`), win.command(hwnd, cmd)),
   launch: (app, slot) => win.launch(app, slot),
 };
 ```
@@ -208,16 +205,10 @@ it("확인점 안에 올린 켜진 큐브만 등록하고, 이미 올려 둔 큐
   pad.attach(p.conn);
   const [cx, cy] = PAD_CHECK.xy;
   p.emit("sync", {
-    cubes: [
-      { ...cubes[0]!, xy: [cx, cy] },
-      cubes[1]!,
-      { id: "A2:F9", xy: [cx, cy], link: "down", battPct: null },
-    ],
+    cubes: [{ ...cubes[0]!, xy: [cx, cy] }, cubes[1]!, { id: "A2:F9", xy: [cx, cy], link: "down", battPct: null }],
   });
   await api.startPairing();
-  expect(store.get().cubes.map((c) => [c.name, c.mac4])).toEqual([
-    ["A", "A2:F0"],
-  ]);
+  expect(store.get().cubes.map((c) => [c.name, c.mac4])).toEqual([["A", "A2:F0"]]);
   expect(store.get().pairing).toEqual({ total: 2, done: [0] });
 
   p.emit("cube", { id: "A2:F1", xy: [cx + PAD_CHECK.r + 5, cy] }); // 확인점 밖
@@ -279,9 +270,7 @@ const api = createApi(store, {
 - 28줄의 `registerCube` 줄은 지워진 메서드를 쓰므로 바꾼다.
 
 ```ts
-await expect(
-  client.request("call", { method: "unregisterCube", args: [0] }),
-).rejects.toThrow("슬롯 0에 큐브 없음");
+await expect(client.request("call", { method: "unregisterCube", args: [0] })).rejects.toThrow("슬롯 0에 큐브 없음");
 ```
 
 - [ ] **Step 3: 테스트가 실패하는지 보기**
@@ -331,12 +320,7 @@ export type Side = {
 import를 바꾼다.
 
 ```ts
-import {
-  PAD_CHECK,
-  type CubeSpaceApi,
-  type PadCube,
-  type PadToCore,
-} from "@cubespace/protocol";
+import { PAD_CHECK, type CubeSpaceApi, type PadCube, type PadToCore } from "@cubespace/protocol";
 ```
 
 `update` 함수 아래에 넣는다.
@@ -347,9 +331,7 @@ function tryPair() {
   const s0 = store.get();
   const pr = s0.pairing;
   if (!pr || pr.done.length >= pr.total) return;
-  const slot = ([0, 1, 2, 3, 4, 5] as const).find(
-    (i) => !s0.cubes.some((c) => c.slot === i),
-  );
+  const slot = ([0, 1, 2, 3, 4, 5] as const).find((i) => !s0.cubes.some((c) => c.slot === i));
   const [cx, cy] = PAD_CHECK.xy;
   const p = [...known.values()].find(
     (x) =>
@@ -513,21 +495,13 @@ test("단계: 패드가 끊기면 0, 시작 전 · 찾은 큐브 없음은 1, �
 test("단계는 스냅샷 pairing에서: 없으면 idle(0개였으면 none), 덜 채웠으면 place, 다 채웠으면 done", () => {
   expect(pairPhase(OK, false)).toBe("idle");
   expect(pairPhase(OK, true)).toBe("none");
-  expect(pairPhase({ ...OK, pairing: { total: 2, done: [4] } }, false)).toBe(
-    "place",
-  );
-  expect(pairPhase({ ...OK, pairing: { total: 2, done: [4, 5] } }, false)).toBe(
-    "done",
-  );
+  expect(pairPhase({ ...OK, pairing: { total: 2, done: [4] } }, false)).toBe("place");
+  expect(pairPhase({ ...OK, pairing: { total: 2, done: [4, 5] } }, false)).toBe("done");
 });
 
 test("올리는 중 안내: k는 지금 올릴 큐브 번째, 하나라도 등록했으면 그 글자", () => {
-  expect(placeText({ total: 4, done: [] })).toBe(
-    "큐브 하나를 확인점에 올려 주세요 (1/4)",
-  );
-  expect(placeText({ total: 4, done: [2] })).toBe(
-    "C로 등록했어요 · 내리고 다음 큐브를 올려 주세요 (2/4)",
-  );
+  expect(placeText({ total: 4, done: [] })).toBe("큐브 하나를 확인점에 올려 주세요 (1/4)");
+  expect(placeText({ total: 4, done: [2] })).toBe("C로 등록했어요 · 내리고 다음 큐브를 올려 주세요 (2/4)");
 });
 ```
 
@@ -553,14 +527,7 @@ test("가짜 API: 등록 해제하면 맡던 창은 담당 없음, 장치 추가
 새 파일 `apps/client/test/pairPanel.test.tsx`
 
 ```tsx
-import {
-  act,
-  cleanup,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { afterEach, expect, test, vi } from "vitest";
 import type { Slot, Snapshot } from "@cubespace/protocol";
@@ -593,40 +560,26 @@ async function registerAt(fake: ReturnType<typeof createFakeApi>, slot: Slot) {
 
 test("설정: 시작하면 k/N 안내, 등록될 때마다 글자 · 토스트, 다 채우면 완료 뒤 처음으로", async () => {
   const fake = renderAt("/settings");
-  fireEvent.click(
-    await screen.findByRole("button", { name: "큐브 등록 시작" }),
-  );
-  expect(
-    await screen.findByText("큐브 하나를 확인점에 올려 주세요 (1/2)"),
-  ).toBeTruthy();
+  fireEvent.click(await screen.findByRole("button", { name: "큐브 등록 시작" }));
+  expect(await screen.findByText("큐브 하나를 확인점에 올려 주세요 (1/2)")).toBeTruthy();
 
   await registerAt(fake, 4);
-  expect(
-    screen.getByText("E로 등록했어요 · 내리고 다음 큐브를 올려 주세요 (2/2)"),
-  ).toBeTruthy();
+  expect(screen.getByText("E로 등록했어요 · 내리고 다음 큐브를 올려 주세요 (2/2)")).toBeTruthy();
   expect(screen.getByText("큐브 E 등록 완료 · 슬롯 4")).toBeTruthy();
 
   await registerAt(fake, 5);
   expect(screen.getByText("큐브 2개 등록 완료")).toBeTruthy();
-  await waitFor(
-    () =>
-      expect(
-        screen.getByRole("button", { name: /슬롯 6개가 모두 찼어요/ }),
-      ).toBeTruthy(),
-    { timeout: 2500 },
-  );
+  await waitFor(() => expect(screen.getByRole("button", { name: /슬롯 6개가 모두 찼어요/ })).toBeTruthy(), {
+    timeout: 2500,
+  });
   expect((await fake.api.getSnapshot()).pairing).toBeNull();
 });
 
 test("그만하기를 누르면 stopPairing, 처음으로 돌아간다", async () => {
   const fake = renderAt("/");
-  fireEvent.click(
-    await screen.findByRole("button", { name: "큐브 등록 시작" }),
-  );
+  fireEvent.click(await screen.findByRole("button", { name: "큐브 등록 시작" }));
   fireEvent.click(await screen.findByRole("button", { name: "그만하기" }));
-  expect(
-    await screen.findByRole("button", { name: "큐브 등록 시작" }),
-  ).toBeTruthy();
+  expect(await screen.findByRole("button", { name: "큐브 등록 시작" })).toBeTruthy();
   expect((await fake.api.getSnapshot()).pairing).toBeNull();
 });
 
@@ -634,15 +587,10 @@ test("켜진 미등록 큐브가 없으면 안내 뒤 처음으로", async () =>
   const fake = createFakeApi(FREE2);
   vi.spyOn(fake.api, "startPairing").mockResolvedValue(0);
   renderAt("/", fake);
-  fireEvent.click(
-    await screen.findByRole("button", { name: "큐브 등록 시작" }),
-  );
+  fireEvent.click(await screen.findByRole("button", { name: "큐브 등록 시작" }));
   expect(await screen.findByText("찾은 큐브가 없어요")).toBeTruthy();
   expect(screen.getByText("등록할 큐브를 켜 주세요")).toBeTruthy();
-  await waitFor(
-    () => expect(screen.queryByText("찾은 큐브가 없어요")).toBeNull(),
-    { timeout: 2500 },
-  );
+  await waitFor(() => expect(screen.queryByText("찾은 큐브가 없어요")).toBeNull(), { timeout: 2500 });
 });
 
 test("다시 열면 지난 등록은 알리지 않고 진행 표시는 이어진다", async () => {
@@ -652,11 +600,7 @@ test("다시 열면 지난 등록은 알리지 않고 진행 표시는 이어진
   s.pairing!.done.push(4);
   fake.push(s);
   renderAt("/settings", fake);
-  expect(
-    await screen.findByText(
-      "E로 등록했어요 · 내리고 다음 큐브를 올려 주세요 (2/2)",
-    ),
-  ).toBeTruthy();
+  expect(await screen.findByText("E로 등록했어요 · 내리고 다음 큐브를 올려 주세요 (2/2)")).toBeTruthy();
   expect(screen.queryByText("큐브 E 등록 완료 · 슬롯 4")).toBeNull();
 });
 ```
@@ -678,8 +622,7 @@ Expected: FAIL이 나와야 해요.
 export type PairPhase = "idle" | "place" | "done" | "none"; // none = 시작했지만 켜진 미등록 큐브가 없었다
 export const PAIR_STEPS = ["패드 연결", "큐브 등록", "위치 확인"];
 export function pairPhase(s: Snapshot, none: boolean): PairPhase {
-  if (s.pairing)
-    return s.pairing.done.length < s.pairing.total ? "place" : "done";
+  if (s.pairing) return s.pairing.done.length < s.pairing.total ? "place" : "done";
   return none ? "none" : "idle";
 }
 export function pairStep(s: Snapshot, phase: PairPhase): number {
@@ -708,11 +651,7 @@ import { pairPhase } from "../model/settings";
 
 // 장치 추가 흐름(시안 pairStart). 등록은 core가 한다: 시작하면 켜진 미등록 큐브를 세고,
 // 확인점에 올린 순서대로 빈 슬롯에 등록한다(스냅샷 pairing). 완료 · 찾은 큐브 없음은 1.7초 뒤 처음으로 돌아간다.
-export function usePairing(
-  s: Snapshot,
-  api: CubeSpaceApi,
-  onRegistered: (slot: Slot) => void,
-) {
+export function usePairing(s: Snapshot, api: CubeSpaceApi, onRegistered: (slot: Slot) => void) {
   const [none, setNone] = useState(false);
   const phase = pairPhase(s, none);
   const done = s.pairing?.done;
@@ -730,10 +669,7 @@ export function usePairing(
 
   useEffect(() => {
     if (phase !== "none" && phase !== "done") return;
-    const t = setTimeout(
-      () => (phase === "none" ? setNone(false) : void api.stopPairing()),
-      1700,
-    );
+    const t = setTimeout(() => (phase === "none" ? setNone(false) : void api.stopPairing()), 1700);
     return () => clearTimeout(t);
   }, [phase, api]);
 
@@ -750,14 +686,7 @@ export function usePairing(
 - import를 바꾼다. `regPixels`는 idle 슬롯 칸에서 계속 쓴다.
 
 ```ts
-import {
-  freeSlot,
-  PAIR_STEPS,
-  pairStep,
-  placeText,
-  regPixels,
-  SLOTS,
-} from "../model/settings";
+import { freeSlot, PAIR_STEPS, pairStep, placeText, regPixels, SLOTS } from "../model/settings";
 ```
 
 - 위쪽 주석을 바꾼다.
@@ -809,12 +738,7 @@ import {
 
 ```tsx
 const startButton = (
-  <Button
-    variant="primary"
-    wide
-    disabled={slot === undefined || !padUp}
-    onClick={pair.start}
-  >
+  <Button variant="primary" wide disabled={slot === undefined || !padUp} onClick={pair.start}>
     {!padUp
       ? "패드를 먼저 연결해 주세요"
       : slot === undefined
@@ -900,9 +824,7 @@ git commit -m "feat: 장치 추가 화면을 확인점 순서 등록으로(k/N �
 test("장치 추가 중이면 미등록 pad-sim 큐브를 확인점에 올리는 버튼", async () => {
   const sim = mockSim();
   renderSim(sim, { ...OK, pairing: { total: 1, done: [] } });
-  fireEvent.click(
-    await screen.findByRole("button", { name: "A2:F0 확인점에" }),
-  );
+  fireEvent.click(await screen.findByRole("button", { name: "A2:F0 확인점에" }));
   expect(sim.moveCube).toHaveBeenCalledWith("A2:F0", PAD_CHECK.xy);
 });
 
@@ -942,11 +864,7 @@ export const SIM_IDS = ["A2:F0", "A2:F1", "A2:F2", "A2:F3"];
   live && s.pairing && (
     <div className="simpair">
       {SIM_IDS.filter((id) => !s.cubes.some((c) => c.mac4 === id)).map((id) => (
-        <Button
-          key={id}
-          size="sm"
-          onClick={() => run(sim!.moveCube(id, PAD_CHECK.xy))}
-        >
+        <Button key={id} size="sm" onClick={() => run(sim!.moveCube(id, PAD_CHECK.xy))}>
           {id} 확인점에
         </Button>
       ))}

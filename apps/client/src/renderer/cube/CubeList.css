@@ -1,16 +1,102 @@
-.clist { display: flex; flex-direction: column; gap: 10px; }
-.csub { margin: 2px 2px -4px; font-size: 12px; font-weight: 700; color: var(--muted); }
-.csub small { margin-left: 6px; font-weight: 500; color: var(--faint); }
-.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.clist {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.csub {
+  margin: 2px 2px -4px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.csub small {
+  margin-left: 6px;
+  font-weight: 500;
+  color: var(--faint);
+}
+.cgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
 /* 고른 큐브는 큐브 색(--sel)으로 테두리 + 번짐 */
-.ctile { padding: 10px; border-radius: 18px; background: var(--raise); box-shadow: var(--r1); transition: box-shadow .25s; }
-.ctile.on { box-shadow: inset 0 1px 0 var(--hi), 0 3px 0 color-mix(in srgb, var(--sel) 55%, var(--edge)), 0 0 22px color-mix(in srgb, var(--sel) 30%, transparent), 0 0 0 1.5px var(--sel); }
-.ctile { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; min-width: 0; text-align: left; }
-.tn { display: flex; align-items: center; gap: 6px; width: 100%; }
-.tn b { flex: 1; font-size: 13px; }
-.ta { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; font-weight: 600; color: var(--muted); }
-.cempty { display: grid; place-items: center; min-height: 100px; border-radius: 18px; border: 1.5px dashed var(--line); color: var(--faint); font-size: 12px; }
-.ctray { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 8px; }
-.ctc { display: flex; align-items: center; gap: 6px; min-width: 0; padding: 5px; border-radius: 12px; background: var(--raise); box-shadow: var(--r1); font-size: 12.5px; font-weight: 700; white-space: nowrap; transition: box-shadow .25s; }
-.ctc.on { box-shadow: var(--r1), 0 0 0 1.5px var(--sel); }
-.cbat { font-style: normal; font-size: 10.5px; font-weight: 700; color: var(--err); }
+.ctile {
+  padding: 10px;
+  border-radius: 18px;
+  background: var(--raise);
+  box-shadow: var(--r1);
+  transition: box-shadow 0.25s;
+}
+.ctile.on {
+  box-shadow:
+    inset 0 1px 0 var(--hi),
+    0 3px 0 color-mix(in srgb, var(--sel) 55%, var(--edge)),
+    0 0 22px color-mix(in srgb, var(--sel) 30%, transparent),
+    0 0 0 1.5px var(--sel);
+}
+.ctile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 0;
+  text-align: left;
+}
+.tn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+.tn b {
+  flex: 1;
+  font-size: 13px;
+}
+.ta {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.cempty {
+  display: grid;
+  place-items: center;
+  min-height: 100px;
+  border-radius: 18px;
+  border: 1.5px dashed var(--line);
+  color: var(--faint);
+  font-size: 12px;
+}
+.ctray {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: 8px;
+}
+.ctc {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 5px;
+  border-radius: 12px;
+  background: var(--raise);
+  box-shadow: var(--r1);
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: box-shadow 0.25s;
+}
+.ctc.on {
+  box-shadow:
+    var(--r1),
+    0 0 0 1.5px var(--sel);
+}
+.cbat {
+  font-style: normal;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--err);
+}

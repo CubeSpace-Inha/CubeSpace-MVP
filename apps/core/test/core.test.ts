@@ -151,8 +151,36 @@ describe("core", () => {
   it("배치: 패드 밖 · 최소화된 창은 빠진다", () => {
     const s = createStore().get();
     s.cubes = [
-      { slot: 0, name: "A", mac4: "1", link: "up", battPct: 1, battLevel: "ok", state: "run", mode: "window", xy: [40, 60], window: "a", icon: "", ai: null, aiChoices: [] },
-      { slot: 1, name: "B", mac4: "2", link: "up", battPct: 1, battLevel: "ok", state: "run", mode: "window", xy: null, window: "b", icon: "", ai: null, aiChoices: [] },
+      {
+        slot: 0,
+        name: "A",
+        mac4: "1",
+        link: "up",
+        battPct: 1,
+        battLevel: "ok",
+        state: "run",
+        mode: "window",
+        xy: [40, 60],
+        window: "a",
+        icon: "",
+        ai: null,
+        aiChoices: [],
+      },
+      {
+        slot: 1,
+        name: "B",
+        mac4: "2",
+        link: "up",
+        battPct: 1,
+        battLevel: "ok",
+        state: "run",
+        mode: "window",
+        xy: null,
+        window: "b",
+        icon: "",
+        ai: null,
+        aiChoices: [],
+      },
     ];
     s.windows = [
       { id: "a", app: "", title: "", owner: "A", status: "linked" },
@@ -172,7 +200,21 @@ describe("core", () => {
     // 빈 슬롯이 하나뿐이면 1
     store.change((s) => {
       for (const slot of [0, 1, 2, 3, 4] as const)
-        s.cubes.push({ slot, name: "ABCDE"[slot]!, mac4: `x${slot}`, link: "down", battPct: null, battLevel: "ok", state: "idle", mode: "window", xy: null, window: null, icon: "heart", ai: null, aiChoices: [] });
+        s.cubes.push({
+          slot,
+          name: "ABCDE"[slot]!,
+          mac4: `x${slot}`,
+          link: "down",
+          battPct: null,
+          battLevel: "ok",
+          state: "idle",
+          mode: "window",
+          xy: null,
+          window: null,
+          icon: "heart",
+          ai: null,
+          aiChoices: [],
+        });
     });
     await expect(api.startPairing()).resolves.toBe(1);
 
@@ -186,7 +228,9 @@ describe("core", () => {
     const p = fakeConn();
     pad.attach(p.conn);
     const [cx, cy] = PAD_CHECK.xy;
-    p.emit("sync", { cubes: [{ ...cubes[0]!, xy: [cx, cy] }, cubes[1]!, { id: "A2:F9", xy: [cx, cy], link: "down", battPct: null }] });
+    p.emit("sync", {
+      cubes: [{ ...cubes[0]!, xy: [cx, cy] }, cubes[1]!, { id: "A2:F9", xy: [cx, cy], link: "down", battPct: null }],
+    });
     await api.startPairing();
     expect(store.get().cubes.map((c) => [c.name, c.mac4])).toEqual([["A", "A2:F0"]]);
     expect(store.get().pairing).toEqual({ total: 2, done: [0] });

@@ -12,11 +12,11 @@ pnpm install
 pnpm dev                 # Electron 창 + 화면 즉시 반영(HMR)
 ```
 
-| 명령         | 하는 일                                                        |
-| ------------ | -------------------------------------------------------------- |
-| `pnpm dev`   | 개발 모드로 앱 실행                                            |
-| `pnpm build` | `out/`에 빌드                                                  |
-| `pnpm check` | lint · typecheck · test                                        |
+| 명령         | 하는 일                 |
+| ------------ | ----------------------- |
+| `pnpm dev`   | 개발 모드로 앱 실행     |
+| `pnpm build` | `out/`에 빌드           |
+| `pnpm check` | lint · typecheck · test |
 
 ## 템플릿 카탈로그
 

@@ -59,10 +59,14 @@ else
     const core = createCoreClient(app.getAppPath(), () => readSource(dir));
     relay(core, createSimLink(), dir);
     createWindow();
-    const { show } = createTray(icon, () => win ?? createWindow(), () => {
-      quitting = true;
-      core.shutdown();
-      app.quit();
-    });
+    const { show } = createTray(
+      icon,
+      () => win ?? createWindow(),
+      () => {
+        quitting = true;
+        core.shutdown();
+        app.quit();
+      },
+    );
     app.on("second-instance", show);
   });

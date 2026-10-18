@@ -1,6 +1,14 @@
 import { expect, test } from "vitest";
 import { OK } from "../src/renderer/dev/fixtures";
-import { conflictChecks, moveChoice, nextChoice, proposalBad, proposeTargets, recommendIds, removeChoice } from "../src/renderer/model/aiAdv";
+import {
+  conflictChecks,
+  moveChoice,
+  nextChoice,
+  proposalBad,
+  proposeTargets,
+  recommendIds,
+  removeChoice,
+} from "../src/renderer/model/aiAdv";
 
 const A = OK.cubes[0]!; // 현재 p3, 전환 목록 [p3, p4]
 const B = OK.cubes[1]!; // 현재 p2, 전환 목록 [p2]

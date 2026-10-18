@@ -4,9 +4,23 @@ import { LedIcon } from "./LedIcon";
 import type { Pixels } from "./led";
 import "./CubeList.css";
 
-export type CubeInfo = { id: string; name: string; pixels: Pixels; color: string; state: CubeStateKind; pct: number; win?: string };
+export type CubeInfo = {
+  id: string;
+  name: string;
+  pixels: Pixels;
+  color: string;
+  state: CubeStateKind;
+  pct: number;
+  win?: string;
+};
 
-type Props = { placed: CubeInfo[]; tray: CubeInfo[]; slots?: number; selected?: string; onSelect?: (id: string) => void };
+type Props = {
+  placed: CubeInfo[];
+  tray: CubeInfo[];
+  slots?: number;
+  selected?: string;
+  onSelect?: (id: string) => void;
+};
 
 // 창 화면 왼쪽: 패드 위 칸(최대 slots개, 나머지는 빈 칸) + 패드 밖 큐브 칩.
 export function CubeList({ placed, tray, slots = 4, selected, onSelect }: Props) {
@@ -16,7 +30,13 @@ export function CubeList({ placed, tray, slots = 4, selected, onSelect }: Props)
       <div className="csub">패드 위</div>
       <div className="cgrid">
         {placed.map((c) => (
-          <button key={c.id} type="button" className={c.id === selected ? "ctile on" : "ctile"} style={sel(c)} onClick={() => onSelect?.(c.id)}>
+          <button
+            key={c.id}
+            type="button"
+            className={c.id === selected ? "ctile on" : "ctile"}
+            style={sel(c)}
+            onClick={() => onSelect?.(c.id)}
+          >
             <LedIcon pixels={c.pixels} size={40} />
             <span className="tn">
               <b className="num">큐브 {c.name}</b>
@@ -26,7 +46,9 @@ export function CubeList({ placed, tray, slots = 4, selected, onSelect }: Props)
           </button>
         ))}
         {Array.from({ length: Math.max(0, slots - placed.length) }, (_, i) => (
-          <div key={i} className="cempty">빈 칸</div>
+          <div key={i} className="cempty">
+            빈 칸
+          </div>
         ))}
       </div>
       {tray.length > 0 && (
@@ -36,7 +58,13 @@ export function CubeList({ placed, tray, slots = 4, selected, onSelect }: Props)
           </div>
           <div className="ctray">
             {tray.map((c) => (
-              <button key={c.id} type="button" className={c.id === selected ? "ctc on" : "ctc"} style={sel(c)} onClick={() => onSelect?.(c.id)}>
+              <button
+                key={c.id}
+                type="button"
+                className={c.id === selected ? "ctc on" : "ctc"}
+                style={sel(c)}
+                onClick={() => onSelect?.(c.id)}
+              >
                 <LedIcon pixels={c.pixels} size={28} />
                 <span>{c.name}</span>
                 {c.pct < 25 && <em className="cbat num">{c.pct}%</em>}

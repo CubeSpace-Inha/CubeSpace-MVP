@@ -1,3 +1,13 @@
-.ledm { display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(8, 1fr); }
-.ledm i { border-radius: 50%; background: rgba(255, 255, 255, .08); }
-.ledm i.on { background: var(--p); box-shadow: 0 0 3px var(--p); }
+.ledm {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+}
+.ledm i {
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+}
+.ledm i.on {
+  background: var(--p);
+  box-shadow: 0 0 3px var(--p);
+}

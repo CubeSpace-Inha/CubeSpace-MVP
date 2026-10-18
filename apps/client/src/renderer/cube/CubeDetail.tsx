@@ -21,16 +21,35 @@ type Props = {
   picker?: ReactNode; // 묶인 창 줄 아래 고르기 목록
 };
 
-const BUTTONS: [CubeButton, string][] = [["toggle", "켜기·끄기"], ["pick", "다시 고르기"]];
+const BUTTONS: [CubeButton, string][] = [
+  ["toggle", "켜기·끄기"],
+  ["pick", "다시 고르기"],
+];
 
 // 고른 큐브 하나의 설정: 머리 · 묶인 창 · 지난번 / 고정 프로그램 · 큐브 버튼 · 상태별 동작 표.
-export function CubeDetail({ cube: c, monitor, last, fix, programs, onFix, button, onButton, children, picker }: Props) {
+export function CubeDetail({
+  cube: c,
+  monitor,
+  last,
+  fix,
+  programs,
+  onFix,
+  button,
+  onButton,
+  children,
+  picker,
+}: Props) {
   const on = c.state !== "out";
   const pick = button === "pick";
   // [상태, 이름, 한 번, 꾹]. 지금 상태 줄에 불이 들어온다.
   const table: [string, string, string, string][] = [
     ["out", "패드 밖", "동작 없음", "동작 없음"],
-    ["empty", "? 큐브", fix ? `${fix} 바로 열기` : `고르는 창 (맨 위 ${last ?? "떠 있는 창"})`, fix ? "고정 무시하고 고르기" : last ? `${last} 바로 열기` : "고르는 창"],
+    [
+      "empty",
+      "? 큐브",
+      fix ? `${fix} 바로 열기` : `고르는 창 (맨 위 ${last ?? "떠 있는 창"})`,
+      fix ? "고정 무시하고 고르기" : last ? `${last} 바로 열기` : "고르는 창",
+    ],
     ["pick", "고르는 창 뜸", "맨 위 항목 배치", "취소하고 ?로"],
     ["bound", "배치된 큐브", pick ? "풀고 다시 고르기" : "창 켜기·끄기", pick ? "창 켜기·끄기" : "풀고 다시 고르기"],
   ];
@@ -50,7 +69,11 @@ export function CubeDetail({ cube: c, monitor, last, fix, programs, onFix, butto
       </div>
       {on && (
         <div className="ccw">
-          {c.win ? <LedIcon pixels={appPixels(c.win)} size={24} /> : <span className="aic" style={{ "--z": "24px" } as CSSProperties} />}
+          {c.win ? (
+            <LedIcon pixels={appPixels(c.win)} size={24} />
+          ) : (
+            <span className="aic" style={{ "--z": "24px" } as CSSProperties} />
+          )}
           <span className="cn">
             {c.win ?? "묶인 창 없음"}
             {c.win && monitor && <small> · {monitor}</small>}
@@ -92,7 +115,13 @@ export function CubeDetail({ cube: c, monitor, last, fix, programs, onFix, butto
           </span>
           <span className="mseg" role="group" aria-label="큐브 버튼">
             {BUTTONS.map(([v, n]) => (
-              <button key={v} type="button" className={button === v ? "on" : ""} aria-pressed={button === v} onClick={() => onButton(v)}>
+              <button
+                key={v}
+                type="button"
+                className={button === v ? "on" : ""}
+                aria-pressed={button === v}
+                onClick={() => onButton(v)}
+              >
                 {n}
               </button>
             ))}

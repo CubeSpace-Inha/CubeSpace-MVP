@@ -1,6 +1,35 @@
-.cap-batt { display: inline-flex; align-items: center; gap: 6px; }
-.cap-batt.low30 { color: var(--t-warn); }
-.cap-batt.low10 { color: var(--t-danger); }
-.batt { position: relative; width: 18px; height: 9px; padding: 1px; border: 1.5px solid currentColor; border-radius: 3px; }
-.batt::after { content: ""; position: absolute; right: -4px; top: 1.5px; width: 2px; height: 3px; border-radius: 0 1px 1px 0; background: currentColor; }
-.batt i { display: block; height: 100%; border-radius: 1px; background: currentColor; }
+.cap-batt {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.cap-batt.low30 {
+  color: var(--t-warn);
+}
+.cap-batt.low10 {
+  color: var(--t-danger);
+}
+.batt {
+  position: relative;
+  width: 18px;
+  height: 9px;
+  padding: 1px;
+  border: 1.5px solid currentColor;
+  border-radius: 3px;
+}
+.batt::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  top: 1.5px;
+  width: 2px;
+  height: 3px;
+  border-radius: 0 1px 1px 0;
+  background: currentColor;
+}
+.batt i {
+  display: block;
+  height: 100%;
+  border-radius: 1px;
+  background: currentColor;
+}

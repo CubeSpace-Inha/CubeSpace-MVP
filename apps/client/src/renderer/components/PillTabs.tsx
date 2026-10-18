@@ -7,7 +7,13 @@ export function PillTabs<T extends string>({ options, value, onChange, label }: 
   return (
     <div className="ptabs" role="group" aria-label={label}>
       {options.map(([id, name]) => (
-        <button key={id} type="button" className={id === value ? "on" : undefined} aria-pressed={id === value} onClick={() => onChange(id)}>
+        <button
+          key={id}
+          type="button"
+          className={id === value ? "on" : undefined}
+          aria-pressed={id === value}
+          onClick={() => onChange(id)}
+        >
           {name}
         </button>
       ))}

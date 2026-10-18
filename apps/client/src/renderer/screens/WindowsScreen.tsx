@@ -33,7 +33,12 @@ export function WindowsScreen() {
         <Card title="열린 창" meta={`${rows.length}개`} scroll n={1} className="wsec">
           <div className="wtop">
             <span>대상 모니터</span>
-            <MonitorSwitch label={monitorName(s.monitor.no)} onPrev={() => turn(-1)} onNext={() => turn(1)} disabled={count < 2} />
+            <MonitorSwitch
+              label={monitorName(s.monitor.no)}
+              onPrev={() => turn(-1)}
+              onNext={() => turn(1)}
+              disabled={count < 2}
+            />
           </div>
           {rows.length === 0 && <p className="wnote">{monitorName(s.monitor.no)}에 열린 창이 없어요.</p>}
           {rows.map(({ w: x, cube: k }) => {
@@ -43,22 +48,36 @@ export function WindowsScreen() {
                 큐브 {k.name}
                 {min && " · 꺼짐"}
               </span>
-            ) : x.top ? "항상 위 · 큐브와 상관없음" : min ? "최소화됨 · 지도에 자리 남음" : "떠 있음";
+            ) : x.top ? (
+              "항상 위 · 큐브와 상관없음"
+            ) : min ? (
+              "최소화됨 · 지도에 자리 남음"
+            ) : (
+              "떠 있음"
+            );
             return (
               <WindowRow key={x.id} pixels={appIcon(x.app)} name={winTitle(x)} sub={sub} min={!k && min}>
                 {k ? (
                   power(x.id, !min)
                 ) : (
                   <>
-                    <MiniButton label="왼쪽 절반" onClick={() => cmd(x.id, "left")}>◧</MiniButton>
-                    <MiniButton label="오른쪽 절반" onClick={() => cmd(x.id, "right")}>◨</MiniButton>
-                    <MiniButton label="최소화·올리기" on={min} onClick={() => cmd(x.id, "min")}>▁</MiniButton>
+                    <MiniButton label="왼쪽 절반" onClick={() => cmd(x.id, "left")}>
+                      ◧
+                    </MiniButton>
+                    <MiniButton label="오른쪽 절반" onClick={() => cmd(x.id, "right")}>
+                      ◨
+                    </MiniButton>
+                    <MiniButton label="최소화·올리기" on={min} onClick={() => cmd(x.id, "min")}>
+                      ▁
+                    </MiniButton>
                     <MiniButton label="항상 위" on={x.top} onClick={() => cmd(x.id, "top")}>
                       <Icon name="pin" size={12} stroke={2.2} />
                     </MiniButton>
                   </>
                 )}
-                <MiniButton label="창 닫기" onClick={() => cmd(x.id, "close")}>✕</MiniButton>
+                <MiniButton label="창 닫기" onClick={() => cmd(x.id, "close")}>
+                  ✕
+                </MiniButton>
               </WindowRow>
             );
           })}

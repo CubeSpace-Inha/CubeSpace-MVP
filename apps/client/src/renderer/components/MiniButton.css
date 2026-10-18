@@ -1,4 +1,23 @@
-.mini { width: 25px; height: 25px; flex: none; display: grid; place-items: center; border-radius: 8px; background: var(--raise); box-shadow: var(--r1); font-size: 11px; color: var(--muted); }
-.mini:hover { color: var(--ink); }
-.mini:active { transform: translateY(1px); box-shadow: var(--r1p); }
-.mini.on { background: var(--ink); color: var(--on-ink); }
+.mini {
+  width: 25px;
+  height: 25px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--raise);
+  box-shadow: var(--r1);
+  font-size: 11px;
+  color: var(--muted);
+}
+.mini:hover {
+  color: var(--ink);
+}
+.mini:active {
+  transform: translateY(1px);
+  box-shadow: var(--r1p);
+}
+.mini.on {
+  background: var(--ink);
+  color: var(--on-ink);
+}

@@ -1,7 +1,14 @@
 import type { ReactNode } from "react";
 import "./Rows.css";
 
-export type RowItem = { key: string; title: ReactNode; value?: ReactNode; note?: ReactNode; dot?: string; lead?: ReactNode };
+export type RowItem = {
+  key: string;
+  title: ReactNode;
+  value?: ReactNode;
+  note?: ReactNode;
+  dot?: string;
+  lead?: ReactNode;
+};
 
 // 상태 목록: 줄마다 색 점(또는 lead) · 이름 · 값, 필요하면 아래에 설명 한 줄.
 export function Rows({ items }: { items: RowItem[] }) {

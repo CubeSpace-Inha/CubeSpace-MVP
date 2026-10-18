@@ -1,5 +1,28 @@
 /* TextInput · TextArea 공용: 움푹한 입력칸 */
-.tx { width: 100%; border: 0; border-radius: 14px; padding: 12px 14px; font: inherit; color: var(--ink); resize: none; outline: 0; transition: box-shadow .2s; background: var(--soft); line-height: 1.5; box-shadow: inset 0 3px 7px var(--inset); }
-input.tx { height: 46px; padding: 0 14px; }
-.tx::placeholder { color: var(--faint); }
-.tx:focus { box-shadow: inset 0 3px 7px var(--inset), 0 0 0 2px var(--sel), 0 0 18px color-mix(in srgb, var(--sel) 35%, transparent); }
+.tx {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 14px;
+  font: inherit;
+  color: var(--ink);
+  resize: none;
+  outline: 0;
+  transition: box-shadow 0.2s;
+  background: var(--soft);
+  line-height: 1.5;
+  box-shadow: inset 0 3px 7px var(--inset);
+}
+input.tx {
+  height: 46px;
+  padding: 0 14px;
+}
+.tx::placeholder {
+  color: var(--faint);
+}
+.tx:focus {
+  box-shadow:
+    inset 0 3px 7px var(--inset),
+    0 0 0 2px var(--sel),
+    0 0 18px color-mix(in srgb, var(--sel) 35%, transparent);
+}

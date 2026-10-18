@@ -38,19 +38,42 @@ export const WIN_TEXT: Record<WindowStatus, { text: string; tone: Tone; note?: s
   minimized: { text: "최소화됨 (제거됨)", tone: "neutral", note: "담당 큐브를 다시 올리면 되돌린다." },
   relaunchable: { text: "재실행 가능", tone: "warn", note: "창이 사라졌다. 저장한 정보로 다시 열 수 있다." },
   gone: { text: "창 없음", tone: "neutral", note: "복원 정보가 없어 다시 열 수 없다. 담당 큐브는 미배정이 된다." },
-  excluded: { text: "제외 · 관리자 권한", tone: "danger", note: "관리자 권한으로 실행된 창은 CUBE SPACE가 옮길 수 없습니다." },
-  noResponse: { text: "응답 없음", tone: "warn", note: "1초 안에 창이 바뀌지 않았다. 다시 보내지 않고, 나중에 바뀌면 자동으로 풀린다." },
+  excluded: {
+    text: "제외 · 관리자 권한",
+    tone: "danger",
+    note: "관리자 권한으로 실행된 창은 CUBE SPACE가 옮길 수 없습니다.",
+  },
+  noResponse: {
+    text: "응답 없음",
+    tone: "warn",
+    note: "1초 안에 창이 바뀌지 않았다. 다시 보내지 않고, 나중에 바뀌면 자동으로 풀린다.",
+  },
 };
 
-export const KIND_TEXT: Record<ProfileKind, string> = { project: "프로젝트", agent: "에이전트", prompt: "지침", skill: "스킬", mcp: "MCP" };
+export const KIND_TEXT: Record<ProfileKind, string> = {
+  project: "프로젝트",
+  agent: "에이전트",
+  prompt: "지침",
+  skill: "스킬",
+  mcp: "MCP",
+};
 
-const LINK_WHY: Record<DownReason, string> = { link: "무선 끊김", dock: "도크 · 충전 중", button: "버튼으로 끔", lowVolt: "저전압" };
+const LINK_WHY: Record<DownReason, string> = {
+  link: "무선 끊김",
+  dock: "도크 · 충전 중",
+  button: "버튼으로 끔",
+  lowVolt: "저전압",
+};
 
 // 큐브 무선 연결 문구(시안 link)
 export function linkText(c: Cube): { text: string; tone: Tone; why?: string } {
   if (c.link === "up") return { text: "연결", tone: "ok" };
   if (c.downReason === "link") return { text: "끊김", tone: "warn", why: LINK_WHY.link };
-  return { text: "꺼짐", tone: c.downReason === "lowVolt" ? "danger" : "muted", why: c.downReason ? LINK_WHY[c.downReason] : "사유 모름" };
+  return {
+    text: "꺼짐",
+    tone: c.downReason === "lowVolt" ? "danger" : "muted",
+    why: c.downReason ? LINK_WHY[c.downReason] : "사유 모름",
+  };
 }
 
 export function noticeText(n: Notice, cubes: Cube[]): string {

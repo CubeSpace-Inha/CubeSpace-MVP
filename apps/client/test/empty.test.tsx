@@ -44,7 +44,11 @@ test("빈 상태에서도 페어링 화면이 그려진다", async () => {
 
 test("빈 상태 페어링: 패드가 없으면 등록 · 시작을 막는다", async () => {
   renderAt("/");
-  expect((await screen.findByRole("button", { name: "패드를 먼저 연결해 주세요" })).hasAttribute("disabled")).toBe(true);
+  expect((await screen.findByRole("button", { name: "패드를 먼저 연결해 주세요" })).hasAttribute("disabled")).toBe(
+    true,
+  );
   expect(screen.getByText("패드를 찾는 중…")).toBeTruthy();
-  expect(screen.getByRole("button", { name: "큐브를 하나 이상 등록하면 시작할 수 있어요" }).hasAttribute("disabled")).toBe(true);
+  expect(
+    screen.getByRole("button", { name: "큐브를 하나 이상 등록하면 시작할 수 있어요" }).hasAttribute("disabled"),
+  ).toBe(true);
 });

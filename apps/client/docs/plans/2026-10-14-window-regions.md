@@ -123,9 +123,7 @@ it("windowsChanged가 오면 창 위치 · 순서 · 최소화가 바뀌고, 새
 
 it("windowsChanged는 응답 없음 · 제외 창의 상태를 덮지 않는다", async () => {
   const { store, win } = setup();
-  const w = fakeConn((type) =>
-    type === "listMonitors" || type === "listWindows" ? [] : null,
-  );
+  const w = fakeConn((type) => (type === "listMonitors" || type === "listWindows" ? [] : null));
   await win.attach(w.conn);
   store.change((s) =>
     s.windows.push({
@@ -298,8 +296,7 @@ if (e.type === "windowsChanged")
         continue;
       }
       Object.assign(cur, { monitor: w.monitor, rect: w.rect, z: w.z });
-      if (cur.status === "linked" || cur.status === "minimized")
-        cur.status = w.minimized ? "minimized" : "linked";
+      if (cur.status === "linked" || cur.status === "minimized") cur.status = w.minimized ? "minimized" : "linked";
     }
   });
 ```
@@ -339,21 +336,12 @@ git commit -m "feat: 창 위치·순서를 받아 상태에 넣기(windowsChange
 test("패드 LED: 맡은 창(w1, 왼쪽 반)은 영역 색, 나머지 열린 창(w2 · w3)은 회색", () => {
   const w1 = v.leds.filter((l) => l.color === "rgb(18 181 214)");
   expect(w1.length).toBe(2 * 12 + 2 * 14); // 12 × 16 칸의 바깥 한 줄
-  expect(v.leds.filter((l) => l.color === NEUTRAL).length).toBe(
-    2 * (2 * 12 + 2 * 6),
-  ); // 12 × 8 두 개
-  expect(
-    v.leds.filter((l) => l.color === NEUTRAL).every((l) => l.b === 0.2),
-  ).toBe(true);
+  expect(v.leds.filter((l) => l.color === NEUTRAL).length).toBe(2 * (2 * 12 + 2 * 6)); // 12 × 8 두 개
+  expect(v.leds.filter((l) => l.color === NEUTRAL).every((l) => l.b === 0.2)).toBe(true);
 });
 
 // 큐브 없이 창만 있는 스냅샷
-const win = (
-  id: string,
-  rect: AppWindow["rect"],
-  z: number,
-  more: Partial<AppWindow> = {},
-): AppWindow => ({
+const win = (id: string, rect: AppWindow["rect"], z: number, more: Partial<AppWindow> = {}): AppWindow => ({
   id,
   app: "메모장",
   title: "",
@@ -397,10 +385,7 @@ test("대상 모니터의 창만, 최소화 · 없는 창은 그리지 않는다
 
 test("위 창에 가려진 아래 창 테두리는 꺼진다", () => {
   // 위(z 0): 왼쪽 반, 아래(z 1): 전체 → 아래 창의 왼쪽 반 테두리는 꺼지고 오른쪽 반만 남는다
-  const s = only([
-    win("top", [0, 0, 0.5, 1], 0),
-    win("under", [0, 0, 1, 1], 1, { app: "Edge" }),
-  ]);
+  const s = only([win("top", [0, 0, 0.5, 1], 0), win("under", [0, 0, 1, 1], 1, { app: "Edge" })]);
   const leds = homeView(s).leds;
   expect(leds.length).toBe(new Set(leds.map((l) => l.i)).size); // 한 칸에 하나
   const top = 2 * 12 + 2 * 14;
@@ -410,9 +395,7 @@ test("위 창에 가려진 아래 창 테두리는 꺼진다", () => {
 });
 
 test("작은 창도 최소 1칸, 삐져나간 창은 잘라서, 작업 영역 밖 창은 없다", () => {
-  expect(cells(only([win("tiny", [0.5, 0.5, 0.51, 0.51], 0)]))).toEqual([
-    8 * PAD_COLS + 12,
-  ]);
+  expect(cells(only([win("tiny", [0.5, 0.5, 0.51, 0.51], 0)]))).toEqual([8 * PAD_COLS + 12]);
   const out = cells(only([win("edge", [0.75, -0.5, 1.5, 0.25], 0)]));
   expect(out.every((i) => i >= 0 && i < 24 * 16)).toBe(true);
   expect(out.length).toBe(2 * 6 + 2 * 2); // 오른쪽 위 6 × 4 칸
@@ -446,17 +429,10 @@ function windowLeds(s: Snapshot, lit: Placement[]): PadLed[] {
   const clip = (v: number) => Math.min(1, Math.max(0, v));
   const gone: AppWindow["status"][] = ["minimized", "relaunchable", "gone"];
   const boxes = s.windows
-    .filter(
-      (w) => w.rect && w.monitor === s.monitor.no && !gone.includes(w.status),
-    )
+    .filter((w) => w.rect && w.monitor === s.monitor.no && !gone.includes(w.status))
     .sort((a, b) => (a.z ?? 0) - (b.z ?? 0))
     .flatMap((w) => {
-      const [rx0, ry0, rx1, ry1] = w.rect!.map(clip) as [
-        number,
-        number,
-        number,
-        number,
-      ];
+      const [rx0, ry0, rx1, ry1] = w.rect!.map(clip) as [number, number, number, number];
       if (rx1 <= rx0 || ry1 <= ry0) return []; // 작업 영역 밖
       const x0 = Math.min(Math.round(rx0 * PAD_COLS), PAD_COLS - 1);
       const y0 = Math.min(Math.round(ry0 * PAD_ROWS), PAD_ROWS - 1);
@@ -470,9 +446,7 @@ function windowLeds(s: Snapshot, lit: Placement[]): PadLed[] {
   const out: PadLed[] = [];
   for (let y = 0; y < PAD_ROWS; y++)
     for (let x = 0; x < PAD_COLS; x++) {
-      const o = boxes.find(
-        (r) => x >= r.x0 && x < r.x1 && y >= r.y0 && y < r.y1,
-      );
+      const o = boxes.find((r) => x >= r.x0 && x < r.x1 && y >= r.y0 && y < r.y1);
       if (o && (x === o.x0 || x === o.x1 - 1 || y === o.y0 || y === o.y1 - 1))
         out.push({ i: y * PAD_COLS + x, color: o.color, b: o.b });
     }
