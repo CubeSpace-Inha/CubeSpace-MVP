@@ -38,13 +38,13 @@ VS Code를 열면 추천 확장(Prettier · ESLint · EditorConfig · C#)을 설
 
 ## 공통 설정 파일
 
-| 파일                                   | 하는 일                                       |
-| -------------------------------------- | --------------------------------------------- |
-| `eslint.config.mjs`                    | 모든 패키지의 lint 규칙을 이 파일 하나에 둔다 |
-| `.prettierrc.json` · `.prettierignore` | 포맷(줄 길이 120, 나머지는 Prettier 기본값)   |
-| `.editorconfig`                        | UTF-8 · LF · 공백 2칸(C#은 4칸)               |
-| `.vscode/`                             | 저장 시 포맷 · lint 수정, 추천 확장           |
-| `CLAUDE.md`                            | Claude Code가 따르는 프로젝트 규칙            |
+| 파일                | 하는 일                                       |
+| ------------------- | --------------------------------------------- |
+| `eslint.config.mjs` | 모든 패키지의 lint 규칙을 이 파일 하나에 둔다 |
+| `.prettierignore`   | 포맷에서 뺄 파일(포맷 규칙은 Prettier 기본값) |
+| `.editorconfig`     | UTF-8 · LF · 공백 2칸(C#은 4칸) · 줄 길이 120 |
+| `.vscode/`          | 저장 시 포맷 · lint 수정, 추천 확장           |
+| `CLAUDE.md`         | Claude Code가 따르는 프로젝트 규칙            |
 
 ## 커밋
 
