@@ -15,7 +15,12 @@ drivers/
   win-driver/  # C# Win32 창 제어
 ```
 
-client → core → win-driver · pad-sim (named pipe)
+```mermaid
+flowchart LR
+  client -- "pipe: core" --> core
+  core -- "pipe: win" --> win-driver
+  core -- "pipe: pad" --> pad-sim
+```
 
 ## 실행
 
