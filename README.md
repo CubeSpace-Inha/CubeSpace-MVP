@@ -24,11 +24,11 @@ flowchart LR
 
 ## 실행
 
-Windows, node 22+, pnpm, .NET 8 SDK.
+Windows, node 22+, pnpm, .NET 8 SDK. macOS에서는 win-driver 없이(창 제어 없이) 화면 · core 개발과 테스트만 된다.
 
 ```
 pnpm install
-pnpm build:win   # win-driver 빌드(한 번)
+pnpm build:win   # win-driver 빌드(한 번, Windows만)
 pnpm dev
-pnpm check       # lint · 타입 · 테스트
+pnpm check       # 포맷 · lint · 타입 · 테스트
 ```
