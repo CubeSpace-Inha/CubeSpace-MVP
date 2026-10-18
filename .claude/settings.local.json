@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(python3 -)",
-      "Bash(cmd.exe /c \"cd /d D:\\\\git\\\\CubeSpaceMain\\\\apps\\\\client && pnpm check\")"
-    ]
-  }
-}

@@ -1,7 +1,24 @@
+# 의존성
 node_modules/
+
+# 빌드 결과(JS · C#)
 out/
 dist/
-*.log
-.DS_Store
 bin/
 obj/
+
+# 로그 · OS 파일
+*.log
+.DS_Store
+
+# 개인 도구 설정(팀 설정은 .claude/settings.json)
+.superpowers/
+.claude/settings.local.json
+CLAUDE.local.md
+
+# 키 · 인증서
+.env
+.env.*
+*.pem
+*.key
+*.pfx
