@@ -64,6 +64,16 @@ test("창: 열린 창 목록을 보여 준다", async () => {
   expect(await screen.findByRole("heading", { name: /^열린 창/ })).toBeTruthy();
 });
 
+test("창: 묶음을 풀고 ＋로 고른 것을 다시 묶는다", async () => {
+  renderAt("/windows");
+  expect(await screen.findByText("큐브 A 설정")).toBeTruthy();
+  fireEvent.click(screen.getByRole("button", { name: "묶음 풀기" }));
+  fireEvent.click(await screen.findByRole("button", { name: "무엇을 열지 고르기" }));
+  const list = screen.getByRole("group", { name: "무엇을 열지 고르기" });
+  fireEvent.click(list.querySelector("button")!);
+  expect(await screen.findByRole("button", { name: "묶음 풀기" })).toBeTruthy();
+});
+
 test("AI: 예시를 넣으면 시작할 수 있고, 시작하면 진행 카드가 뜬다", async () => {
   renderAt("/ai");
   const start = await screen.findByRole("button", { name: "▶ 시작" });
