@@ -102,14 +102,6 @@ export function createCoreClient(appPath: string, getSource: () => Source, log: 
       quitting = true;
       conn?.send("shutdown", {});
     },
-    // HW 통합 후 제거: HW/SW를 바꾸면 core를 끄고 새 --pad로 다시 띄운다.
-    // 끊기면 retry → 붙을 core가 없어 launchCore가 돈다. 새 core에 붙으면 끝난다
-    restart() {
-      return new Promise<void>((resolve) => {
-        waiters.push(() => resolve());
-        conn?.send("shutdown", {});
-      });
-    },
   };
 }
 

@@ -5,11 +5,11 @@ import "./styles/fonts.css";
 import "./styles/tokens.css";
 import "./styles/base.css";
 import { App } from "./App";
-import type { Bridge } from "@cubespace/protocol";
+import type { CubeSpaceApi } from "@cubespace/protocol";
 
 declare global {
   interface Window {
-    cubeSpace?: Bridge; // preload/index.ts
+    cubeSpace?: CubeSpaceApi; // preload/index.ts
   }
 }
 

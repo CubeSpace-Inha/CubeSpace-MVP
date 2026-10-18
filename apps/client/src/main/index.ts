@@ -4,7 +4,6 @@ import { join } from "node:path";
 import icon from "../../resources/icon.png?asset"; // 로고 시안 I, 창 · 작업 표시줄 · 트레이 아이콘
 import { createCoreClient } from "./coreClient";
 import { relay } from "./ipc";
-import { createSimLink } from "./simLink";
 import { readSource } from "./source";
 import { createTray } from "./tray";
 
@@ -57,7 +56,7 @@ else
     Menu.setApplicationMenu(null); // 창 위 File · Edit · View · Window 메뉴 막대를 없앤다
     const dir = app.getPath("userData");
     const core = createCoreClient(app.getAppPath(), () => readSource(dir));
-    relay(core, createSimLink(), dir);
+    relay(core);
     createWindow();
     const { show } = createTray(
       icon,

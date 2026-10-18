@@ -9,15 +9,13 @@ import { NAV } from "../src/renderer/layout/nav";
 
 afterEach(cleanup);
 
-// core가 막 떴을 때: 등록된 큐브 · 창 · 모드가 없고 패드가 끊겨 있다
+// core가 막 떴을 때: 등록된 큐브 · 창이 없고 패드가 끊겨 있다
 const EMPTY: Snapshot = {
   ...OK,
   pad: { session: "lost", fw: "", badSensors: [] },
   cubes: [],
   windows: [],
   layout: [],
-  modes: [],
-  activeMode: null,
   profiles: [],
   settings: { ...OK.settings, cubes: [], favs: [] },
   notices: [{ code: "padLost" }],

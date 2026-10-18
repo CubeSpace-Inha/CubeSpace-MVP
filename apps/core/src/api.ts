@@ -1,5 +1,4 @@
 import {
-  fitMode,
   type BattLevel,
   type Cube,
   type CubeSpaceApi,
@@ -23,8 +22,6 @@ export type Side = {
 
 export const battLevel = (pct: number | null): BattLevel =>
   pct === null || pct > 30 ? "ok" : pct > 10 ? "low30" : "low10";
-
-const onPad = (c: Cube) => c.link === "up" && c.xy !== null;
 
 export function createApi(store: Store, side: Side): CubeSpaceApi {
   function change(slot: Slot, fn: (s: Snapshot, c: Cube) => void) {
@@ -104,25 +101,6 @@ export function createApi(store: Store, side: Side): CubeSpaceApi {
         }),
       ),
     setRules: (patch) => done(() => store.change((s) => Object.assign(s.settings.rules, patch))),
-    saveMode: ({ id, name, cubes, now }) =>
-      done(() =>
-        store.change((s) => {
-          let m = s.modes.find((x) => x.id === id);
-          if (m) Object.assign(m, { name, cubes });
-          else s.modes.push((m = { id: `m${Date.now()}`, name, cubes }));
-          const placed = s.cubes.filter(onPad).map((c) => ({ xy: c.xy! }));
-          if (now) s.activeMode = m.id;
-          // 실행 중인 모드를 고쳐 지금 패드와 모양이 달라지면 실행 중이 아니다
-          else if (s.activeMode === m.id && !fitMode(placed, cubes, s.settings.rules.gapMm)) s.activeMode = null;
-        }),
-      ),
-    deleteMode: (id) =>
-      done(() =>
-        store.change((s) => {
-          s.modes = s.modes.filter((x) => x.id !== id);
-          if (s.activeMode === id) s.activeMode = null;
-        }),
-      ),
     // 장치 추가: 켜진 미등록 큐브를 빈 슬롯 수까지 센다. 0이면 시작하지 않는다.
     // 등록은 padLink가 확인점에 올린 순서대로 한다. 이미 올려 둔 큐브가 있으면 바로 등록된다
     startPairing() {

@@ -1,5 +1,4 @@
-import type { Xy } from "./pad";
-import type { CubeMode, CubeSettings, ModeCube, Rules, Slot, Snapshot, WindowId } from "./snapshot";
+import type { CubeMode, CubeSettings, Rules, Slot, Snapshot, WindowId } from "./snapshot";
 
 // 화면 ↔ core 경계. 화면은 이 인터페이스로만 상태를 받는다.
 // 앱은 preload의 window.cubeSpace(core 중계)를, 테스트는 견본으로 도는 가짜(client test/fakeApi.ts)를 쓴다.
@@ -17,9 +16,6 @@ export type CubeSpaceApi = {
   windowCommand(window: WindowId, cmd: WindowCommand): Promise<void>;
   setMonitor(no: number): Promise<void>;
   setCubeSettings(slot: Slot, patch: Partial<Omit<CubeSettings, "slot">>): Promise<void>;
-  // id가 있으면 그 모드를 고친다. now = 지금 패드 그대로 저장(그 모드가 실행 중이 된다)
-  saveMode(mode: { id?: string; name: string; cubes: ModeCube[]; now?: boolean }): Promise<void>;
-  deleteMode(id: string): Promise<void>;
   // 설정 화면
   setRules(patch: Partial<Rules>): Promise<void>;
   startPairing(): Promise<number>; // 장치 추가 시작: 켜진 미등록 큐브 수(빈 슬롯 수까지)를 돌려준다. 0이면 시작하지 않는다
@@ -30,14 +26,5 @@ export type CubeSpaceApi = {
 // 열린 창 버튼: 왼쪽 · 오른쪽 절반, 최소화 · 올리기, 항상 위, 닫기
 export type WindowCommand = "left" | "right" | "min" | "top" | "close";
 
-// HW 통합 후 제거: 화면이 붙을 곳(hw = pad-gateway, sw = 가상 패드 pad-sim)과 가상 패드 조작.
-// id는 큐브 mac4(= pad-sim 큐브 id)
+// HW 통합 후 제거: core가 붙을 패드(hw = pad-gateway, sw = 가상 패드 pad-sim)
 export type Source = "hw" | "sw";
-export type SimApi = {
-  moveCube(id: string, xy: Xy | null): Promise<void>; // null = 들기(패드 밖)
-  press(id: string, press: "short" | "long"): Promise<void>;
-  setLink(id: string, link: "up" | "down"): Promise<void>;
-  dropPad(): Promise<void>; // 패드 끊김. 약 1초 뒤 큐브가 모두 패드 밖인 채로 돌아온다
-};
-// preload가 여는 window.cubeSpace. sim은 SW일 때만 있다
-export type Bridge = CubeSpaceApi & { source: Source; setSource(v: Source): Promise<void>; sim?: SimApi };

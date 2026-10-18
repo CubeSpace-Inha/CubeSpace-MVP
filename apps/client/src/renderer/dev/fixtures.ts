@@ -154,26 +154,6 @@ export const OK: Snapshot = {
     { window: "w2", rect: [0.5, 0, 1, 0.5] },
     { window: "w3", rect: [0.5, 0.5, 1, 1] },
   ],
-  modes: [
-    {
-      id: "m1",
-      name: "코딩",
-      cubes: [
-        { xy: [80, 48], app: "VS Code" },
-        { xy: [104, 48], app: "Windows Terminal" },
-        { xy: [104, 69.3], app: "Notion" },
-      ],
-    },
-    {
-      id: "m2",
-      name: "리서치",
-      cubes: [
-        { xy: [84, 66.7], app: "Chrome" },
-        { xy: [110, 66.7], app: "Notion" },
-      ],
-    },
-  ],
-  activeMode: null,
   profiles: [
     {
       id: "p1",
@@ -259,8 +239,6 @@ export const OK: Snapshot = {
       lift: "min",
       backSec: 1,
       stayMm: 10,
-      gapMm: 10,
-      bootMode: true,
       topSkip: true,
       skipApps: [],
       order: "recent",

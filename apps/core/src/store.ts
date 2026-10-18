@@ -8,8 +8,6 @@ export function emptySnapshot(): Snapshot {
     cubes: [],
     windows: [],
     layout: [],
-    modes: [],
-    activeMode: null,
     profiles: [],
     settings: {
       cubes: [],
@@ -20,8 +18,6 @@ export function emptySnapshot(): Snapshot {
         lift: "min",
         backSec: 1,
         stayMm: 10,
-        gapMm: 10,
-        bootMode: true,
         topSkip: true,
         skipApps: [],
         order: "recent",

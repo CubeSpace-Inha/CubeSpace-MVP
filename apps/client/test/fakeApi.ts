@@ -1,7 +1,5 @@
 import type { CubeSpaceApi } from "@cubespace/protocol";
 import type { Cube, Slot, Snapshot } from "@cubespace/protocol";
-import { fitMode } from "@cubespace/protocol";
-import { nowCubes } from "../src/renderer/model/modes";
 import { OK } from "../src/renderer/dev/fixtures";
 
 // 장치 없이 도는 가짜 API(테스트 대역). push로 새 상태를 보내면 구독한 화면이 바뀐다.
@@ -115,24 +113,6 @@ export function createFakeApi(initial: Snapshot = OK) {
           rules: { ...current.settings.rules, ...patch },
         },
       });
-      return Promise.resolve();
-    },
-    saveMode({ id, name, cubes, now }) {
-      const s = structuredClone(current);
-      let m = s.modes.find((x) => x.id === id);
-      if (m) Object.assign(m, { name, cubes });
-      else s.modes.push((m = { id: `m${Date.now()}`, name, cubes }));
-      if (now) s.activeMode = m.id;
-      // 실행 중인 모드를 고쳐 지금 패드와 모양이 달라지면 실행 중이 아니다
-      else if (s.activeMode === m.id && !fitMode(nowCubes(s), cubes, s.settings.rules.gapMm)) s.activeMode = null;
-      push(s);
-      return Promise.resolve();
-    },
-    deleteMode(id) {
-      const s = structuredClone(current);
-      s.modes = s.modes.filter((x) => x.id !== id);
-      if (s.activeMode === id) s.activeMode = null;
-      push(s);
       return Promise.resolve();
     },
     // 장치 추가: 패드가 없으니 빈 슬롯 수만큼 센다. 등록(확인점에 올리기)은 테스트가 push로 흉내 낸다
