@@ -27,6 +27,7 @@ packages/
   protocol/    # 프로그램끼리 주고받는 메시지 형식
 drivers/
   win-driver/  # C# Win32 창 제어
+docs/          # 화면 시안(pad-home.html)
 scripts/       # 팀 공통 git 설정(setup-git · verify-git)
 ```
 
