@@ -1,0 +1,5 @@
+# 팀 공통 git 설정. setup-git · verify-git 스크립트가 이 파일을 읽는다. 한 줄에 "키 값".
+init.defaultBranch main
+pull.ff only
+core.quotepath false
+core.longpaths true
