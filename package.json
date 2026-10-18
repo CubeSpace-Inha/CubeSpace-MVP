@@ -9,7 +9,17 @@
     "dev": "pnpm --filter @cubespace/core --filter @cubespace/pad-sim build && pnpm --filter @cubespace/client dev",
     "build": "pnpm -r build",
     "build:win": "dotnet build drivers/win-driver -c Release",
-    "check": "pnpm -r --workspace-concurrency=1 check",
-    "check:win": "dotnet run --project drivers/win-driver -c Release -- --check-fixtures packages/protocol/fixtures/win"
+    "check": "prettier --check . && pnpm -r --workspace-concurrency=1 check",
+    "check:win": "dotnet run --project drivers/win-driver -c Release -- --check-fixtures packages/protocol/fixtures/win",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "eslint": "10.12.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "globals": "17.13.0",
+    "prettier": "3.9.10",
+    "typescript-eslint": "8.71.1"
   }
 }

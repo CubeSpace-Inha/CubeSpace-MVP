@@ -1,0 +1,22 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+# Prettier가 printWidth로 읽는다
+max_line_length = 120
+
+[*.cs]
+indent_size = 4
+
+[*.md]
+trim_trailing_whitespace = false
+
+# Windows PowerShell 5.1은 BOM이 없으면 한글을 깨뜨린다
+[*.ps1]
+charset = utf-8-bom
+end_of_line = crlf

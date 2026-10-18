@@ -1,0 +1,6 @@
+pnpm-lock.yaml
+**/dist
+**/out
+drivers
+apps/client/pad-home.html
+packages/protocol/fixtures
